@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script language="JavaScript" event="OnMessage(lType, lResult, szDescription)" for="ocx">
+        alert(szDescription);
+        switch (lType) {
+            case 0:
+                if (lResult == 0) { // 登录成功
+                    queryHistoryFile();
+                }
+                break;
+            case 2:
+                if (lResult == 2) { // 查询成功
+                    showHistoryFile(szDescription);
+                }
+        }
+    </script>
+
+    <script language="JavaScript" event="OnDownloadProgress(nPos)" for="ocx">
+        alert(nPos);
+    </script>
+
+    <script type="text/javascript">
+        var ip = "125.46.82.45";
+        var port = "9000";
+        var user = "yttest";
+        var pwd = "123456";
+        var deviceId = "LZYTETC22F1040505";
+        var channel = 2;
+        var startTime = "2016-12-01 00:00:00";
+        var endTime = "2016-12-01 23:59:59";
+
+        function query() {
+            ocx.LoginServer(ip, port, user, pwd);
+        }
+        function queryHistoryFile() {
+            ocx.QueryRecords(deviceId, channel - 1, startTime, endTime, 0);
+        }
+        function showHistoryFile(xml) {
+            list.innerText = xml;
+        }
+        function download() {
+            /*
+             参数表：
+             1	strName	String	文件名
+             2	strBeginTime	String	开始时间
+             3	strEndTime	String	结束时间
+             4	lSource	Short	录像源 0：设备 1：中心
+             5	lRecordType	Short	录像类型
+             6	nLength	Long	录像长度
+             7	nPlanID	long	计划ID
+             8	nSsID	Long	Ss服务器ID
+             9	strDiskId	String	硬盘ID
+             10	nFileHandle	Long	文件句柄
+             11	strPath	String	录像保存全路径
+             */
+
+/*
+            <Recordsnfo cameraID="214820401">
+                <Record id="1" name="0-1-5968-301056-1480545619-1480550341" beginTime="2016-12-01 06:40:19" endTime="2016-12-01 07:59:01" sourceType="2" recordType="6" recordLen="301056" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="2" name="0-1-6548-94720-1480561743-1480563286" beginTime="2016-12-01 11:09:03" endTime="2016-12-01 11:34:46" sourceType="2" recordType="6" recordLen="94720" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="3" name="0-1-6735-187234-1480565405-1480568400" beginTime="2016-12-01 12:10:05" endTime="2016-12-01 13:00:00" sourceType="2" recordType="6" recordLen="187234" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="4" name="0-1-7103-225520-1480568401-1480572000" beginTime="2016-12-01 13:00:01" endTime="2016-12-01 14:00:00" sourceType="2" recordType="6" recordLen="225520" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="5" name="0-1-7541-139127-1480572000-1480574241" beginTime="2016-12-01 14:00:00" endTime="2016-12-01 14:37:21" sourceType="2" recordType="6" recordLen="139127" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="6" name="0-1-7820-260328-1480575032-1480579200" beginTime="2016-12-01 14:50:32" endTime="2016-12-01 16:00:00" sourceType="2" recordType="6" recordLen="260328" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="7" name="0-1-8331-228857-1480579200-1480582800" beginTime="2016-12-01 16:00:00" endTime="2016-12-01 17:00:00" sourceType="2" recordType="6" recordLen="228857" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="8" name="0-1-8778-21504-1480582800-1480583140" beginTime="2016-12-01 17:00:00" endTime="2016-12-01 17:05:40" sourceType="2" recordType="6" recordLen="21504" planId="0" ssId="0" diskId="" fileHandle="0" />
+            </Recordsnfo>
+
+            <Recordsnfo cameraID="214865302">
+                <Record id="1" name="1-1-9845-191681-1480543614-1480546800" beginTime="2016-12-01 06:06:54" endTime="2016-12-01 07:00:00" sourceType="2" recordType="6" recordLen="191681" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="2" name="1-1-10231-206394-1480546800-1480550340" beginTime="2016-12-01 07:00:00" endTime="2016-12-01 07:59:00" sourceType="2" recordType="6" recordLen="206394" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="3" name="1-1-10654-110477-1480561868-1480563669" beginTime="2016-12-01 11:11:08" endTime="2016-12-01 11:41:09" sourceType="2" recordType="6" recordLen="110477" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="4" name="1-1-10872-240254-1480564220-1480568219" beginTime="2016-12-01 11:50:20" endTime="2016-12-01 12:56:59" sourceType="2" recordType="6" recordLen="240254" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="5" name="1-1-11360-216131-1480568333-1480572000" beginTime="2016-12-01 12:58:53" endTime="2016-12-01 14:00:00" sourceType="2" recordType="6" recordLen="216131" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="6" name="1-1-11809-9713-1480572000-1480572159" beginTime="2016-12-01 14:00:00" endTime="2016-12-01 14:02:39" sourceType="2" recordType="6" recordLen="9713" planId="0" ssId="0" diskId="" fileHandle="0" />
+                <Record id="7" name="1-1-11827-216064-1480581399-1480585069" beginTime="2016-12-01 16:36:39" endTime="2016-12-01 17:37:49" sourceType="2" recordType="6" recordLen="216064" planId="0" ssId="0" diskId="" fileHandle="0" />
+            </Recordsnfo>
+
+ */
+
+            var ret = ocx.DownloadRecord(
+                    "1-1-11809-9713-1480572000-1480572159",
+                    "2016-12-01 14:00:00",
+                    "2016-12-01 14:02:39",
+                    2,
+                    6,
+                    9713,
+                    0,
+                    0,
+                    "",
+                    0,
+                    "c:\\ttt\\111.dav"
+            );
+            alert(ret);
+        }
+    </script>
+</head>
+<body>
+<object id="ocx" classid="clsid:C2F93B39-9404-47A9-B254-2F64753B06DC" style="width: 10px; height: 10px;"></object>
+<button onclick="query()">查询</button>
+<button onclick="download()">下载</button>
+<div>
+    <pre id="list"></pre>
+</div>
+</body>
+</html>

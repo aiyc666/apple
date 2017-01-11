@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>angular</title>
+<script type="text/javascript" src="../../js/lib/angular-1.4.2.js"></script>
+
+</head>
+<body>
+	<div>
+		<a></a>
+	</div>
+	<div>
+		<input ng-model="name" type="text"/>
+		<span>Hello {{ name }}</span>
+	</div>
+	<div ng-controller="MyController">
+		<h3>Hello {{ clock }}</h3>
+	</div>
+	
+	<div ng-controller="ParentController">
+		<div ng-controller="ChildController">
+			<a ng-click="say()" href="#">say</a>
+			{{ person }}
+		</div>
+	</div>
+	
+	<my-directive></my-directive>
+	<div my-directive></div>
+	<div class="my-directive"></div>
+	<!-- directive: my-direcitve -->
+	
+	<input type="text" ng-model="isChecked"/>
+	<input type="checkbox" ng-model="myChecked" ng-checked="isChecked"/>
+	<select>
+		<option>11</option>
+		<option ng-selected="myChecked == true">22</option>
+	</select>
+	<br>
+	<label>someProperty = {{someProperty}}</label>
+	<input type="checkbox"
+		ng-checked="someProperty"
+		ng-init="someProperty = true"
+		ng-model="someProperty">
+	
+	<script type="text/javascript">
+	var myApp = angular.module('myApp', []);
+	myApp.controller('MyController', function($scope, $timeout) {
+		$timeout(function() {
+			$scope.clock = new Date().toLocaleString();
+			$timeout(arguments.callee, 1000);
+		}, 1000);
+	});
+	
+	myApp.controller('ParentController', function($scope) {
+		$scope.person = {greeted:false};
+	});
+	
+	myApp.controller('ChildController', function($scope) {
+		$scope.say = function() {
+			$scope.person.name = '张三';
+		}
+	});
+	
+	myApp.directive('myDirective', function() {
+		return {
+			restrict : 'EACM',
+		//	replace : true,
+			template : '<a href="http://www.baidu.com">百度</a>'
+		}
+	});
+
+	var a = false;
+	if (a) {
+
+	}
+		console.log(a);
+		var d = new Date();
+		d = new Array();
+	</script>
+</body>
+</html>

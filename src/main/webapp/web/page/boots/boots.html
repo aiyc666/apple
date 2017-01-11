@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- 引入bootstrap -->
+    <link href="../../lib/bootstrap-3.3.0/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../lib/bootstrap-3.3.0/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <style>
+        /*html, body {height: 100%; overflow: hidden;}*/
+
+        /* 媒体查询 */
+        /*@media (width: 500px)  and (device-width: 1920px) {*/
+        /*@media not screen and (min-width: 500px) and (max-width: 800px) {*/
+        /*@media screen and (aspect-ratio: 16 / 9) and (device-aspect-ratio: 16 / 9) {*/
+        /*@media (color) and (min-color: 8) {*/
+        /*@media (orientation: portrait), (min-width: 600px) {
+            body { background-color: red; }
+        }*/
+
+        @keyframes k-rotating {
+            0% {transform: rotate(0deg); color: red;}
+            50% {transform: rotate(180deg); color: black;}
+            100% {transform: rotate(360deg); color: blue;}
+        }
+        .m-rotating {
+            display :inline-block;
+            animation: k-rotating 2s linear infinite;
+        }
+        @keyframes k-masker {
+            from {left: 0}
+            to {left: 50px;}
+        }
+        .ok-icon-masker {
+            animation: k-masker 2s linear 2s infinite;
+            position: absolute; top: 0; left: 0; width: 50px; height: 50px;
+        }
+        @keyframes k-width {
+            from {width: 0}
+            to {width: 50px;}
+        }
+        .ok-icon-wrapper {
+            animation: k-width 1s ease-out 2s infinite;
+            overflow: hidden;
+        }
+        .tran-container {padding: 30px 30px 30px 40%; border: 1px dashed #666; position: relative; }
+        .tran-div1 {
+            float: left;
+            width: 300px;  border2: 1px solid red;
+            perspective: 2000px;
+        }
+        @keyframes k-tran-img {
+            0% {transform: rotateX(0deg) rotateZ(0deg) rotateY(0deg) scale(1)}
+            50% {transform: rotateX(270deg) rotateZ(30deg) rotateY(200deg) scale(-.6)}
+            70% {transform: rotateX(540deg) rotateZ(60deg) rotateY(280deg) scale(.8)}
+            100% {transform: rotateX(720deg) rotateZ(360deg) rotateY(360deg) scale(1)}
+            /*0% {width: 0}*/
+            /*20% {width: 40px;}*/
+            /*60% {width: 120px;}*/
+            /*100% {width: 200px}*/
+        }
+        .tran-img {
+            transform: translate3d(0, -200px, -500px);
+            transform-style: preserve-3d;
+            transform-origin: 0 -100px;
+            /*animation: k-tran-img 2s ;*/
+            /*animation-delay: 3s;*/
+            /*animation-iteration-count: 3;*/
+            /*animation-direction: alternate-reverse;*/
+            animation: k-tran-img 5s linear 5;
+            animation-fill-mode: forwards;
+
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1">1</div>
+        <div class="col-md-2">2</div>
+        <div class="col-md-3">3</div>
+        <div class="col-md-6">6</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-lowercase">AdcdEF ghiJ JKlmn</div>
+            <div class="text-uppercase">AdcdEF ghiJ JKlmn</div>
+            <div class="text-capitalize">AdcdEF ghiJ JKlmn</div>
+            <div><abbr title="测试">HTML缩略</abbr></div>
+            <div>
+                <blockquote class="blockquote-reverse">这是引用</blockquote>
+            </div>
+            <div>
+                <ul class="list-unstyled">
+                    <li>1111</li>
+                    <li>2222</li>
+                </ul>
+                <ol class="list-inline">
+                    <li>1111</li>
+                    <li>2222</li>
+                </ol>
+                <dl class="dl-horizontal text-overflow">
+                    <dt>a</dt>
+                    <dd>aaa</dd>
+                    <dt>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</dt>
+                    <dd>bbb</dd>
+                </dl>
+            </div>
+            <div>
+                <p class="h1">h1h1h1</p>
+                <h1>h1h1h1</h1>
+                <mark>mark 字体</mark>
+                <del>deldeldel</del>
+                <ins>insinsinsins</ins>
+                <s>ssssss</s>
+                <u>uuuuuuuuuuuuuu</u>
+                <b>bbbbbbbb</b>
+                <i>iiiiiiiiiiii</i>
+                <em>ememememem</em>
+                <strong>strongstrong</strong>
+                <small>smallsmall</small>
+                <span style="text-decoration: blink">blinkblink</span>
+                <kbd>Ctrl + Z</kbd>
+                <code>public class</code>
+                <samp>computer samp word</samp>
+                <pre class="pre-scrollable">
+                    public static void main(String[] args) {
+                        System.out.println("hello world");
+                    }
+                </pre>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover table-condensed">
+                    <tr class="text-center">
+                        <th class="text-center">一</th>
+                        <th class="success">二</th>
+                        <th>三</th>
+                    </tr>
+                    <tr>
+                        <td class="danger">11</td>
+                        <td class="warning">22</td>
+                        <td class="info">33</td>
+                    </tr>
+                    <tr class="active">
+                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                        <td>bb</td>
+                        <td>cc</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <form class="form-horizontal">
+                    <div class="form-group has-success has-feedback form-group-lg">
+                        <label class="control-label col-xs-3">text</label>
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" readonly>
+                            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group has-error has-feedback">
+                        <label class="control-label">password</label>
+                        <input type="password" class="form-control input-lg">
+                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        <span class="help-block">help text....</span>
+                    </div>
+                    <div class="radio checkbox">
+                        <label class="radio-inline disabled" >
+                            <input type="radio" class="" disabled>
+                            radio
+                        </label>
+                        <label class="radio-inline disabled" >
+                            <input type="radio" class="">
+                            radio
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" class="">
+                            checkbox
+                        </label>
+
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" class="">
+                            checkbox
+                        </label>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">选择文件</label>
+                        <input type="file" class="form-control">
+                    </div>
+                    <!--<input type="image" class="form-control">-->
+                    <input type="button" value="按钮" class="btn btn-default">
+                    <input type="submit" class="form-control">
+                    <input type="reset" class="btn btn-default">
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option>111</option>
+                            <option>222</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control">area...</textarea>
+                    </div>
+
+                    <!--
+                    <input type="number" class="form-control">
+                    <input type="range" class="form-control">
+                    <input type="email" class="form-control">
+                    <input type="url" class="form-control">
+                    <input type="tel" class="form-control">
+                    <input type="search" class="form-control">
+                    <input type="month" class="form-control">
+                    <input type="week" class="form-control">
+                    <input type="date" class="form-control">
+                    <input type="time" class="form-control">
+                    <input type="datetime" class="form-control">
+                    <input type="datetime-local" class="form-control">
+                    <input type="color" class="form-control">
+                    -->
+                </form>
+
+                <button class="btn btn-default" disabled onclick="alert(1)">按钮</button>
+                <button class="btn btn-primary disabled" onclick="alert(1)">按钮</button>
+                <button class="btn btn-info" onclick="alert(1)">按钮</button>
+                <button class="btn btn-success active">按钮</button>
+                <button class="btn btn-warning">按钮</button>
+                <button class="btn btn-danger">按钮</button>
+                <button class="btn btn-link">按钮</button>
+                <button class="btn btn-block">按钮</button>
+                <a href="javascript:;" class="btn btn-default">按钮</a>
+                <input type="button" class="btn btn-default" value="按钮">
+            </div>
+            <!--<div style="border:1px solid red; width:50%; ">
+                <img src="../../img/2.jpg" class="img-responsive img-rounded">
+            </div>
+            <div style="border:1px solid red; width:50%; ">
+                <img src="../../img/3.jpg" class="img-responsive img-circle img-thumbnail">
+            </div>-->
+            <p class="text-muted m-rotating">abaldjfeoijfoweiffwjeofjwe</p>
+            <p class="text-primary">abaldjfeoijfoweiffwjeofjwe</p>
+            <p class="text-info">abaldjfeoijfoweiffwjeofjwe</p>
+            <p class="text-success">abaldjfeoijfoweiffwjeofjwe</p>
+            <p class="text-warning">abaldjfeoijfoweiffwjeofjwe</p>
+            <p class="text-danger">abaldjfeoijfoweiffwjeofjwe</p>
+            <p class="bg-success">abaldjfeoijfoweiffwjeofjwe</p>
+            <p class="bg-danger">abaldjfeoijfoweiffwjeofjwe</p>
+            <div>
+                <button class="close">&otimes;</button>
+            </div>
+            <span class="caret"></span>
+            <span class="visible-xs">visible-xs</span>
+            <span class="visible-sm">visible-sm</span>
+            <span class="visible-md">visible-md</span>
+            <span class="visible-lg">visible-lg</span>
+            <span class="visible-lg visible-xs">visible-lg-xs</span>
+            <span class="hidden-xs">hidden-xs</span>
+            <span class="hidden-sm">hidden-sm</span>
+            <span class="hidden-md">hidden-md</span>
+            <span class="hidden-lg">hidden-lg</span>
+        </div>
+    </div>
+    <div class="row">
+        <span class="glyphicon glyphicon-refresh m-rotating"></span>
+        <div class="m-rotating" style="border :1px solid red;">中国</div>
+        <span class="glyphicon glyphicon-ok"></span>
+        <span class="glyphicon glyphicon-remove"></span>
+        <span class="glyphicon glyphicon-ok-circle"></span>
+        <span class="glyphicon glyphicon-user"></span>
+        <span class="glyphicon glyphicon-lock"></span>
+        <span class="glyphicon glyphicon-heart"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-leaf"></span>
+        <span class="glyphicon glyphicon-arrow-right"></span>
+        <span class="glyphicon glyphicon-map-marker"></span>
+        <span class="glyphicon glyphicon-facetime-video"></span>
+        <span class="glyphicon glyphicon-camera"></span>
+        <span class="glyphicon glyphicon-qrcode"></span>
+        <span class="glyphicon glyphicon-download"></span>
+        <span class="glyphicon glyphicon-minus"></span>
+        <span class="glyphicon glyphicon-plus"></span>
+        <span class="glyphicon glyphicon-off"></span>
+        <span class="glyphicon glyphicon-signal"></span>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-trash"></span>
+        <span class="glyphicon glyphicon-time"></span>
+        <span class="glyphicon glyphicon-home"></span>
+        <span class="glyphicon glyphicon-cloud"></span>
+        <span class="glyphicon glyphicon-phone"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <span class="glyphicon glyphicon-eye-close"></span>
+        <span class="glyphicon glyphicon-picture"></span>
+        <span class="glyphicon glyphicon-file"></span>
+        <span class="glyphicon glyphicon-filter"></span>
+        <span class="glyphicon glyphicon-chevron-up"></span>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+        <span class="glyphicon glyphicon-book"></span>
+        <span class="glyphicon glyphicon-bookmark"></span>
+        <span class="glyphicon glyphicon-tag"></span>
+        <span class="glyphicon glyphicon-ok-sign"></span>
+        <span class="glyphicon glyphicon-question-sign"></span>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <span class="glyphicon glyphicon-remove-sign"></span>
+        <span class="glyphicon glyphicon-info-sign"></span>
+        <span class="glyphicon glyphicon-minus-sign"></span>
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        <span class="glyphicon glyphicon-share-alt"></span>
+        <span class="glyphicon glyphicon-stats"></span>
+        <span class="glyphicon glyphicon-th"></span>
+        <span class="glyphicon glyphicon-th-large"></span>
+        <span class="glyphicon glyphicon-th-list"></span>
+        <span class="glyphicon glyphicon-calendar"></span>
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+        <span class="glyphicon glyphicon-print"></span>
+        <span class="glyphicon glyphicon-ban-circle"></span>
+        <span class="glyphicon glyphicon-hdd"></span>
+        <span class="glyphicon glyphicon-sort"></span>
+        <span class="glyphicon glyphicon-copyright-mark"></span>
+        <span class="glyphicon glyphicon-registration-mark"></span>
+        <div class="ok-icon-wrapper">
+            <span class="glyphicon glyphicon-ok" style="font-size:36px;"></span>
+            <!--<div class="ok-icon-masker"></div>-->
+        </div>
+        <div>
+            <div style="width:calc(30% - 100px);border: 1px solid red;height:30px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="tran-container clearfix">
+            <div class="tran-div1">
+                <img class="tran-img img-responsive" src="../../img/6.jpg">
+            </div>
+        </div>
+
+    </div>
+    <div class="row" style="height: 300px;"></div>
+</div>
+</body>
+</html>
