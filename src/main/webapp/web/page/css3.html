@@ -2,6 +2,7 @@
 <html>
 <head>
 <style>
+    *, *:before, *:after {box-sizing: border-box;}
     @keyframes myAni {
         20% {background-color: red; width: 30px; transform:rotate(30deg)}
         60% {background-color: blue; width: 60px; height: 20px; transform: translate(50px)}
@@ -25,6 +26,22 @@
         background-color: red;
         transform: rotate(30deg) translate(100px)
     }
+
+    /* dashboard */
+    .dash-container { position: relative; width: 200px; height: 200px; border: 1px solid red; }
+    /*.dash-container .half1 {position: absolute; z-index: 1; width: 50%; height: 100%; left: 0; top: 0; overflow: hidden;}*/
+    /*.dash-container .half2 {position: absolute; z-index: 2; width: 50%; height: 100%; right: 0; top: 0; overflow: hidden; transform-origin: left center;}*/
+    /*.dash-container .half3 {position: absolute; z-index: 3; width: 50%; height: 100%; right: 0; top: 0; overflow: hidden;}*/
+    /*.dash-container .half4 {position: absolute; z-index: 4; width: 50%; height: 100%; left: 0; top: 0; overflow: hidden; transform-origin: right center;}*/
+    /*.dash-container .half1:after {content: ''; display: block; width: 200%; height: 100%; border: 22px solid #eee; border-radius: 50%; }*/
+    /*.dash-container .half2:after {content: ''; display: block; width: 200%; height: 100%; margin-left:-100%; border: 20px solid blue; border-radius: 50%; }*/
+    /*.dash-container .half3:after {content: ''; display: block; width: 200%; height: 100%; margin-left:-100%; border: 22px solid #eee; border-radius: 50%; }*/
+    /*.dash-container .half4:after {content: ''; display: block; width: 200%; height: 100%; border: 20px solid blue; border-radius: 50%; }*/
+    .dash-container .half1 {position: absolute; z-index: 1; width: 100%; height: 100%; border: 20px solid #eee; clip:rect(0,100px,200px,0); border-radius: 50%;}
+    .dash-container .half2 {position: absolute; z-index: 2; width: 100%; height: 100%; border: 20px solid blue; clip:rect(0,200px,200px,100px); border-radius: 50%;}
+    .dash-container .half3 {position: absolute; z-index: 3; width: 100%; height: 100%; border: 20px solid #eee; clip:rect(0,200px,200px,100px); border-radius: 50%;}
+    .dash-container .half4 {position: absolute; z-index: 4; width: 100%; height: 100%; border: 20px solid blue; clip:rect(0,100px,200px,0); border-radius: 50%;}
+
 </style>
     <script>
         function test() {
@@ -36,5 +53,12 @@
 <div class="dv" ></div>
 <input id="inp" class="inp" type="text">
 <button onclick="test()">test</button>
+
+<div class="dash-container">
+    <div class="half1"></div>
+    <div class="half2"></div>
+    <div class="half3"></div>
+    <div class="half4"></div>
+</div>
 </body>
 </html>
