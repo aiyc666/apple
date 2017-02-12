@@ -1,8 +1,9 @@
 <!doctype html>
 <html>
 <head>
-<style>
+    <style>
     *, *:before, *:after {box-sizing: border-box;}
+    body { padding-bottom: 200px; font-size: 12px; }
     @keyframes myAni {
         20% {background-color: red; width: 30px; transform:rotate(30deg)}
         60% {background-color: blue; width: 60px; height: 20px; transform: translate(50px)}
@@ -48,8 +49,309 @@
             document.getElementById('inp').setAttribute("disabled","disabled");
         }
     </script>
+    <script src="../lib/jquery/jquery-3.1.1.js"></script>
+    <style>
+        @keyframes ani-overlay {
+            from { top: -200px; }
+            to {top: 0; }
+        }
+        @keyframes ani-overlay2 {
+            from { top: 0; }
+            to {top: -200px; }
+        }
+        .overlay {
+            width: 200px; height: 200px; border: 1px solid blue;
+            position: relative; top: -200px; left: 300px;
+        }
+        .overlay.show {
+            animation: ani-overlay 2s infinite alternate forwards paused;
+        }
+        .overlay.hide {
+            animation: ani-overlay 1s 1 reverse forwards;
+        }
+    </style>
+    <style>
+        @keyframes door-left {
+            from { transform: perspective(80px) rotateY(0deg) }
+            to { transform: perspective(80px) rotateY(90deg) }
+        }
+        @keyframes door-right {
+            from { transform: perspective(80px) rotateY(0deg) }
+            to { transform: perspective(80px) rotateY(-90deg) }
+        }
+        .vehicle-body {
+            position: relative; width: 730px; height: 206px; background: url(../img/vehicle.png) 0 0 no-repeat;
+            /*perspective: 150px;*/
+        }
+        .back-door-left {
+            position: absolute; top: 77px; left: 245px; width: 54px; height: 111px; background: url(../img/back-door-left.png) 0 0 no-repeat;
+
+            transform-origin: left center;
+            transform-style: preserve-3d;
+            animation: door-left 3s 2s infinite forwards;
+        }
+        .back-door-right {
+            position: absolute; top: 77px; left: 299px; width: 51px; height: 111px; background: url(../img/back-door-right.png) 0 0 no-repeat;
+
+            transform-origin: right center;
+            transform-style: preserve-3d;
+            animation: door-right 3s 2s infinite forwards;
+        }
+        .front-door-left {
+            position: absolute; top: 78px; left: 606px; width: 40px; height: 108px; background: url(../img/front-door-left.png) 0 0 no-repeat;
+
+            transform-origin: left center;
+            transform-style: preserve-3d;
+            animation: door-left 3s 2s infinite forwards;
+        }
+        .front-door-right {
+            position: absolute; top: 78px; left: 646px; width: 40px; height: 108px; background: url(../img/front-door-right.png) 0 0 no-repeat;
+
+            transform-origin: right center;
+            transform-style: preserve-3d;
+            animation: door-right 3s 2s infinite forwards;
+        }
+    </style>
+    <style>
+        @keyframes po {
+            0% { perspective-origin: 0 0 }
+            20% { perspective-origin: 200px 0 }
+            50% { perspective-origin: 200px 300px }
+            70% { perspective-origin: 0 300px }
+            100% { perspective-origin: 0 0 }
+        }
+        .k-stage { float: left; position: relative; width: 400px; height: 600px; margin: 20px; background-color: #ccc;
+            perspective: 400px;
+            /*perspective-origin: 0 0;*/
+
+        }
+        .k-stage:hover {animation: po 20s linear infinite;}
+        .k-stage img { position: absolute; left: calc(50% - 100px); top: calc(50% - 150px); }
+        .k-stage img:first-child { opacity: .3 }
+        .k-stage img:last-child {
+            /* transform: translateZ(200px) */
+            transform: rotateX(-30deg);
+            transform-origin: bottom center;
+        }
+    </style>
+    <style>
+        @keyframes cube-rot {
+            from { transform: rotateY(0deg) }
+            from { transform: rotateY(360deg) }
+        }
+        .cube-bg {perspective: 800px; float: left; position: relative; width: 300px; height: 300px; margin: 20px; background-color: #ffd; }
+        .cube-bg .container {  position: absolute; width: 100px; height: 100px; left: 100px; top: 100px;
+            transform-style: preserve-3d;
+            animation: cube-rot 2s linear infinite;
+        }
+        .plane { position: absolute; width: 100px; height: 100px;  border: 1px solid #aaa; box-shadow: 0 0 8px #aaa; background-color: rgba(200,200,200,.3); text-align: center; line-height: 100px; font-size: 36px; }
+        .plane.p1 { transform: translateZ(50px) }
+        .plane.p2 { transform: translateX(50px) rotateY(90deg) }
+        .plane.p3 { transform: translateZ(-50px) rotateY(180deg) }
+        .plane.p4 { transform: translateX(-50px) rotateY(270deg) }
+        .plane.p5 { transform: translateY(-50px) rotateX(-90deg) }
+        .plane.p6 { transform: translateY(50px) rotateX(90deg) }
+    </style>
+    <style>
+        @keyframes cube-rot2 {
+        from { transform: rotateX(0deg) }
+        to { transform: rotateX(360deg) }
+        }
+        .cube-bg2 {perspective: 800px; perspective-origin: 0 0 ; float: left; position: relative; width: 300px; height: 300px; margin: 20px; background-color: #ffd; }
+        .cube1 { position: absolute; left: calc(50% - 1em); top: calc(50% - 1em); width: 2em; height: 2em; font-size: 5em;
+        transform-style: preserve-3d;
+        animation: cube-rot2 5s linear infinite;
+        }
+        .cube1 > div { position: absolute; left: 0; top: 0; width: 2em; height: 2em; line-height: 2em; border: 1px solid #aaa; box-shadow: 0 0 20px #aaa inset; background-color: rgba(200,200,200,.3); text-align: center;
+
+        }
+        .cube1 .front { transform: translateZ(1em); }
+        .cube1 .right { transform: rotateY(-270deg) translateX(1em);  transform-origin: top right; }
+        .cube1 .back  { transform: translateZ(-1em) rotateY(180deg) ; }
+        .cube1 .left  { transform: rotateY(270deg) translateX(-1em)  ; transform-origin: left center ;}
+        .cube1 .top   { transform: rotateX(90deg) translateY(-1em)  ; transform-origin: top center;}
+        .cube1 .bottom {transform: rotateX(-90deg) translateY(1em)  ; transform-origin: bottom center;}
+
+    </style>
+    <style type="text/css">
+        .wrap {
+            perspective: 800px;
+            perspective-origin: 50% 100px;
+        }
+        .cube {
+            position: relative;
+            width: 200px;
+            transform-style: preserve-3d;
+        }
+        .cube div {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #aaa; box-shadow: 0 0 8px #aaa; background-color: rgba(200,200,200,.3);
+            text-align: center;
+            line-height: 200px;
+        }
+        .back {
+            transform: translateZ(-100px) rotateY(180deg);
+        }
+        .right {
+            transform: rotateY(-270deg) translateX(100px);
+            transform-origin: top right;
+        }
+        .left {
+            transform: rotateY(270deg) translateX(-100px);
+            transform-origin: left center;
+        }
+        .top {
+            transform: rotateX(-90deg) translateY(-100px);
+            transform-origin: top center;
+        }
+        .bottom {
+            transform: rotateX(90deg) translateY(100px);
+            transform-origin: bottom center;
+        }
+        .front {
+            transform: translateZ(100px);
+        }
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .cube {
+            animation: spin 5s infinite linear;
+        }
+    </style>
+    <style>
+        /*@keyframes my-fade {
+            from { top: 0; opacity: 0 }
+            to { top:0; opacity: 1 }
+        }*/
+        @keyframes my-fade-in {
+            0% { top: 0; opacity: 0 }
+            100% { top:0; opacity: 1 }
+        }
+        @keyframes my-fade-out {
+            0% { top: 0; opacity: 1 }
+            99.9% { top: 0; opacity: 0 }
+            100% { top: -9999px; opacity: 0 }
+        }
+        .masker { position: fixed; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, .9);
+            /*display: none;*/
+            top: -9999px;
+        }
+        .masker.show { top: 0 }
+
+        /*.fade-in { animation: my-fade 3s; }
+        .fade-out { animation: my-fade 3s reverse; }*/
+        .fade-in { transform: translateZ(0); animation: my-fade-in 3s forwards; }
+        .fade-out { transform: translateZ(0); animation: my-fade-out 3s forwards; }
+        /*.show { display: block; }*/
+        /*.hide { display: none; }*/
+    </style>
+    <script>
+        $.fn.animation = function(cls, cb) {
+            var that = this;
+            $(this).one('animationend', function () {
+                $(that).removeClass(cls);
+                if (typeof  cb == 'function') {
+                    cb.call(that);
+                } else if (typeof cb == 'string' && (cls = cb.substring(1))
+                        && (cb = (({'+': 'addClass', '-': 'removeClass'})[cb.charAt(0)]))) {
+                    $(that)[cb](cls);
+                }
+            });
+            $(this).addClass(cls);
+        };
+        function showMask() {
+//            $('.masker').show().animation('fade-in');
+//            $('.masker').addClass('show').animation('fade-in');
+//            $('.masker').animation('fade-in', '+show');
+
+//            $('.masker').removeClass('fade-out').addClass('fade-in');
+            $('.masker').attr('class', 'masker fade-in');
+
+//            $('.masker').fadeIn(3000);
+//            $('.masker').fadeIn(200);
+        }
+        function hideMask() {
+//            $('.masker').animation('fade-out', function() {
+//                $(this).hide();
+//            });
+//            $('.masker').animation('fade-out', '-show');
+//            $('.masker').removeClass('show').animation('fade-out'); // !!!
+//            $('.masker').animation('fade-out', '-show');
+
+//            $('.masker').removeClass('fade-in').addClass('fade-out');
+            $('.masker').attr('class', 'masker fade-out');
+
+//            $('.masker').fadeOut(3000);
+//            $('.masker').fadeOut(200);
+        }
+    </script>
+    <style>
+        .icv-container { position: relative; width: 400px; height: 600px; margin: 50px; background-color: #ccc; border: 1px solid blue;}
+       /* .up-radio {opacity: 0; position: absolute; width: 30px; height: 30px; left: 18px; top: 18px; z-index: 5;}
+        .up-radio:checked { display: none; }
+        .up-radio:checked ~ .upgrade { background-color: blue; }
+        .up-radio:active ~ .upgrade { background-color: red; }*/
+
+        .upgrade { position: relative; height: 250px; margin: 20px; background-color: #666; text-align: center;
+            transition: all .4s; transform: perspective(200px) rotateX(0deg) ; }
+        .up-close-check:active + .upgrade { transform: perspective(200px) rotateX(4deg); }
+        .up-close-check:checked + .upgrade { transform: perspective(200px) rotateX(90deg); }
+
+        .up-close { position: absolute; right: 5px; top: 5px; padding: 5px 8px; border-radius: 50%; background-color: #eee; }
+        .up-close:hover { background-color: #ccc; }
+        .up-cancel { position: absolute; bottom: 10px; left: 42%; padding: 10px 20px; border-radius: 50px; background-color: #eee;}
+    </style>
+    <script>
+        $('.up-close')
+                .mousedown(function () {
+
+                })
+                .mouseup(function () {
+
+                });
+    </script>
+    <script type="text/javascript">
+        (function() {
+            var path = '../res/';
+            var names = ['1.wav', '2.wav', 'p1.mp3', 'music.mp3', 'ling.mp3'];
+            var audioElements = {};
+
+            $.each(names, function(i, name) {
+                audioElements[name] = $('<audio src="' + path + name + '">')[0];
+                audioElements[name].load();
+            });
+
+            $(document).on('click', '[data-sound]', function(event) {
+                var soundName = $(event.target).attr('data-sound') || '1.wav';
+                Sound(soundName).play();
+            });
+
+            window.Sound = function(name) {
+                return {
+                    audioElement: audioElements[name],
+                    play: function() {
+                        this.audioElement.play();
+                    },
+                    pause: function() {
+                        this.audioElement.pause();
+                    },
+                    stop: function() {
+                        this.audioElement.pause();
+                        this.audioElement.currentTime = 0;
+                    }
+                }
+            }
+        })();
+    </script>
 </head>
 <body>
+<div>
+<div>
 <div class="dv" ></div>
 <input id="inp" class="inp" type="text">
 <button onclick="test()">test</button>
@@ -60,5 +362,80 @@
     <div class="half3"></div>
     <div class="half4"></div>
 </div>
+
+<div class="overlay show"></div>
+<script>
+    $('.overlay').on('animationstart',function() {console.error('start')})
+    $('.overlay').on('animationend',function() {console.error('end')})
+    $('.overlay').on('animationiteration',function() {
+        console.error('iter');
+        $(this)[0].style.animationPlayState='paused';
+    })
+</script>
+</div>
+<div class="vehicle-body">
+    <div class="back-door-left"></div>
+    <div class="back-door-right"></div>
+    <div class="front-door-left"></div>
+    <div class="front-door-right"></div>
+</div>
+<div class="k-stage">
+    <img src="../img/ks.jpg">
+    <img src="../img/ks.jpg">
+</div>
+<div class="cube-bg">
+    <div class="container">
+        <div class="plane p1">1</div>
+        <div class="plane p2">2</div>
+        <div class="plane p3">3</div>
+        <div class="plane p4">4</div>
+        <div class="plane p5">5</div>
+        <div class="plane p6">6</div>
+    </div>
+</div>
+<div class="cube-bg2">
+    <div class="cube1">
+        <div class="front">1</div>
+        <div class="left">2</div>
+        <div class="back">3</div>
+        <div class="right">4</div>
+        <div class="top">5</div>
+        <div class="bottom">6</div>
+    </div>
+</div>
+<div class="cube-bg">
+    <div class="wrap">
+        <div class="cube">
+            <div class="front">front</div>
+            <div class="back">back</div>
+            <div class="top">top</div>
+            <div class="bottom">bottom</div>
+            <div class="left">left</div>
+            <div class="right">right</div>
+        </div>
+    </div>
+</div>
+    <div style="clear:both;"></div>
+</div>
+<div class="masker"></div>
+<div style="position: fixed; top: 0; left: 0;">
+    <button onclick="showMask()">show mask</button>
+    <button onclick="hideMask()">hide mask</button>
+    <label for="up-close-check">show upgrade</label>
+</div>
+
+<div class="icv-container">
+    <input type="checkbox" class="up-close-check" id="up-close-check">
+    <div class="upgrade">
+        <label class="up-close" for="up-close-check">X</label>
+        <a href="javascript:" class="up-cancel">取消</a>
+    </div>
+</div>
+
+<button data-sound>1.wav</button>
+<button data-sound="2.wav">2.wav</button>
+<button data-sound="ling.mp3">ling.mp3</button>
+<!--<audio src="../res/1.wav"></audio>-->
+<!--<video src="../res/movie.mp4" controls autoplay></video>-->
 </body>
 </html>
