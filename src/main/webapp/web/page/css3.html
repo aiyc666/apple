@@ -343,6 +343,13 @@
                     stop: function() {
                         this.audioElement.pause();
                         this.audioElement.currentTime = 0;
+                    },
+                    volume: function(size) {
+                        this.audioElement.volume = size;
+                    },
+                    loop: function(looping) {
+                        looping === false ? this.audioElement.removeAttribute('loop')
+                                : this.audioElement.setAttribute('loop', '');
                     }
                 }
             }
