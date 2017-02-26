@@ -1,44 +1,41 @@
 ;(function($) {
-    $.fn.waterBubble = function(option) {
-        // 默认配置
-        var defaultOption = {
-            // 百分比值，范围0 ~ 100
-            value: 50,
-            // 球体大小
-            size: 225,
-            // 球体线条宽度
-            lineWidth: 0,
-            // 线条颜色
-            lineColor: 'blue',
-            // 水与球体间隔
-            margin: 0.1,
-            // 波浪宽度，数越小越宽
-            waveWidth: 0.04,
-            // 波浪高度，数越大越高
-            waveHeight: 6,
-            // 波浪速度，数越大速度越快
-            speed: 0.08,
-            // 背景填充色
-            bgColor: 'rgba(255, 255, 255, 0.1)',
-            // 水填充样式，可以用纯色填充，也可以从下到上的渐变填充
-            // waterColor: 'blue', // 纯色
-            waterColor: [['#08D9B0', .75]], // 渐变
-            // 字体大小
-            fontSize: '70',
-            fontWeight: 'bold',
-            // 字体
-            fontFamily: 'Arial',
-            // 字体颜色
-            fontColor: 'rgba(255, 255, 255, 0.9)'
-        };
+    // 默认配置
+    var defaultOption = {
+        // 百分比，范围0 ~ 100
+        value: 50,
+        // 球体大小
+        size: 225,
+        // 球体轮廓线条宽度
+        lineWidth: 0,
+        // 线条颜色
+        lineColor: 'blue',
+        // 水与球体间隔
+        margin: 0,
+        // 波浪宽度，即正弦曲线每周期宽度，单位：像素
+        waveWidth: 200,
+        // 波浪高度，谷底到波峰的距离，单位：像素
+        waveHeight: 20,
+        // 波浪速度，即每帧动画平移n个像素
+        waveSpeed: 5,
+        // 整个球体的背景填充色
+        bgColor: 'none', // eg: 'rgba(255, 255, 255, 0.1)',
+        // 水填充样式，纯色或渐变填充(从下至上)
+        waterColor: 'blue', // eg: waterColor: [['#08D9B0', .75]], // 渐变
+        // 字体相关样式(百分比进度)
+        fontSize: '70', // eg: 'auto'(自动调整大小)
+        fontWeight: 'bold',
+        fontFamily: 'Arial',
+        fontColor: 'rgba(255, 255, 255, 0.9)'
+    };
 
+    // 验证value的值(向下取整)，有效范围：0~100
+    function validateValue(value) {
+        return (value = ~~value) > 100 ? 100 : value < 0 ? 0 : value;
+    }
+
+    $.fn.waterBubble = function(option) {
         // 本实例配置
         var opt = $.extend(defaultOption, option);
-
-        // 验证value的值：0~100
-        function testValue(value) {
-            return (value = ~~value) > 100 ? 100 : value < 0 ? 0 : value;
-        }
 
         // 创建画布对象
         var canvas = $('<canvas>').prependTo(this)[0];
@@ -50,17 +47,10 @@
         var animationId;
 
         function startAnimation() {
-            // 画布大小， 抗锯齿
-            if (window.devicePixelRatio > 1) {
-                var scaleBy = window.devicePixelRatio;
-                canvas.style.width = canvas.style.height = opt.size + 'px';
-                canvas.width = canvas.height = opt.size * scaleBy;
-                ctx.scale(scaleBy, scaleBy);
-            } else {
-                canvas.width = canvas.height = opt.size;
-            }
+            // 画布大小
+            canvas.width = canvas.height = opt.size;
             // 终止值
-            opt.value = testValue(opt.value);
+            opt.value = validateValue(opt.value);
             // 渐变过程中的value值
             var tmpValue = 0;
             // 圆心
@@ -113,7 +103,7 @@
                 ctx.beginPath();
 
                 // 在整个轴长上取点
-                for (; x < xMax; x += 20 / xMax) {
+                for (; x < xMax; x += 1) {
                     // 此处坐标(x, y)的取点，依靠公式 “振幅高*sin(x*振幅宽 + 振幅偏移量)”
                     y = -Math.sin(x * opt.waveWidth + xOffset);
                     y = yOffset + y * opt.waveHeight;
@@ -144,13 +134,15 @@
                 ctx.restore();
             }
 
+            // var count = 0;
             // 绘图
             function render() {
+                // console.log(count++);
                 tmpValue < opt.value && tmpValue++;
                 tmpValue > opt.value && tmpValue--;
                 ctx.clearRect(0, 0, opt.size, opt.size);
                 drawCircle();
-                drawSin(xOffset += opt.speed);
+                drawSin(xOffset += opt.waveSpeed);
                 drawText();
                 animationId = requestAnimationFrame(render);
             }
@@ -165,7 +157,7 @@
         return {
             // 更新水球百分比值
             setValue: function(value) {
-                opt.value = testValue(value);
+                opt.value = validateValue(value);
             },
 
             // 更新水球配置项

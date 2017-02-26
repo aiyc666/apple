@@ -1,0 +1,62 @@
+<html>
+<head>
+    <script src="../lib/jquery/jquery-3.1.1.js"></script>
+
+</head>
+
+<body>
+<div>
+    <canvas id="canvas" style="border:1px solid red;"></canvas>
+</div>
+<script>
+    var size = 400;
+    var waveWidth = 800;
+    var waveHeight = 30;
+    var waveSpeed = 4;
+    var yOffset = 200; // °Ù·Ö±È
+
+    var canvas = document.getElementById('canvas');
+    canvas.width = canvas.height = 400;
+    var canvasBuffer = document.createElement('canvas');
+    var bufWidth = size + waveWidth
+    canvasBuffer.width = bufWidth;
+    canvasBuffer.height = size;
+    var ctx = canvasBuffer.getContext('2d');
+    ctx.fillStyle = 'hsla(200, 100%, 50%, 1)';
+    var style1 = 'hsla(200, 100%, 50%, 1)';
+    var style2 = 'hsla(200, 100%, 50%, .5)';
+    var x, y, speedOffset = 0;
+    function draw(xOffset, direction, style) {
+        ctx.beginPath();
+        for (x = 0; x <= bufWidth; x++) {
+            y = Math.sin((x - xOffset - speedOffset * direction) * 2 * Math.PI / waveWidth) * waveHeight / 2 + yOffset;
+            ctx.lineTo(x, y);
+        }
+        ctx.lineTo(bufWidth, size);
+        ctx.lineTo(0, size);
+        ctx.fillStyle = style;
+        ctx.fill();
+        speedOffset += waveSpeed;
+    }
+
+    draw(0, 1, style1);
+    ctx.globalAlpha = .2;
+    draw(300, 1, style1);
+//    draw(300, 1, style2);
+
+    var c = canvas.getContext('2d');
+    var sx = 0;
+    function render() {
+        sx += 10;
+        sx %= waveWidth;
+
+        c.clearRect(0, 0, size, size);
+        c.drawImage(canvasBuffer, bufWidth - size - sx, 0, size, size, 0, 0, size, size);
+        requestAnimationFrame(render);
+    }
+
+    render();
+
+</script>
+</body>
+</html>
