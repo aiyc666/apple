@@ -69,33 +69,77 @@
                 r = (size - lineWidth) / 2, // 半径
                 cr = size / 2 - lineWidth - opt.margin, // 截切半径
                 xOffset = 0,        // 波浪x偏移量
-                interimValue = 0;   // 渐变过程中的value值
+                interimValue = 0,   // 渐变过程中的value值
+                waveW = opt.waveWidth,
+                waveH = opt.waveHeight,
+                bufferWidth = size + waveW;    // 缓冲区画布的宽度
 
             // 画布上下文对象
             var ctx = canvas.getContext('2d'),
                 ctxBuf = canvasBuffer.getContext('2d');
 
             // 画布大小
-            canvas.width = canvas.height = size;
-            canvasBuffer.width = size + opt.waveWidth;
-            canvasBuffer.height = size + opt.waveHeight;
+            canvas.width = canvas.height = canvasBuffer.height = size;
+            canvasBuffer.width = bufferWidth;
             // 百分比值
             opt.value = validateValue(opt.value);
             // 解析水浪填充样式
             opt.waterStyle = parseWaterStyle(ctxBuf, opt.waterColor, size);
 
-            // 绘制缓冲区
-            function drawBuffer(xOffset) {
+            // 画正弦波浪函数
+            function drawWave(xOffset) {
+                var x = 0, y,
+                    yOffset = size - (size * interimValue / 100) - (waveH / 2);
+                // 百分比进度数值为0则不绘制
+                if (interimValue != 0) {
+                    ctxBuf.beginPath();
+                    ctxBuf.moveTo(0, yOffset);
+                    // 根据波浪宽高的定义，在相应百分比进度yOffset处，绘制正弦曲线
+                    for (; x < bufferWidth; x++) {
+                        y = Math.sin((x - xOffset) * 2 * Math.PI / waveW) * waveH / 2 + yOffset;
+                        ctxBuf.lineTo(x, y);
+                    }
+                    ctxBuf.lineTo(bufferWidth, size);
+                    ctxBuf.lineTo(0, size);
+                    ctxBuf.fillStyle = opt.waterStyle;
+                    ctxBuf.fill();
+                }
+            }
 
+            // 绘制缓冲区
+            function renderCanvasBuffer() {
+                ctxBuf.clearRect(0, 0, bufferWidth, size);
+                // 背景色
+                if (opt.bgColor != 'none') {
+                    ctxBuf.fillStyle = opt.bgColor;
+                    ctxBuf.beginPath();
+                    ctxBuf.rect(0, 0, bufferWidth, size);
+                    ctxBuf.fill();
+                }
+                // 背景波浪，透明度.8
+                ctxBuf.globalAlpha = .8;
+                drawWave(0);
+                // 前景波浪
+                ctxBuf.globalAlpha = 1;
+                drawWave(waveW / 2);
             }
 
             // 圆形区域截切
             function clipCanvas() {
-
+                if (lineWidth > 0) {
+                    ctx.lineWidth = lineWidth;
+                    ctx.strokeStyle = opt.lineColor;
+                    ctx.beginPath();
+                    ctx.arc(c, c, r, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+                ctx.beginPath();
+                ctx.arc(c, c, cr, 0, Math.PI * 2);
+                ctx.clip();
             }
 
             // 绘制画布
-            function drawCanvas() {
+            function paintCanvas() {
 
             }
 
@@ -119,38 +163,7 @@
                 ctx.fillRect(0, 0, opt.size, opt.size);
             }
 
-            // 画sin曲线函数
-            function drawSin(xOffset) {
-                // sin曲线的起点
-                var point = {},
-                    x = 0,
-                    y,
-                    yOffset = opt.size * (1 - tmpValue / 100);
 
-                ctx.save();
-                ctx.beginPath();
-
-                // 在整个轴长上取点
-                for (; x < xMax; x += 1) {
-                    // 此处坐标(x, y)的取点，依靠公式 “振幅高*sin(x*振幅宽 + 振幅偏移量)”
-                    y = -Math.sin(x * opt.waveWidth + xOffset);
-                    y = yOffset + y * opt.waveHeight;
-                    if (point.x === undefined) {
-                        point.x = x;
-                        point.y = y;
-                    }
-                    ctx.lineTo(x, y);
-                }
-
-                //封闭路径
-                ctx.lineTo(xMax, opt.size);
-                ctx.lineTo(0, opt.size);
-                ctx.lineTo(point.x, point.y);
-
-                ctx.fillStyle = opt.waterFillStyle;
-                ctx.fill();
-                ctx.restore();
-            }
 
             // 写百分比文本函数
             function drawText(){
@@ -164,8 +177,12 @@
 
             // 开始动画绘制
             function painting() {
-                interimValue < opt.value && interimValue++;
-                interimValue > opt.value && interimValue--;
+                if (interimValue != opt.value) {
+                    interimValue < opt.value && interimValue++;
+                    interimValue > opt.value && interimValue--;
+                    renderCanvasBuffer();
+                }
+
                 ctx.clearRect(0, 0, size, size);
                 drawCircle();
                 drawSin(xOffset += opt.waveSpeed);
