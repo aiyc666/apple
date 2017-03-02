@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text"
+       id="d1"
+       lang="zh-CN"
+       speech
+       x-webkit-speech
+       x-webkit-grammar="bUIltin:search"
+       onwebkitspeechchange="foo()"/>
+
+<input type="text" x-webkit-speech x-webkit-grammar="builtin:translate" />
+
+<script>
+    function foo() {
+        var n = document.getElementById("d1").value;
+        if (n == "百度") {
+            window.location.href = "http://www.baidu.com";
+        } else {
+            window.location.href = "http://www.ahsdxy.ah.edu.cn/";
+        }
+    }
+
+    function speak(textToSpeak) {
+        //创建一个 SpeechSynthesisUtterance的实例
+        var newUtterance = new SpeechSynthesisUtterance();
+
+        // 设置文本
+        newUtterance.text = textToSpeak;
+
+        // 添加到队列
+        window.speechSynthesis.speak(newUtterance);
+    }
+
+    window.speechSynthesis.getVoices();
+
+    http://codepen.io/Rumyra/pen/bCphe
+
+            https://www.google.com/intl/en/chrome/demos/speech.html
+
+
+</script>
+</body>
+</html>
