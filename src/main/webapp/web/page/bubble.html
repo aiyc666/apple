@@ -7,11 +7,35 @@
     <script src="../js/jquery-water-bubble.js"></script>
     <script type="text/javascript">
         $(function() {
-            $('#bubble').waterBubble({value: 50});
+            window.ball = $('#bubble').waterBubble({
+                size: 300,
+                waterColor: [['red', 0], ['green', .2]],
+                bubbleImage2: ''
+            });
+
+//            var ctx = ca.getContext('2d');
+//            ctx.scale(.2, .2)
+//            ctx.beginPath();
+//            ctx.arc(500, 500, 300, 0, 2*Math.PI);
+//            ctx.clip();
+//            ctx.fillStyle = 'blue'
+//            ctx.fill();
+//
+//
+//            var i = 0
+//            function r() {
+//                ++i > 255 ? i = 0 : i;
+//                ctx.clearRect(0,0,1000,1000);
+//                ctx.fillStyle='rgb(0,0,' + i + ')'
+//                ctx.beginPath();
+//                ctx.arc(500,500,300, -Math.PI/4, Math.PI * 5 /4);
+////                ctx.fillRect(0,300,1000,1000);
+//                ctx.fill();
+//
+//                requestAnimationFrame(r);
+//            }
+//            r();
         });
-
-
-
         /*function play() {
             v.src = URL.createObjectURL(f.files[0]);
             v.play();
@@ -19,7 +43,15 @@
     </script>
 </head>
 <body>
-<div id="bubble"></div>
+<div style="position: relative;">
+    <!--<canvas style=";left:-2px;top:-2px;" id="ca" width="1000" height="1000"></canvas>-->
+    <div id="bubble"></div>
+
+</div>
+
+<div>
+
+</div>
 <!--<div>
     <input value="播放" type="file" onchange="play()" id="f">
     <video src="" controls id="v"></video>

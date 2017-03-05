@@ -2,7 +2,7 @@
     // 默认配置
     var defaultOption = {
         // 百分比进度值，范围0 ~ 100
-        value: 50,
+        value: 60,
         // 球体大小
         size: 225,
         // 球壁线条宽度，为0则不显示球壁
@@ -10,23 +10,26 @@
         // 线条颜色
         lineColor: 'blue',
         // 水与球壁间隔
-        margin: 0,
+        margin: 5,
         // 波浪宽度，即正弦曲线一个周期的宽度，单位：像素
-        waveWidth: 200,
+        waveWidth: 450,
         // 波浪高度，曲线谷底到波峰间的距离，单位：像素
         waveHeight: 20,
         // 波浪移动速度，即每帧动画平移的距离，单位：像素
-        waveSpeed: 5,
+        waveSpeed: 6,
         // 整个球体的背景填充色
-        bgColor: 'none', // eg: 'rgba(255, 255, 255, 0.1)',
+        bgColor: '#eef', // eg: 'rgba(255, 255, 255, 0.1)',
         // 水样式，纯色或渐变填充(从下至上渐变)
         waterColor: 'blue', // eg: waterColor: [['#08D9B0', .75]], // 渐变
         // 是否显示：百分比进度
         showPercent: true,
         // 字体颜色
-        fontColor: 'rgba(255, 255, 255, 0.9)',
+        percentColor: 'rgba(255, 255, 255, 0.9)',
         // 字体样式类名，可在外部自定义字体样式
-        fontClassName: 'water-bubble-percent'
+        percentClassName: 'water-bubble-percent',
+        // 水球图片
+        bubbleImage: '../img/ball.png',
+        bubbleImageClassName: 'water-bubble-image'
     };
 
     // 验证value的值(四舍五入后取整)，有效范围：0~100
@@ -48,38 +51,53 @@
     }
 
     $.fn.waterBubble = function(option) {
-        // 自定义配置
-        var opt = $.extend(defaultOption, option);
+        // 自定义配置项
+        var opt = $.extend(defaultOption, option),
+            frameId; // 动画帧id
 
-        // 创建DOM元素。。。
+        // 创建DOM元素
+        var $container = $('<div>').css({position: 'relative', boxSizing: 'border-box', borderRadius: '100%', overflow: 'hidden'}),
+            $bubbleImg = $('<div>').addClass(opt.bubbleImageClassName).css({position: 'absolute', width: '100%', height: '100%'}),
+            $percentContainer = $('<div>').css({position: 'absolute', width: '100%', height: '100%', textAlign: 'center', fontFamily: 'arial'}),
+            $percent = $('<span>').addClass(opt.percentClassName).css({marginLeft: .333 + 'em'}),
+            $unit = $('<span>%</span>'),
+            $canvas = $('<canvas>').css({position: 'absolute', borderRadius: '100%'}),
+            canvas = $canvas[0],
+            canvasBuffer = $('<canvas>')[0];
 
-        // 创建画布
-        var canvas = $('<canvas>').prependTo(this)[0];
+        // 插入文档树
+        $container.append($canvas).append($bubbleImg).append($percentContainer.append($percent).append($unit)).prependTo(this);
 
-        // 创建缓冲区画布
-        var canvasBuffer = $('<canvas>')[0];
-
-        // 动画id
-        var frameId;
 
         function draw() {
             var size = opt.size,
                 lineWidth = opt.lineWidth,
-                c = size / 2,   // 圆心
-                r = (size - lineWidth) / 2, // 半径
-                cr = size / 2 - lineWidth - opt.margin, // 截切半径
-                xOffset = 0,        // 波浪x偏移量
-                interimValue = 0,   // 渐变过程中的value值
+                margin = opt.margin,
                 waveW = opt.waveWidth,
                 waveH = opt.waveHeight,
-                bufferWidth = size + waveW;    // 缓冲区画布的宽度
-
-            // 画布上下文对象
-            var ctx = canvas.getContext('2d'),
+                speed = opt.waveSpeed,
+                // 当前动画帧的波浪x偏移量
+                xOffset = 0,
+                // 渐变过程中的value值
+                interimValue = 0,
+                // 画布大小
+                canvasSize = size - 2 * (lineWidth + margin),
+                // 缓冲区画布的宽度
+                bufferWidth = canvasSize + waveW,
+                // 画布上下文对象
+                ctx = canvas.getContext('2d'),
                 ctxBuf = canvasBuffer.getContext('2d');
 
+            // 元素样式
+            $container.css({border: lineWidth + 'px solid ' + opt.lineColor, width: size + 'px', height: size + 'px'});
+            $bubbleImg.css({background: opt.bubbleImage ? ('url(' + opt.bubbleImage + ') no-repeat 0 0/' + size + 'px ' + size + 'px') : 'none'});
+            $percentContainer.css({color: opt.percentColor, lineHeight: (size - 2 * lineWidth) + 'px'})[opt.showPercent ? 'show' : 'hide']();
+            $percent.css({fontSize: (.31 * canvasSize) + 'px'});
+            $unit.css({fontSize: (.1 * canvasSize) + 'px'});
+            $canvas.css({margin: margin + 'px', width: canvasSize + 'px', height: canvasSize + 'px'});
+
             // 画布大小
-            canvas.width = canvas.height = canvasBuffer.height = size;
+            canvas.width = canvas.height = canvasBuffer.height = size = canvasSize;
             canvasBuffer.width = bufferWidth;
             // 百分比值
             opt.value = validateValue(opt.value);
@@ -107,7 +125,7 @@
             }
 
             // 绘制缓冲区
-            function renderCanvasBuffer() {
+            function drawCanvasBuffer() {
                 ctxBuf.clearRect(0, 0, bufferWidth, size);
                 // 背景色
                 if (opt.bgColor != 'none') {
@@ -116,84 +134,46 @@
                     ctxBuf.rect(0, 0, bufferWidth, size);
                     ctxBuf.fill();
                 }
-                // 背景波浪，透明度.8
-                ctxBuf.globalAlpha = .8;
+                // 背景波浪，透明度.6
+                ctxBuf.globalAlpha = .6;
                 drawWave(0);
                 // 前景波浪
                 ctxBuf.globalAlpha = 1;
-                drawWave(waveW / 2);
+                drawWave(waveW / 3);
             }
 
-            // 圆形区域截切
-            function clipCanvas() {
-                if (lineWidth > 0) {
-                    ctx.lineWidth = lineWidth;
-                    ctx.strokeStyle = opt.lineColor;
-                    ctx.beginPath();
-                    ctx.arc(c, c, r, 0, Math.PI * 2);
-                    ctx.stroke();
-                }
-                ctx.beginPath();
-                ctx.arc(c, c, cr, 0, Math.PI * 2);
-                ctx.clip();
-            }
-
-            // 绘制画布
-            function paintCanvas() {
-
+            // 绘制可见画布
+            function drawCanvas() {
+                ctx.drawImage(canvasBuffer, (waveW - xOffset), 0, size, size, 0, 0, size, size);
             }
 
             // 更新百分比进度
             function updatePercent() {
-
+                $percent.text(interimValue);
             }
 
-            // 画圈函数
-            function drawCircle() {
-                if ((ctx.lineWidth = opt.lineWidth) > 0) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = opt.lineColor;
-                    ctx.arc(c, c, r, 0, 2 * Math.PI);
-                    ctx.stroke();
-                }
-                ctx.beginPath();
-                ctx.arc(c, c, cr, 0, 2 * Math.PI);
-                ctx.clip();
-                ctx.fillStyle = opt.bgColor;
-                ctx.fillRect(0, 0, opt.size, opt.size);
-            }
-
-
-
-            // 写百分比文本函数
-            function drawText(){
-                ctx.save();
-                var fontSize = opt.fontSize == 'auto' ? 0.3 * r : opt.fontSize;
-                ctx.font = fontSize + 'px ' + opt.fontFamily;
-                ctx.textAlign = 'center';
-                ctx.fillStyle = opt.fontColor;
-                ctx.restore();
-            }
-
-            // 开始动画绘制
-            function painting() {
+            // 动画绘制
+            function startPainting() {
+                // 百分比渐变效果
                 if (interimValue != opt.value) {
                     interimValue < opt.value && interimValue++;
                     interimValue > opt.value && interimValue--;
-                    renderCanvasBuffer();
+                    drawCanvasBuffer();
+                    updatePercent();
                 }
-
+                // 计算当前动画帧xOffset偏移
+                (xOffset += speed) > waveW && (xOffset -= waveW);
                 ctx.clearRect(0, 0, size, size);
-                drawCircle();
-                drawSin(xOffset += opt.waveSpeed);
-                drawText();
-                frameId = requestAnimationFrame(painting);
+                drawCanvas();
+                frameId = requestAnimationFrame(startPainting);
             }
 
-            painting();
+            // 开始绘制
+            drawCanvasBuffer();
+            drawCanvas();
+            startPainting();
         }
 
-        // 开始绘制
         draw();
 
         // 返回此水球对象
@@ -211,4 +191,5 @@
             }
         }
     };
+
 })(jQuery);
