@@ -4,7 +4,7 @@
         // 百分比进度值，范围0 ~ 100
         value: 60,
         // 球体大小
-        size: 225,
+        size: 200,
         // 球壁线条宽度，为0则不显示球壁
         lineWidth: 0,
         // 线条颜色
@@ -18,13 +18,13 @@
         // 波浪移动速度，即每帧动画平移的距离，单位：像素
         waveSpeed: 6,
         // 整个球体的背景填充色
-        bgColor: '#eef', // eg: 'rgba(255, 255, 255, 0.1)',
-        // 水样式，纯色或渐变填充(从下至上渐变)
-        waterColor: 'blue', // eg: waterColor: [['#08D9B0', .75]], // 渐变
+        bgColor: 'rgba(1, 119, 157, 0.6)',
+        // 水样式，可以为纯色、或渐变填充(从下至上渐变)
+        waterColor: [ ['#9304FE', .05], ['#04BBFF', .75] ], // eg: 'blue'
         // 是否显示：百分比进度
         showPercent: true,
         // 字体颜色
-        percentColor: 'rgba(255, 255, 255, 0.9)',
+        percentFontColor: 'rgba(255, 255, 255, 0.9)',
         // 字体样式类名，可在外部自定义字体样式
         percentClassName: 'water-bubble-percent',
         // 水球图片
@@ -91,7 +91,7 @@
             // 元素样式
             $container.css({border: lineWidth + 'px solid ' + opt.lineColor, width: size + 'px', height: size + 'px'});
             $bubbleImg.css({background: opt.bubbleImage ? ('url(' + opt.bubbleImage + ') no-repeat 0 0/' + size + 'px ' + size + 'px') : 'none'});
-            $percentContainer.css({color: opt.percentColor, lineHeight: (size - 2 * lineWidth) + 'px'})[opt.showPercent ? 'show' : 'hide']();
+            $percentContainer.css({color: opt.percentFontColor, lineHeight: (size - 2 * lineWidth) + 'px'})[opt.showPercent ? 'show' : 'hide']();
             $percent.css({fontSize: (.31 * canvasSize) + 'px'});
             $unit.css({fontSize: (.1 * canvasSize) + 'px'});
             $canvas.css({margin: margin + 'px', width: canvasSize + 'px', height: canvasSize + 'px'});
