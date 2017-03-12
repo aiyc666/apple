@@ -349,7 +349,31 @@
             </ul>
         </div>
     </div>
+    <style>
+        .version-container { width: 250px; height: 200px; padding-top: 50px; position: relative; margin-top: 30px; background:#efefef; }
+        .vwrap {position: relative; display: block; width: 150px; margin: 0 auto;border: 1px solid red;}
+        .version-drop-down { display: block; width: 150px; height:30px; margin: 0 auto; text-align: center; line-height: 30px }
+        .version-drop-down:focus + ul { opacity:1; top: -30px; width: 120%; overflow:auto; max-height: 200px; margin-left: -10%; z-index:999}
+        .version-list { position: absolute; top:0; width: 100%; max-height:30px; overflow:hidden; list-style:none; border: 1px solid blue; background:#ddd;
+                        transition:all 2s linear; z-index:-1; opacity:.6}
+    </style>
+    <div class="version-container">
+        <div class="vwrap">
+            <a href="javascript:" class="version-drop-down">升级版本</a>
+            <ul class="version-list">
+                <li>aaaaaaaaa</li>
+                <li>aaaaaaaaa</li>
+                <li>aaaaaaaaa</li>
+                <li>aaaaaaaaa</li>
+                <li>aaaaaaaaa</li>
+            </ul>
+        </div>
+
+
+    </div>
     <div class="row" style="height: 300px;"></div>
+
+
 </div>
 </body>
 </html>
