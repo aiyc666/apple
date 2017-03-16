@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>speech-test</title>
+    <style>
+        html, body { width: 100%; height: 100%; }
+    </style>
+    <script src="../lib/jquery/jquery-3.1.1.js"></script>
+    <script>
+        var token = {
+            "access_token": "24.f70cfaed5d68a465d9adb09d797a9482.2592000.1491419319.282335-9345071",
+            "session_key": "9mzdXUMQOZXJLpWfLciLaEB94YL6UqnylbjrpEPyBbUznWD2tFlBxxn2LRsTZNgZQJULOrNqTuWj621uTVcvNpboimNP",
+            "scope": "public audio_voice_assistant_get audio_tts_post wise_adapt lebo_resource_base lightservice_public hetu_basic lightcms_map_poi kaidian_kaidian wangrantest_test wangrantest_test1 bnstest_test1 bnstest_test2 ApsMisTest_Test\u6743\u9650 vis-classify_flower",
+            "refresh_token": "25.c019b340662b431c343420f37ea779a7.315360000.1804187319.282335-9345071",
+            "session_secret": "100332cf0d60a051c5204b99bdf2d5a8",
+            "expires_in": 2592000
+        };
+
+        // doc : http://yuyin.baidu.com/docs/asr/57
+
+        /**
+        format	    sting	必填	语音压缩的格式，请填写上述格式之一，不区分大小写
+        rate	    int	    必填	采样率，支持 8000 或者 16000
+        channel	    int	    必填	声道数，仅支持单声道，请填写 1
+        cuid	    string	必填	用户唯一标识，用来区分用户，填写机器 MAC 地址或 IMEI 码，长度为60以内
+        token	    string	必填	开放平台获取到的开发者 access_token
+        ptc	        int	    选填	协议号，下行识别结果选择，默认 nbest 结果
+        lan	        string	选填	语种选择，中文=zh、粤语=ct、英文=en，不区分大小写，默认中文
+        url	        string	选填	语音下载地址
+        callback	string	选填	识别结果回调地址
+        speech	    string	选填	真实的语音数据 ，需要进行base64 编码
+        len	        int	    选填	原始语音长度，单位字节
+        */
+
+        // 下行：
+        /**
+        err_no	    int	必填	错误码
+        err_msg	    string	必填	错误码描述
+        sn	        string	必填	语音数据唯一标识，系统内部产生，用于 debug
+        result	    array ( [string,string,…])	选填	识别结果数组，提供1-5 个候选结果，string 类型为识别的字符串， utf-8 编码
+        */
+
+        var params = {
+            format: 'pcm', // pcm（不压缩）、wav、opus、speex、amr
+            rate: 8000, // 16000
+            channel: 1,
+            cuid: 'M9FF7629C25C681AA9B05EA315EC8B87A8FB',
+            token: '24.f70cfaed5d68a465d9adb09d797a9482.2592000.1491419319.282335-9345071',
+            // ptc: '',
+            lan: 'zh', // 'en'
+            //url: '',
+            //callback: '',
+            speech: '',
+            len: 52512
+        };
+
+        $.ajax({
+            url: 'http://vop.baidu.com/server_api',
+            method: 'post',
+            contentType: 'application/json',
+            data: params,
+            success: function(data) {
+                debugger;
+                console.error(data.result);
+            }
+        });
+
+    </script>
+
+    <script>
+        window.onload = function() {
+//            var grammar = '#JSGF V1.0; grammar colors; public <color> = aqua | azure | beige | bisque | black | blue | brown | chocolate | coral | crimson | cyan | fuchsia | ghostwhite | gold | goldenrod | gray | green | indigo | ivory | khaki | lavender | lime | linen | magenta | maroon | moccasin | navy | olive | orange | orchid | peru | pink | plum | purple | red | salmon | sienna | silver | snow | tan | teal | thistle | tomato | turquoise | violet | white | yellow ;'
+            var grammar = '#JSGF V1.0; grammar colors; public <color> =  中国 | 你好 | 打开空调 ;'
+            var recognition = new webkitSpeechRecognition();
+            var speechRecognitionList = new webkitSpeechGrammarList();
+            speechRecognitionList.addFromString(grammar, 1);
+            recognition.grammars = speechRecognitionList;
+//            recognition.continuous = false;
+            recognition.lang = 'zh-CN';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            var diagnostic = document.querySelector('.output');
+            var bg = document.querySelector('html');
+
+            document.body.onclick = function() {
+                recognition.start();
+                console.log('Ready to receive a color command.');
+            }
+
+            recognition.onresult = function(event) {
+                var color = event.results[0][0].transcript;
+                diagnostic.textContent = 'Result received: ' + color;
+//                bg.style.backgroundColor = color;
+            }
+        }
+    </script>
+</head>
+<body>
+<span class="output"></span>
+</body>
+</html>
