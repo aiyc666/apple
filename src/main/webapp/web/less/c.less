@@ -1,0 +1,67 @@
+@color: red;
+@import "a";
+@import "b";
+@color: yellow;
+.mx {
+  color: yellow;
+}
+.c {
+  color: @color;
+  .mx;
+}
+#iv {
+  .mx { color: #333; }
+}
+
+.d {
+  .x {color: red;}
+  .dd {
+    .x {color: blue;}
+    .x {color: black;}
+    .ddd1 {
+      .x {color: purple;}
+    }
+    .ddd {
+      .x();
+    }
+  }
+}
+
+#x() {
+  color: #000;
+  .size(@x, @y) {
+
+  }
+}
+.x() {
+  color: #000;
+  .size(@x, @y) {
+
+  }
+}
+
+.a {
+  @path: a;
+  .x.size(1,1);
+  #x.size(2,2);
+}
+
+.a {
+  @ok: .ok;
+  @err: .err;
+  .b {
+    @d: .c .d;
+    &b1 { @{d} {} }
+    & {@{d} {} }
+    .c {
+      .d { }
+
+      .d {
+        & { color: black; }
+        @{ok}& { color: blue; }
+        @{err}& { color: red; }
+      }
+      //.on& .d { color: red; }
+    }
+  }
+}

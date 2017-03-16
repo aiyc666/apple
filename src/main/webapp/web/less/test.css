@@ -1,0 +1,98 @@
+extend ' .x2' has no matches
+.a {
+  color: red;
+}
+.a {
+  color: red;
+}
+.b {
+  color: red;
+}
+#b {
+  color: red;
+}
+b {
+  color: red;
+}
+b[b='x'] {
+  color: red;
+}
+.a .b .c, .d.d ~ .e + .f {
+  color: red;
+}
+div > p > span {
+  color: red;
+}
+.a + b,
+.a .b .c, .d.d ~ .e + .f:hover {
+  color: red;
+}
+.a-b {
+  color: red;
+}
+.a {
+  background: url("../images/a.png");
+}
+.a {
+  height: 30px;
+  line-height: 30px;
+  max-height: 30px;
+  color: red;
+}
+div {
+  color: red;
+}
+.a {
+  height: 1;
+}
+.a .b {
+  height: 22;
+}
+div {
+  color: #cc0000;
+}
+a:hover:active {
+  color: red;
+}
+.g,
+.h,
+.j,
+.j {
+  color: red;
+}
+.i,
+.h,
+.j,
+.j {
+  height: 0;
+}
+.i .ii {
+  border: none;
+}
+.h,
+.j {
+  width: 0;
+}
+.j {
+  font-size: 12px;
+}
+.gg,
+.hh {
+  color: red;
+}
+.gg .gg-2 {
+  font-size: 5px;
+}
+li.list > a,
+button.list-style {
+  color: red;
+}
+.k {
+  color: red;
+}
+.mx1 {
+  color: red;
+}
+.mx1 .mx-2 {
+  color: blue;
+}
