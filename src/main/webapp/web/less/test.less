@@ -19,6 +19,14 @@
 @{s4} { color: red; }
 @{s1} + @{s2}, @{s3}:hover { color: red; }
 @{s1}-@{s2} { color: red; }
+@a: aa;
+@aa: bb;
+@bb: cc;
+
+.var {
+  //val: @{@@a};
+}
+
 
 // url
 @img: "../images";
@@ -30,10 +38,10 @@
 @co: co;
 @lor: lor;
 .a {
-  @{h}: 30px;
+    @{h}: 30px;
   line-@{h}: 30px;
-  @{m}-@{h}: 30px;
-  @{co}@{lor}: red;
+    @{m}-@{h}: 30px;
+    @{co}@{lor}: red;
 }
 
 // 懒加载、作用域、默认值
@@ -81,7 +89,7 @@ li.list > a { color: red; }
 button.list-style {
   &:extend(li.list > a); // use the same list styles
 }
-.k:extend(.x){ color: red; };
+.k:extend(.x2){ color: red; };
 
 // 混合
 .mx(@p1: red) {
@@ -93,12 +101,65 @@ button.list-style {
 .mx1 {
   .mx();
 }
-@mode: 1;
-.mode() {
-  &:hover when (@mode=0) { .on(); }
-  &:active when (@mode=1) { .on(); }
+
+@device: pc;
+@device: pad;
+.effect(pc) {
+  &:hover { .on; }
 }
+.effect(pad) {
+  &:active { .on; }
+}
+.effect() {
+  &:hover when (@device=pc) { .on(); }
+  &:active when (@device=pad) { .on(); }
+}
+.effect() when (@device=pc) { &:hover { .on; } }
+.effect() when (@device=pad) { &:active { .on; } }
 a {
   .on() { color: yellow; width: 1px;}
-  .mode !important;
+  //.mode !important;
+}
+
+
+
+.x() {
+  p1: 1;
+}
+.x(@a: a, @b: b, @c: c) {
+  p1: @a;
+  p2: @b;
+  p3: @c;
+  p4: @arguments;
+}
+.x(...) {
+  p5: @arguments;
+  //p55: @rest;
+}
+.x(@a, ...) {
+  p6: @arguments;
+}
+.x(@a, @b...) {
+  p7: @b;
+}
+.x(x1, @a) {
+  p8: @a;
+}
+.x(x2, @a) {
+  p9: @a;
+}
+.xx(@a) {
+  //@a();
+}
+.xx {
+  //.x();
+  //.x(aa);
+  //.x(@b:bb, aa);
+  //.x(@b: bb, aa, cc);
+  //.x(aa, bb, cc);
+  //.x(x1, a);
+  //@sw: x1;
+  //.x(@sw, aaa);
+  .c(){ p: cc; }
+  .xx(@a: b);
 }
