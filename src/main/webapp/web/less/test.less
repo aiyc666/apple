@@ -1,7 +1,104 @@
-.page {
-  .page-content {
-    font-size: 12px;
-    font-family: "微软雅黑";
+@color: red;
+.a {
+  color: @color;
+  //background: @{color}; XXX
+}
 
+// 选择器
+@s1: .a;
+@s2: b;
+@s3: ~".a .b .c, .d.d ~ .e + .f";
+@s4: ~"div > p > span";
+
+@{s1} { color: red; }
+.@{s2} { color: red; }
+#@{s2} { color: red; }
+@{s2} { color: red; }
+@{s2}[@{s2}='x'] { color: red; }
+@{s3} { color: red; }
+@{s4} { color: red; }
+@{s1} + @{s2}, @{s3}:hover { color: red; }
+@{s1}-@{s2} { color: red; }
+
+// url
+@img: "../images";
+.a { background: url("@{img}/a.png"); }
+
+// 属性
+@h: height;
+@m: max;
+@co: co;
+@lor: lor;
+.a {
+  @{h}: 30px;
+  line-@{h}: 30px;
+  @{m}-@{h}: 30px;
+  @{co}@{lor}: red;
+}
+
+// 懒加载、作用域、默认值
+div { color: @late; }
+@late: red;
+@var: 0;
+.a {
+  @var: 1;
+  .b {
+    @var: 2;
+    height: @var;
+    @var: 22;
   }
+  height: @var;
+}
+@base-color: blue;
+@dark-color: darken(@base-color, 10%);
+div { color: @dark-color; }
+@base-color: red;
+
+a:hover:active { color: red; }
+
+// 继承
+.g { color: red; }
+.i {
+  height: 0;
+  .ii { border: none; }
+}
+.h:extend(.g, .i) {
+  width: 0;
+}
+.j {
+  &:extend(.g, .i, .h);
+  font-size: 12px;
+}
+.gg {
+  color: red;
+  .gg-2 {
+    font-size: 5px;
+  }
+}
+.hh:extend(.gg) {}
+
+li.list > a { color: red; }
+button.list-style {
+  &:extend(li.list > a); // use the same list styles
+}
+.k:extend(.x){ color: red; };
+
+// 混合
+.mx(@p1: red) {
+  color: @p1;
+  .mx-2 {
+    color: blue;
+  }
+}
+.mx1 {
+  .mx();
+}
+@mode: 1;
+.mode() {
+  &:hover when (@mode=0) { .on(); }
+  &:active when (@mode=1) { .on(); }
+}
+a {
+  .on() { color: yellow; width: 1px;}
+  .mode !important;
 }
