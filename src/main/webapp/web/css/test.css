@@ -1,0 +1,226 @@
+.a,
+.k {
+  color: red;
+}
+.a {
+  color: red;
+}
+.b {
+  color: red;
+}
+#b {
+  color: red;
+}
+b {
+  color: red;
+}
+b[b='x'] {
+  color: red;
+}
+.a .b .c, .d.d ~ .e + .f {
+  color: red;
+}
+div > p > span {
+  color: red;
+}
+.a + b,
+.a .b .c, .d.d ~ .e + .f:hover {
+  color: red;
+}
+.a-b {
+  color: red;
+}
+.a,
+.k {
+  background: url("../images/a.png");
+}
+.a,
+.k {
+  height: 30px;
+  line-height: 30px;
+  max-height: 30px;
+  color: red;
+}
+div {
+  color: red;
+}
+.a,
+.k {
+  height: 1;
+}
+.a .b {
+  height: 22;
+}
+div {
+  color: #cc0000;
+}
+a:hover:active {
+  color: red;
+}
+.g,
+.h,
+.j,
+.j {
+  color: red;
+}
+.i,
+.h,
+.j,
+.j {
+  height: 0;
+}
+.i .ii {
+  border: none;
+}
+.h,
+.j {
+  width: 0;
+}
+.j {
+  font-size: 12px;
+}
+.gg,
+.hh {
+  color: red;
+}
+.gg .gg-2 {
+  font-size: 5px;
+}
+li.list > a,
+button.list-style {
+  color: red;
+}
+.k {
+  color: red;
+}
+.mx1 {
+  color: red;
+}
+.mx1 .mx-2 {
+  color: blue;
+}
+.xfc .a {
+  my: 111;
+  in: 111;
+}
+.xfc .a .on {
+  in: 111;
+}
+.xfc .on {
+  out: 111;
+}
+.r {
+  p1: 11;
+  p2: 22;
+  p3: ppp;
+}
+.r *::before {
+  content: ' ';
+}
+/*
+.mixin() {}           -> 0
+.mixin(@a) {}         -> 1
+.mixin(@a:a) {}       -> 0~1
+.mixin(@a:a, ...) {}  -> 0~n
+.mixin(@a, ...) {}    -> 1~n
+.mixin(...) {}        -> 0~n
+*/
+.a,
+.k {
+  p: 333;
+}
+.b {
+  p: 111;
+  p: 222;
+}
+.grc {
+  exp: 60;
+  d-exp: 30;
+  exp: "35";
+  exp: 55;
+  exp: #fff;
+  t-exp: true;
+}
+.lp {
+  width: 1px;
+  width: 2px;
+  width: 3px;
+  width: 4px;
+  width: 5px;
+  width: 6px;
+  width: 7px;
+  width: 8px;
+  width: 9px;
+  width: 10px;
+}
+.lp .column-1 {
+  width: 8.33333333%;
+}
+.lp .column-2 {
+  width: 16.66666667%;
+}
+.lp .column-3 {
+  width: 25%;
+}
+.lp .column-4 {
+  width: 33.33333333%;
+}
+.lp .column-5 {
+  width: 41.66666667%;
+}
+.lp .column-6 {
+  width: 50%;
+}
+.lp .column-7 {
+  width: 58.33333333%;
+}
+.lp .column-8 {
+  width: 66.66666667%;
+}
+.lp .column-9 {
+  width: 75%;
+}
+.lp .column-10 {
+  width: 83.33333333%;
+}
+.lp .column-11 {
+  width: 91.66666667%;
+}
+.lp .column-12 {
+  width: 100%;
+}
+.mg {
+  box-shadow: 0 0 10px red, 0 0 20px blue;
+  background-position: 0 0, 2px 2px, 4px 4px;
+  transform: scale(1) skew(30deg);
+}
+.mode-auto {
+  p: 1;
+}
+.mode-cool {
+  p: 2;
+}
+.mode-wind {
+  p: 3;
+}
+.ls-auto {
+  p: auto;
+}
+.ls-cool {
+  p: cool;
+}
+.ls-hot {
+  p: hot;
+}
+.ls-wind {
+  p: wind;
+}
+.fn {
+  p: 2;
+  p: 1.13;
+  p: 3.14159265;
+  p: 1;
+  p: 0.5;
+  p: 0.51503807;
+  p: 8;
+}

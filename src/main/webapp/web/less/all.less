@@ -1,0 +1,2161 @@
+@import "../../../../../resource/skin/default/less/variables";
+@import "../../../../../resource/skin/default/less/mixins";
+
+/* 液晶字体 */
+@font-face {
+  font-family: 'transponderaoe';
+  src: url('../../../font/transponderaoe.ttf') format('turetype'), url('../../../font/transponderaoe.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/************ 页面内动画 ************/
+
+/* 360度旋转-顺时针 */
+@keyframes iv-rotate {
+  0% { transform: translateZ(0) rotate(0deg); }
+  100% { transform: translateZ(0) rotate(360deg); }
+}
+
+/* 360度旋转-逆时针 */
+@keyframes iv-rotate-reverse {
+  0% { transform: translateZ(0) rotate(0deg); }
+  100% { transform: translateZ(0) rotate(-360deg); }
+}
+
+/* 灯光控制-双闪灯交替闪烁 */
+@keyframes iv-vehicle-light-double-flash {
+  0%, 49% { opacity: 1 }
+  51%, 100% { opacity: 0 }
+}
+
+/* 灯光控制按钮-打开中动画 */
+@keyframes iv-ctrl-btn-halo-opening {
+  from { box-shadow: 0 0 0 0 rgba(161, 157, 184, .8); }
+  to { box-shadow: 0 0 25px 5px rgba(161, 157, 184, .8); }
+}
+
+/* 灯光控制按钮-关闭中动画 */
+@keyframes iv-ctrl-btn-halo-closing {
+  from { box-shadow: 0 0 25px 5px rgba(161, 157, 184, .8); }
+  to { box-shadow: 0 0 0 0 rgba(161, 157, 184, .8); }
+}
+
+/* 空调顶盖-缩放效果 */
+@keyframes iv-air-top-cap-scaling {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* 空调风向箭头-向左 */
+@keyframes iv-air-wind-arrow-to-left {
+  0%, 85%, 100% { transform: rotate(90deg) translate(0); opacity: 1; }
+  24.9999% { transform: rotate(90deg) translate(120px, 0); opacity: 1; }
+  25% { transform: rotate(180deg) translate(-20px, -140px); opacity: 1; }
+  70% { transform: rotate(180deg) translate(160px, -140px); opacity: 1; }
+  84.9999% { transform: rotate(180deg) translate(220px, -140px); opacity: .4; }
+}
+
+/* 空调风向箭头-向右 */
+@keyframes iv-air-wind-arrow-to-right {
+  0%, 85%, 100% { transform: rotate(90deg) translate(0); opacity: 1; }
+  24.9999% { transform: rotate(90deg) translate(120px, 0); opacity: 1; }
+  25% { transform: rotate(0deg) translate(-20px, 140px); opacity: 1; }
+  70% { transform: rotate(0deg) translate(160px, 140px); opacity: 1; }
+  84.9999% { transform: rotate(0deg) translate(220px, 140px); opacity: .4; }
+}
+
+/* 空调开关按钮-打开中效果 */
+@keyframes iv-air-switch-btn-opening {
+  0% { background-color: #999; }
+  100% { background-color: #38019d; }
+}
+
+/* 空调开关按钮-位移过程中的抖动 */
+@keyframes iv-air-switch-dot-shaking {
+  10% { width: 40px; transform: scale(1, .6); }
+  40% { width: 30px; transform: scale(1); }
+  45% { transform: scale(.7, 1.3); }
+  60% { transform: scale(1.2, .8); }
+  76% { transform: scale(.9, 1.1); }
+  96% { transform: scale(1); }
+}
+
+/* 空调设置-光圈旋转动画 */
+@keyframes iv-air-temp-ring-turning {
+  0% {transform: rotate(0deg) scale(1);}
+  25% {transform: rotate(180deg) scale(1.08);}
+  50% {transform: rotate(360deg) scale(1);}
+  75% {transform: rotate(540deg) scale(.96);}
+  100% {transform: rotate(720deg) scale(1);}
+}
+
+/* 充电界面-虚线水帘 */
+@keyframes iv-dashed-line-flow {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 -18px;}
+}
+
+/* 充电界面-车辆边框上的小亮球 */
+@keyframes iv-little-bright-ball {
+  0%, 100% { transform: translate(0, 0); }
+  33.3333% { transform: translate(918px, 0); }
+  50% { transform: translate(918px, 458px); }
+  83.3333% { transform: translate(0, 458px); }
+}
+
+/* 诊断界面-扫描光束动画 */
+@keyframes iv-diagnosis-scan-light {
+  0%, 100% { left: -50px; transform: scale(1); }
+  49.9999% { left: 638px; transform: scale(1); }
+  50% { left: 894px; transform: scaleX(-1); }
+  99.9999% { left: 206px; transform: scaleX(-1); }
+}
+
+/* 诊断界面-箭头进度条 */
+@keyframes iv-scan-progress-bar-running {
+  0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 0 0, 0 0, 0 0, 19px 0; }
+}
+
+/* 升级界面-光圈转动 */
+@keyframes iv-upgrade-light-circle-twist {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(0deg); }
+  75% { transform: rotate(120deg); }
+  100% { transform: rotate(120deg); }
+}
+
+/* 升级界面-光圏反向转动 */
+@keyframes iv-upgrade-light-circle-twist-reverse {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(0deg); }
+  90% { transform: rotate(-90deg); }
+  100% { transform: rotate(-90deg); }
+}
+
+/* 全局提示显示动画 */
+@keyframes iv-global-tip-active {
+  0%, 100% { height: 80px; opacity: 0; }
+  10%, 80% { opacity: 1; }
+}
+
+/************ 公用样式 ************/
+
+/* 混合 */
+.mix() {
+
+  /* 按钮 */
+  .btn {
+    display: inline-block;
+    padding: .83em 1.5em;
+    font-size: 30px;
+    line-height: 1;
+    text-align: center;
+    border-radius: 2em;
+    &:focus { outline: none; }
+  }
+
+  /* 显隐 */
+  .show { display: block !important; }
+  .hide { display: none !important; }
+
+  /* 清除浮动 */
+  .clear-float {
+    &::before, &::after { display: table; content: ' '; }
+    &::after { clear: both; }
+  }
+
+  .style(@color) {
+    @_color: @color;
+    border-color: @color;
+    &::before, &::after { background-color: @color; }
+  }
+}
+
+/* 主按钮-蓝色 */
+.iv-btn-primary {
+  .mix .btn;
+  color: #fff;
+  background-color: #3152f7;
+  &:hover {
+    color: #fff;
+    background-color: #1d3194;
+  }
+  &:focus { color: #fff; }
+}
+
+/* 次按钮-白色 */
+.iv-btn-secondary {
+  .mix .btn;
+  color: #666;
+  background-color: #fff;
+  &:hover {
+    color: #666;
+    background-color: #ccc;
+  }
+  &:focus { color: #666; }
+}
+
+/* 半透明按钮-暗灰色 */
+.iv-btn-opacity {
+  .mix .btn;
+  font-size: 20px;
+  color: #ccc;
+  background-color: rgba(255, 255, 255, .1);
+  &:hover {
+    color: #ccc;
+    background-color: rgba(255, 255, 255, .2);
+    box-shadow: 0 0 8px;
+  }
+  &:focus { color: #ccc; }
+}
+
+/* 带边框按钮 */
+.iv-btn-bordered {
+  .mix .btn;
+  font-size: 24px;
+  color: #666;
+  border: 1px solid #666;
+  background-color: rgba(102, 102, 102, .1);
+  &:hover {
+    color: #666;
+    background-color: rgba(102, 102, 102, .3);
+    box-shadow: 0 0 8px;
+  }
+  &:focus { color: #666; }
+}
+
+/* 将“是”“否”按钮加宽 */
+.btn-yes, .btn-no { padding: .83em 2em; }
+
+/* 按钮容器 */
+.btn-container {
+  text-align: center;
+
+  .iv-btn-primary, .iv-btn-secondary  {
+    margin-right: 30px;
+  }
+
+  :nth-last-child(1) {
+    margin-right: 0;
+  }
+}
+
+/* 水球图片 */
+.water-bubble-image { opacity: .5; }
+
+/* 水球内的提示文字 */
+.water-bubble-text-container {
+  &::before, &::after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+  }
+  &::before { content: '剩余电量'; top: 30px; }
+  &::after { content: ''; bottom: 30px; }
+}
+.charging .water-bubble-text-container::before { content: '正在充电'; }
+.low-power .water-bubble-text-container::after { content: '电量低'; }
+
+
+/************ 页面容器 ************/
+.icvt {
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  font-family: Arial, "微软雅黑", sans-serif;
+  overflow: auto;
+  background: #000;
+  a { text-decoration: none; }
+}
+
+
+/****** 主页面 ******/
+
+/* 通用变量 */
+@container-height-header: 130px;
+@container-height-dashboard: 430px;
+@container-height-vehicle: 630px;
+@container-height-air: 330px;
+@container-height-stats: 220px;
+@total-height: 1740px; /* @container-height-header + ... */
+@color-overlay: rgba(0, 0, 0, .8);
+
+.iv-main {
+  position: relative;
+  width: 1080px;
+  margin: 0 auto;
+  /* 底纹 */
+  padding-bottom: e("calc(100vh - @{total-height})");
+  background: url('@{iv-image-url}/main-bottom-bg.jpg') 0 @total-height no-repeat;
+
+  /*** 离线时，界面禁用 ***/
+  &.disabled {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    * { pointer-events: none !important };
+    .iv-header {
+      .right { color: #666; }
+      .offline-tip { display: block; }
+    }
+  }
+
+  /*** 诊断时其它界面禁止操作 ***/
+  &.diagnosis-running {
+    .iv-dashboard, .iv-stats {
+      * { pointer-events: none !important; }
+      -webkit-filter: blur(1.5px) brightness(.8);
+      filter: blur(1.5px) brightness(.8);
+    }
+  }
+}
+
+/*** 全局提示 ***/
+.iv-tip-container {
+  position: fixed;
+  //top: @container-height-header + @container-height-dashboard - 40px;
+  top: 27%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+
+  /* 提示 */
+  .iv-tip {
+    display: none;
+    height: 80px;
+    padding: 0 1.6em;
+    color: #333;
+    font-size: 24px;
+    line-height: 80px;
+    overflow: hidden;
+    border-radius: 80px;
+    background-color: hsla(0, 100%, 100%, .5);
+    &.active {
+      display: inline-block;
+      animation: iv-global-tip-active 2.5s;
+    }
+  }
+}
+
+/*** 页头部 ***/
+.iv-header {
+  position: relative;
+  height: @container-height-header;
+  padding: 60px 30px 0;
+  color: #330099;
+  font-weight: bold;
+  background-color: #fff;
+
+  .left {
+    float: left;
+    font-size: 28px;
+    .logo {
+      float: left;
+      width: 62px;
+      height: 36px;
+      margin-right: 15px;
+      background: url('@{iv-image-url}/logo.png') no-repeat;
+    }
+  }
+  .right {
+    float: right;
+    font-size: 24px;
+    line-height: 50px;
+    .vehicle-ico {
+      float: right;
+      width: 50px;
+      height: 50px;
+      margin-left: 15px;
+      background: url('@{iv-image-url}/ico-vehicle.png') no-repeat;
+    }
+  }
+  /* 离线提示 */
+  .offline-tip {
+    display: none;
+    position: absolute;
+    right: 96px;
+    bottom: 10px;
+    color: #666;
+    font-size: 13px;
+  }
+}
+
+/*** 仪表盘区 ***/
+.iv-dashboard {
+  height: @container-height-dashboard;
+  padding: 95px 0 0 90px;
+  background: url('@{iv-image-url}/main-dashboard-bg.jpg') 0 0 no-repeat;
+
+  /* 转速表 */
+  .dash-rpm-container {
+    float: left;
+    position: relative;
+    width: 230px;
+    height: 230px;
+
+    .text-label {
+      position: absolute;
+      top: 50px;
+      width: 100%;
+      text-align: center;
+      line-height:1;
+      color: #BBB;
+
+      div:nth-child(1) { height: 25px; font-size: 18px; }
+      div:nth-child(2) { height: 95px; font-size: 84px; color: #00BFFF; }
+      div:nth-child(3) { font-size: 14px; }
+    }
+  }
+
+  /* 速度表 */
+  .dash-speed-container {
+    float: left;
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: -12px 0 0 85px;
+
+    .text-label {
+      position: absolute;
+      top: 55px;
+      width: 100%;
+      text-align: center;
+      line-height:1;
+      color: #BBB;
+
+      div:nth-child(1) { height: 28px; font-size: 18px; }
+      div:nth-child(2) { height: 100px; font-size: 94px; color: #00BFFF; }
+      div:nth-child(3) { font-size: 18px; }
+    }
+  }
+
+  /* 电量表 */
+  .dash-battery-container {
+    position: relative;
+    float: left;
+    margin: -12px 0 0 85px;
+
+    /* 电量球 */
+    .bat-outer-circle {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      border: 12px solid rgba(200, 200, 255, 0.3);
+      border-radius: 50%;
+
+      .water-bubble {
+        position: absolute;
+        top: 13px;
+        left: 13px;
+      }
+    }
+
+    /* 去充电按钮容器 */
+    .btn-container {
+      position: absolute;
+      width: 100%;
+      bottom: -65px;
+
+      /* 去充电按钮 */
+      .btn-charge {
+        position: relative;
+        width: 120px;
+        height: 40px;
+        padding: 0;
+        line-height: 40px;
+        overflow: hidden;
+
+        .bg {
+          display: none;
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          background-color: rgba(30, 237, 255, .8);
+        }
+
+        .txt {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          color: #fff;
+          font-size: 24px;
+          text-align: center;
+
+          &::after { content: '去充电'; }
+        }
+      }
+    }
+
+    /* 充电中 */
+    &.charging {
+      .btn-container .btn-charge {
+        .bg { display: block; }
+        .txt::after { content: '充电中'; }
+      }
+    }
+
+    /* 低电量 */
+    &.low-power {
+      .btn-container .btn-charge {
+        .bg { background-color: rgba(255, 0, 0, .8); }
+      }
+    }
+  }
+}
+
+/*** 车身区 ***/
+.iv-vehicle {
+  position: relative;
+  height: @container-height-vehicle;
+  padding: 80px 100px 0;
+  background: url('@{iv-image-url}/main-vehicle-bg.jpg') 0 0 no-repeat;
+
+  /* 车辆状态卡 */
+  .vehicle-status-card {
+    float: left;
+    width: 130px;
+    height: 186px;
+    padding-top: 16px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    text-align: center;
+    background: url('@{iv-image-url}/main-vehicle-status-card-bg.png') center no-repeat;
+
+    .ico-engine-status {
+      height: 52px;
+      margin: 13px 0;
+      background: url('@{iv-image-url}/main-vehicle-engine-ico-off.png') center no-repeat;
+      &.active {background: url('@{iv-image-url}/main-vehicle-engine-ico-on.png') center no-repeat;}
+    }
+    .total-mileage {
+      margin-top: 12px;
+      font-size: 24px;
+      color: #00adfe;
+    }
+  }
+
+  /* 远程升级、故障诊断按钮*/
+  .btn-container {
+    float: right;
+    > div { margin-bottom: 20px; }
+  }
+
+  /* 车体 */
+  .vehicle-body {
+    position: absolute;
+    left: 195px;
+    bottom: 150px;
+    width: 730px;
+    height: 206px;
+    background: url('@{iv-image-url}/vehicle-body-normal-no-door.png') 0 0 no-repeat;
+
+    /* 车体内元素 */
+    > div { position: absolute; }
+
+    /* 近光 */
+    .light-near {
+      display: none;
+      left: 700px;
+      top: 80px;
+      width: 172px;
+      height: 155px;
+      background: url('@{iv-image-url}/main-vehicle-part-light-near.png') 0 0 no-repeat;
+    }
+
+    /* 远光 */
+    .light-far {
+      display: none;
+      left: 690px;
+      top: 74px;
+      width: 195px;
+      height: 134px;
+      background: url('@{iv-image-url}/main-vehicle-part-light-far.png') 0 0 no-repeat;
+    }
+
+    /* 位置 */
+    .light-position {
+      display: none;
+      > div {
+        position: absolute;
+        &.part-front, &.part-back { width: 12px; height: 14px; }
+        &.part-normal-top-left, &.part-normal-top-right, &.part-normal-bottom-right, &.part-normal-bottom-left {
+          width: 9px;
+          height: 16px;
+          background: url('@{iv-image-url}/main-vehicle-part-light-position-normal.png') 0 0 no-repeat;
+        }
+      }
+      .part-front {
+        left: 669px;
+        top: 14px;
+        background: url('@{iv-image-url}/main-vehicle-part-light-position-front.png') 0 0 no-repeat;
+      }
+      .part-back {
+        left: 35px;
+        top: 13px;
+        background: url('@{iv-image-url}/main-vehicle-part-light-position-back.png') 0 0 no-repeat;
+      }
+      .part-normal-top-left {
+        left: -7px;
+        top: 50px;
+      }
+      .part-normal-top-right {
+        left: 700px;
+        top: 50px;
+      }
+      .part-normal-bottom-right {
+        left: 696px;
+        top: 170px;
+        transform: rotate(15deg);
+      }
+      .part-normal-bottom-left {
+        left: -2px;
+        top: 170px;
+        transform: rotate(-20deg);
+      }
+    }
+
+    /* 双闪 */
+    .light-double {
+      display: none;
+      > div {
+        position: absolute;
+        width: 38px;
+        height: 80px;
+        animation: iv-vehicle-light-double-flash 1s linear infinite;
+      }
+      .part-front {
+        left: 696px;
+        top: 111px;
+        background: url('@{iv-image-url}/main-vehicle-part-light-double-front.png') 0 0 no-repeat;
+      }
+      .part-back {
+        left: -25px;
+        top: 117px;
+        background: url('@{iv-image-url}/main-vehicle-part-light-double-back.png') 0 0 no-repeat;
+      }
+    }
+
+    .light-near, .light-far, .light-position, .light-double { &.active { .mix .show; } }
+
+    /* 前门 */
+    .front-door {
+      position: absolute;
+      top: 78px;
+      left: 606px;
+      &::before, &::after { width: 40px; height: 108px; content: ''; transition: transform 3s; }
+      &::before {
+        float: left;
+        background: url('@{iv-image-url}/vehicle-body-normal-front-door-left.png') no-repeat;
+        transform-origin: left center;
+      }
+      &::after {
+        float: right;
+        background: url('@{iv-image-url}/vehicle-body-normal-front-door-right.png') no-repeat;
+        transform-origin: right center;
+      }
+    }
+
+    /* 后门 */
+    .back-door {
+      position: absolute;
+      top: 77px;
+      left: 245px;
+      &::before, &::after { height: 111px; content: ''; transition: transform 3s; }
+      &::before {
+        float: left;
+        width: 54px;
+        background: url('@{iv-image-url}/vehicle-body-normal-back-door-left.png') no-repeat;
+        transform-origin: left center;
+      }
+      &::after {
+        float: right;
+        width: 51px;
+        background: url('@{iv-image-url}/vehicle-body-normal-back-door-right.png') no-repeat;
+        transform-origin: right center;
+      }
+    }
+
+    /* 前后门打开动画 */
+    .front-door.active, .back-door.active {
+      &::before { transform: perspective(80px) rotateY(90deg); }
+      &::after { transform: perspective(80px) rotateY(-90deg); }
+    }
+
+    /* 空调-制冷与制热 */
+    .air-device {
+      width: 100%;
+      height: 100%;
+
+      /* 顶盖儿 */
+      .top-cap {
+        position: absolute;
+        top: -30px;
+        left: 180px;
+        width: 420px;
+        height: 100px;
+      }
+
+      /* 箭头运动范围 */
+      .arrow-motion-range {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        bottom: 40px;
+        left: 40px;
+        overflow: hidden;
+
+        /* 箭头 */
+        .first-group, .second-group {
+          &::before, &::after {
+            position: absolute;
+            top: -100px;
+            width: 116px;
+            height: 78px;
+            content: '';
+          }
+        }
+        .first-group, .second-group {
+          &::before { left: e("calc(50% - 58px - 39px)"); }
+          &::after { left: e("calc(50% - 58px + 39px)"); }
+        }
+      }
+
+      /* 显示制冷 */
+      &.active-cool {
+        .top-cap { background: url('@{iv-image-url}/air-top-cap-cool.png') center no-repeat; }
+        .first-group, .second-group { &::before, &::after { background: url('@{iv-image-url}/air-cool-arrow-to-right.png') center no-repeat; } }
+      }
+
+      /* 显示制热 */
+      &.active-hot {
+        .top-cap { background: url('@{iv-image-url}/air-top-cap-hot.png') center no-repeat; }
+        .first-group, .second-group { &::before, &::after { background: url('@{iv-image-url}/air-hot-arrow-to-right.png') center no-repeat; } }
+      }
+
+      /* 自动、通风暂无动画 */
+      &.active-auto, &.active-wind {}
+
+      /* 制冷制热动画 */
+      &.active-cool, &.active-hot {
+        /* 顶盖动画 */
+        .top-cap { animation: iv-air-top-cap-scaling 5s cubic-bezier(.3, 0, .7, 1) alternate infinite; }
+        /* 风向箭头动画 */
+        .arrow-motion-range .first-group::before { animation: iv-air-wind-arrow-to-left 6s linear infinite; }
+        .arrow-motion-range .first-group::after { animation: iv-air-wind-arrow-to-right 6s linear infinite; }
+        .arrow-motion-range .second-group::before { animation: iv-air-wind-arrow-to-left 6s 3s linear infinite; }
+        .arrow-motion-range .second-group::after { animation: iv-air-wind-arrow-to-right 6s 3s linear infinite; }
+      }
+    }
+  }
+
+  /* 控制按钮 */
+  .control-buttons {
+    position: absolute;
+    left: 270px;
+    bottom: 22px;
+
+    /* 按钮 */
+    .ctrl-btn {
+      float: left;
+      width: 88px;
+      margin-right: 10px;
+      color: #c0c0c0;
+      font-size: 18px;
+      text-align: center;
+      &:first-child, &:last-child { margin-top: -50px; }
+      &:nth-child(2), &:nth-last-child(2) { margin-top: -25px; }
+
+      /* 图标 */
+      .ico {
+        width: 48px;
+        height: 48px;
+        margin: 20px 20px 10px;
+        border-radius: 50%;
+        background: rgba(141, 137, 164, .7) center no-repeat;
+        cursor: pointer;
+        &.ico-light-near { background-image: url('@{iv-image-url}/ico-light-near-off.png'); }
+        &.ico-light-far { background-image: url('@{iv-image-url}/ico-light-far-off.png'); }
+        &.ico-light-position { background-image: url('@{iv-image-url}/ico-light-position-off.png'); }
+        &.ico-light-double { background-image: url('@{iv-image-url}/ico-light-double-off.png'); }
+        &.ico-door-front { background-image: url('@{iv-image-url}/ico-door-front-off.png'); }
+        &.ico-door-back { background-image: url('@{iv-image-url}/ico-door-back-off.png'); }
+
+        /* 鼠标悬停 */
+        &:hover {
+          background-color: rgba(141, 137, 164, .9);
+          & + div { color: #fff; }
+        }
+      }
+
+      /* 点亮时图标 */
+      &.active {
+        color: #fff;
+        .ico {
+          background-color: #38019d;
+          box-shadow: 0 0 25px 5px rgba(161, 157, 184, .8);
+          &.ico-light-near { background-image: url('@{iv-image-url}/ico-light-near-on.png'); }
+          &.ico-light-far { background-image: url('@{iv-image-url}/ico-light-far-on.png'); }
+          &.ico-light-position { background-image: url('@{iv-image-url}/ico-light-position-on.png'); }
+          &.ico-light-double { background-image: url('@{iv-image-url}/ico-light-double-on.png'); }
+          &.ico-door-front { background-image: url('@{iv-image-url}/ico-door-front-on.png'); }
+          &.ico-door-back { background-image: url('@{iv-image-url}/ico-door-back-on.png'); }
+        }
+      }
+
+      /* 打开中 */
+      &.opening {
+        color: #fff;
+        .ico {
+          background-color: rgba(141, 137, 164, .9);
+          animation: iv-ctrl-btn-halo-opening 1.2s ease infinite;
+        }
+      }
+
+      /* 关闭中 */
+      &.closing {
+        .ico {
+          animation: iv-ctrl-btn-halo-closing 1.2s ease infinite;
+        }
+      }
+    }
+  }
+}
+
+/*** 空调控制区 ***/
+.iv-air {
+  position: relative;
+  height: @container-height-air;
+  padding: 20px 0 0 70px;
+  background: url('@{iv-image-url}/main-air-bg.jpg') 0 0 no-repeat;
+
+  /* 标题 */
+  .top-title {
+    height: 46px;
+    padding-left: 52px;
+    color: #fff;
+    font-size: 18px;
+    background: url('@{iv-image-url}/main-air-title.png') 0 -2px no-repeat;
+  }
+
+  /* 开关 */
+  .air-switch {
+    position: absolute;
+    top: 20px;
+    right: 70px;
+    color: #fff;
+    font-size: 16px;
+    vertical-align: middle;
+
+    &:before, &:after {
+      display: inline-block;
+      vertical-align: 15px;
+    }
+    &:before {
+      margin-right: 10px;
+      content: '关闭';
+      color: #fff;
+    }
+    &:after {
+      margin-left: 10px;
+      content: '开启';
+      color: #999;
+    }
+
+    .switch-bg {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 40px;
+      padding: 0 12px;
+      color: #aaa;
+      font-size: 18px;
+      line-height: 40px;
+      border-radius: 20px;
+      background-color: #ddd;
+      cursor: pointer;
+
+      &:before {
+        float: left;
+        content: 'on'
+      }
+      &:after {
+        float: right;
+        content: 'off'
+      }
+
+      .switch-dot {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #999;
+        transition: left .3s .1s/* ,background-color .2s .1s */;
+      }
+    }
+
+    /* 打开中闪烁 */
+    &.opening .switch-bg .switch-dot {
+      animation: iv-air-switch-btn-opening .85s linear infinite;
+    }
+
+    /* 关闭中闪烁 */
+    &.closing .switch-bg .switch-dot {
+      animation: iv-air-switch-btn-opening .85s linear reverse infinite;
+    }
+
+    /* 打开状态 */
+    &.active {
+      &:before { color: #999 }
+      &:after { color: #fff }
+      .switch-bg {
+        &:before { color: #38019d }
+        .switch-dot {
+          left: 45px;
+          background-color: #38019d;
+          animation: iv-air-switch-dot-shaking 1s linear;
+        }
+      }
+    }
+
+    /* 打开时控制面板中相关状态 */
+    &.active + .control-panel {
+      .left .btn-container {
+        .btn-minus, .btn-plus {
+
+        }
+      }
+      .right .mode-btn-container .mode-btn:hover { background-color: #4D4948; }
+    }
+  }
+
+  /* 控制区 */
+  .control-panel {
+    /* 右侧工作模式切换 */
+    .right {
+      float: right;
+      margin: 40px 70px 0 0;
+
+      .mode-title {
+        height: 24px;
+        padding-left: 36px;
+        line-height: 24px;
+        font-size: 18px;
+        color: #fff;
+        background: url('@{iv-image-url}/main-air-mode.png') left center no-repeat;
+      }
+
+      .mode-btn-container {
+        margin-top: 30px;
+
+        /* 模式按钮 */
+        .mode-btn {
+          float: left;
+          width: 80px;
+          height: 110px;
+          margin-right: 15px;
+          padding-top: 16px;
+          color: #c0c0c0;
+          font-size: 20px;
+          text-align: center;
+          border-radius: 8px;
+          background-color: #3D3938;
+          cursor: pointer;
+
+          /* 按钮图标 */
+          .ico { width: 24px; height: 24px; margin: 0 auto 22px; }
+
+          /* 打开中动画 */
+          &.opening .ico { animation: iv-rotate 1s linear infinite ; }
+        }
+        .btn-auto .ico { background: url('@{iv-image-url}/ico-air-mode-auto-default.png') center center no-repeat; }
+        .btn-cool .ico { background: url('@{iv-image-url}/ico-air-mode-cool-default.png') center center no-repeat; }
+        .btn-hot .ico { background: url('@{iv-image-url}/ico-air-mode-hot-default.png') center center no-repeat; }
+        .btn-wind .ico { background: url('@{iv-image-url}/ico-air-mode-wind-default.png') center center no-repeat; }
+      }
+
+      /* 自动 */
+      &.active-auto {
+        .mode-btn-container .btn-auto {
+          color: #27850A;
+          border: 1px solid #27850A;
+          box-shadow: inset 0 0 18px #27850A;
+          background-color: transparent;
+          .ico { background: url('@{iv-image-url}/ico-air-mode-auto-on.png') center center no-repeat; }
+          &:hover { background-color: transparent !important; }
+        }
+        + .left .air-temperature .temp-ring {
+          background: url('@{iv-image-url}/air-temp-ring-auto.png') 0 0 no-repeat;
+          animation: iv-air-temp-ring-turning 15s linear infinite;
+        }
+      }
+
+      /* 制冷 */
+      &.active-cool {
+        .mode-btn-container .btn-cool {
+          color: #01adfe;
+          border: 1px solid #01adfe;
+          box-shadow: inset 0 0 18px #01adfe;
+          background-color: transparent;
+          .ico { background: url('@{iv-image-url}/ico-air-mode-cool-on.png') center center no-repeat; }
+          &:hover { background-color: transparent !important; }
+        }
+        + .left .air-temperature .temp-ring {
+          background: url('@{iv-image-url}/air-temp-ring-cool.png') 0 0 no-repeat;
+          animation: iv-air-temp-ring-turning 15s linear infinite;
+        }
+      }
+
+      /* 制热 */
+      &.active-hot {
+        .mode-btn-container .btn-hot {
+          color: #FEA62B;
+          border: 1px solid #FEA62B;
+          box-shadow: inset 0 0 18px #FEA62B;
+          background-color: transparent;
+          .ico { background: url('@{iv-image-url}/ico-air-mode-hot-on.png') center center no-repeat; }
+          &:hover { background-color: transparent !important; }
+        }
+        + .left .air-temperature .temp-ring {
+          background: url('@{iv-image-url}/air-temp-ring-hot.png') 0 0 no-repeat;
+          animation: iv-air-temp-ring-turning 15s linear infinite;
+        }
+      }
+
+      /* 通风 */
+      &.active-wind {
+        .mode-btn-container .btn-wind {
+          color: #74128c;
+          border: 1px solid #74128c;
+          box-shadow: inset 0 0 18px #74128c;
+          background-color: transparent;
+          .ico { background: url('@{iv-image-url}/ico-air-mode-wind-on.png') center center no-repeat; }
+          &:hover { background-color: transparent !important; }
+        }
+        + .left .air-temperature .temp-ring {
+          background: url('@{iv-image-url}/air-temp-ring-wind.png') 0 0 no-repeat;
+          animation: iv-air-temp-ring-turning 15s linear infinite;
+        }
+      }
+
+    }
+
+    /* 左侧空调控制 */
+    .left {
+      float: left;
+      height: 220px;
+      margin: 14px 0 0 50px;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1;
+
+      /* 车内外温度 */
+      .vehicle-temperature {
+        float: left;
+        padding-top: 17px;
+
+        .temp-label {
+          margin-bottom: 12px;
+          color: #c0c0c0;
+        }
+
+        div:nth-child(2) { height: 65px; }
+
+        .temp-value {
+          > span {
+            float: left;
+            font-size: 36px;
+            font-family: transponderaoe, sans-serif;
+          }
+          &:after {
+            float: left;
+            margin: 2px 5px;
+            content: '℃';
+            font-size: 14px;
+            font-family: '微软雅黑', sans-serif;
+          }
+        }
+      }
+
+      /* 空调温度 */
+      .air-temperature {
+        float: left;
+        position: relative;
+        width: 220px;
+        margin: -2px 0 0 48px;
+        text-align: center;
+
+        /* 光圈 */
+        .temp-ring {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 220px;
+          height: 220px;
+          background: url('@{iv-image-url}/air-temp-ring-default.png') 0 0 no-repeat;
+        }
+
+        .temp-value {
+          position: relative;
+          height: 84px;
+          margin-top: 64px;
+
+          .air-device-temperature {
+            font-size: 68px;
+            font-family: transponderaoe, sans-serif;
+          }
+
+          &:after {
+            position: absolute;
+            margin: 10px 0 0 8px;
+            content: '℃';
+            color: #fff;
+            font-size: 24px;
+            font-family: '微软雅黑', sans-serif;
+          }
+        }
+      }
+
+      /* 加、减按钮 */
+      .btn-container {
+        float: left;
+        margin: 40px 0 0 35px;
+
+        .btn-minus, .btn-plus {
+          .btn-disable;
+          display: block;
+          position: relative;
+          width: 50px;
+          height: 50px;
+          margin-bottom: 40px;
+          border: 3px solid;
+          border-radius: 100%;
+
+          &::before, &::after {
+            position: absolute;
+            top: e("calc(50% - 1.5px)");
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            content: '';
+          }
+        }
+        .btn-minus::after { display: none; }
+        .btn-plus::after { transform: rotate(90deg); }
+
+
+        /* 禁用状态 */
+        .btn-disable { .mix .style(@color: #5B6469); }
+        /* 启用状态 */
+        .btn-enable { .mix .style(@color: #ccc); }
+        /* active状态 */
+        .btn-on {
+          .mix .style(@color: #ccc);
+          background-color: @_color;
+          box-shadow: 0 0 12px @_color;
+          &::before, &::after { background-color: #666; }
+        }
+      }
+
+    }
+  }
+}
+
+/*** 能耗统计区 ***/
+.iv-stats {
+  height: @container-height-stats;
+  background: url('@{iv-image-url}/main-stats-bg.jpg') 0 0 no-repeat;
+
+  .main-stats-chart {
+    float: left;
+    width: 750px;
+    padding: 20px 0 0 70px;
+
+    /* 标题 */
+    .stats-title {
+      height: 32px;
+      padding-left: 52px;
+      line-height: 32px;
+      color: #fff;
+      font-size: 18px;
+      background: url('@{iv-image-url}/main-stats-title-ico.png') left center no-repeat;
+    }
+    /* 柱状图 */
+    .stats-chart-container {
+      margin: 5px 0 0 52px;
+      .energy-chart {
+        width: 620px;
+        height: 160px;
+      }
+    }
+  }
+
+  /* 视频 */
+  .video-container {
+    float: right;
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin-right: 30px;
+
+    /* 缩略图 */
+    .video-thumb {
+      height: 100%;
+      background: url('@{iv-image-url}/video-thumb-play-btn-default.png') center center no-repeat,
+      url('@{iv-image-url}/video-thumb-bg.png') center center no-repeat;
+      opacity: .3;
+      cursor: pointer;
+
+      &:hover {
+        background: url('@{iv-image-url}/video-thumb-play-btn-on.png') center center no-repeat,
+        url('@{iv-image-url}/video-thumb-bg.png') center center no-repeat;
+        opacity: .9;
+      }
+    }
+
+    /* 视频容器 */
+    .video {
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      width: 1000px;
+      margin-left: -500px;
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(21, 95, 142, .5);
+      overflow: hidden;
+      opacity: 0;
+      z-index: -1;
+      transform: perspective(1000px) rotateX(30deg) translate3d(0, 0, 500px);
+      transition: transform .6s, opacity .6s;
+
+      &.opening, &.playing {
+        opacity: 1;
+        transform: perspective(1000px) rotateX(0deg) translate3d(0, -100px, 0);
+        z-index: 2;
+      }
+
+      &.closing {
+        opacity: 0;
+        transform: perspective(1000px) rotateX(0deg) translate3d(0, -50px, 0) scale(.3);
+      }
+
+      .btn-dialog-close {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 48px;
+        height: 48px;
+        background: url('@{iv-image-url}/dialog-close-btn-default.png') 0 0 no-repeat;
+        z-index: 1;
+        &:hover { background: url('@{iv-image-url}/dialog-close-btn-on.png') 0 0 no-repeat; }
+      }
+
+      &.playing .btn-dialog-close { display: block; }
+
+      video {
+        display: block;
+      }
+    }
+
+  }
+}
+
+/*** 车辆充电 ***/
+.iv-charge {
+  display: none;
+  position: absolute;
+  top: @container-height-header;
+  width: 100%;
+  height: @container-height-dashboard + @container-height-vehicle;
+  z-index: 2;
+
+  /* 上半区背景 */
+  .top-bg {
+    height: @container-height-dashboard;
+    padding-top: 100px;
+    background: url('@{iv-image-url}/main-dashboard-bg.jpg') 0 0 no-repeat;
+
+    &::before {
+      display: block;
+      width: 359px;
+      height: 57px;
+      margin: 0 auto;
+      content: '车辆充电';
+      color: #fff;
+      font-size: 36px;
+      line-height: 57px;
+      text-align: center;
+      letter-spacing: 16px;
+      background: url('@{iv-image-url}/main-vehicle-title-bg.png') center center no-repeat;
+    }
+  }
+
+  /* 下半区车辆背景 */
+  .vehicle-bg {
+    height: @container-height-vehicle;
+    padding: 165px 90px 25px;
+    background: url('@{iv-image-url}/vehicle-body-gray.png') content-box no-repeat 115px 108px, linear-gradient(0, transparent, transparent) content-box, linear-gradient(0, @color-overlay, @color-overlay) padding-box, url('@{iv-image-url}/main-vehicle-bg-gray.jpg') no-repeat padding-box;
+  }
+
+  /* 内部元素容器 */
+  .content-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* 铁爪手 */
+    .iron-paw {
+      position: absolute;
+      top: 280px;
+      width: 100%;
+      padding: 0 79px;
+
+      &::before, &::after {
+        float: left;
+        width: 327px;
+        height: 100px;
+        content: '';
+        background: url('@{iv-image-url}/charging-iron-paw-seat-left.png') 0 0 no-repeat, url('@{iv-image-url}/charging-iron-paw-hook-left.png') 95px 20px no-repeat;
+        transition: all .6s;
+      }
+      &::after {
+        float: right;
+        transform: scaleX(-1);
+      }
+    }
+
+    /* 充电球 */
+    .ball-container {
+      position: absolute;
+      top: 188px;
+      left: 400px;
+      width: 280px;
+
+      /* 底托儿半圆 */
+      .outer-half-circle {
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        border: 3px solid #666;
+        border-radius: 140px;
+        clip: rect(112px, 300px, 300px, -20px);
+        transition: all .8s;
+
+        &.charging {
+          border: 3px solid #377fd0;
+          box-shadow: 0 0 18px #377fd0, inset 0 0 18px #377fd0;
+        }
+      }
+
+      /* 低电量标示圆 */
+      .low-power-circle {
+        @normal-color: rgba(30, 237, 255, .8);
+        @red-color: rgba(255, 0, 0, .8);
+        position: absolute;
+        top: 15px;
+        left: 17px;
+        width: 246px;
+        height: 246px;
+        border: 10px solid @normal-color;
+        border-radius: 200px;
+        transition: all 1s;
+        box-shadow: 0 0 4px @normal-color, inset 0 0 4px @normal-color;
+
+        &.red { border-color: @red-color; box-shadow: 0 0 4px @red-color, inset 0 0 4px @red-color; }
+      }
+
+      /* 水球 */
+      .water-bubble-charge {
+        position: absolute;
+        top: 37px;
+        left: 40px;
+      }
+
+      /* 虚线水帘 */
+      .dashed-line-container {
+        position: absolute;
+        left: 10px;
+        top: 210px;
+        transform: rotate(180deg);
+
+        i {
+          float: left;
+          width: 2px;
+          margin: 0 9px;
+          background: #666;
+
+          &:nth-child(1), &:nth-last-child(1) { height: 187px; }
+          &:nth-child(2), &:nth-last-child(2) { height: 160px; }
+          &:nth-child(3), &:nth-last-child(3) { height: 143px; }
+          &:nth-child(4), &:nth-last-child(4) { height: 131px; }
+          &:nth-child(5), &:nth-last-child(5) { height: 123px; }
+          &:nth-child(6), &:nth-last-child(6) { height: 119px; }
+          &:nth-child(7) { height: 117px; };
+        }
+
+        &.charging i {
+          background: linear-gradient(180deg, #377fd0 14px, transparent 14px, transparent 18px) 0 0 repeat-y;
+          background-size: 2px 18px;
+          animation: iv-dashed-line-flow .6s linear infinite;
+        }
+      }
+    }
+
+    /* 车体容器 */
+    .vehicle-container {
+      position: absolute;
+      left: 80px;
+      bottom: 15px;
+      width: 920px;
+      height: 460px;
+      border: 2px solid #666;
+
+      /* 不同状态下各自的界面容器 */
+      > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .status-label, .info-text, .btn-container {
+        position: absolute;
+        width: 100%;
+        color: #fff;
+        text-align: center;
+      }
+
+      .status-label { top: 45px; font-size: 36px; }
+      .info-text { bottom: 60px; font-size: 24px; }
+      .btn-container { top: 145px; }
+
+      /* 未充电 */
+      .not-charge {
+        .info-text { display: none; }
+      }
+
+      /* 充电中 */
+      .on-charging {
+        display: none;
+
+        /* 停止充电按钮 */
+        .btn-stop {
+          position: absolute;
+          top: -110px;
+          right: 0;
+          font-size: 24px;
+        }
+
+        /* 收起窗口按钮 */
+        .btn-collapse {
+          position: absolute;
+          left: 50%;
+          bottom: -100px;
+          margin-left: -90px;
+          font-size: 18px;
+
+          .ico-collapse {
+            padding: 12px 18px;
+            background: url('@{iv-image-url}/ico-charging-collapse-window.png') left center no-repeat;
+          }
+        }
+      }
+
+      /* 充电完成 */
+      .charge-over {
+        display: none;
+
+        .status-label span {
+          margin-left: -70px;
+          padding-left: 70px;
+          background: url('@{iv-image-url}/ico-tip-success.png') left center no-repeat;
+        }
+      }
+
+    }
+  }
+
+  /* 充电中时相应界面变化 */
+  &.charging {
+    /* 下半区车辆背景 */
+    .vehicle-bg {
+      background-image: url('@{iv-image-url}/vehicle-body-bright.png'), linear-gradient(0, rgba(0, 123, 255, .2), rgba(0, 123, 255, .2)), linear-gradient(0, @color-overlay, @color-overlay),url('@{iv-image-url}/main-vehicle-bg-gray.jpg');
+    }
+
+    /* 内部元素容器 */
+    .content-container {
+      /* 铁爪手 */
+      .iron-paw {
+        &::before, &::after {
+          background-position: 0 0, 168px 20px;
+        }
+      }
+
+      /* 充电球 */
+      .ball-container {
+
+        /* 底托儿半圆 */
+        .outer-half-circle {
+          border: 3px solid #377fd0;
+          box-shadow: 0 0 18px #377fd0, inset 0 0 18px #377fd0;
+        }
+
+        /* 虚线水帘 */
+        .dashed-line-container {
+          i {
+            background: linear-gradient(180deg, #377fd0 14px, transparent 14px, transparent 18px) 0 0 repeat-y;
+            background-size: 2px 18px;
+            animation: iv-dashed-line-flow .6s linear infinite;
+          }
+        }
+      }
+
+      /* 车体容器 */
+      .vehicle-container {
+        border: 2px dashed #377fd0;
+
+        /* 小亮球 */
+        &::before {
+          display: block;
+          position: absolute;
+          top: -9px;
+          left: -9px;
+          width: 16px;
+          height: 16px;
+          content: '';
+          border-radius: 16px;
+          box-shadow: 0 0 18px 2px #7ecef4;
+          background-color: #7ecef4;
+          animation: iv-little-bright-ball 18s linear infinite;
+        }
+
+        /* 未充电界面 */
+        .not-charge { display: none; }
+
+        /* 充电中界面 */
+        .on-charging { display: block; }
+      }
+    }
+  }
+
+  /* 低电量界面变化 */
+  &.low-power {
+    .content-container {
+      .vehicle-container {
+        .not-charge {
+          .info-text { display: block; }
+        }
+      }
+    }
+  }
+
+}
+
+/*** 远程诊断 ***/
+.iv-diagnosis {
+  display: none;
+  position: absolute;
+  top: 560px;
+  left: 0;
+  width: 100%;
+
+  /* 车体扫描区 */
+  .vehicle-body {
+    position: relative;
+    height: @container-height-vehicle;
+    padding-top: 65px;
+    background: url('@{iv-image-url}/vehicle-body-gray.png') 195px 274px no-repeat,
+    url('@{iv-image-url}/main-vehicle-bg-gray.jpg') 0 0 no-repeat;
+    overflow: hidden;
+
+    .title {
+      width: 359px;
+      height: 57px;
+      margin: 0 auto;
+      color: #fff;
+      font-size: 32px;
+      line-height: 57px;
+      text-align: center;
+      letter-spacing: 16px;
+      background: url('@{iv-image-url}/main-vehicle-title-bg.png') center center no-repeat;
+    }
+
+    .txt-tip {
+      margin-top: 65px;
+      color: #fff;
+      font-size: 34px;
+      line-height: 1;
+      text-align: center;
+      .tip-running {}
+      .tip-complete { display: none; }
+    }
+
+    .txt-result {
+      margin-top: 330px;
+      font-size: 34px;
+      line-height: 1;
+      text-align: center;
+      > span { padding-left: 70px; }
+
+      .ok { display: none; color: #00B5FF; background: url('@{iv-image-url}/ico-tip-success.png') left center no-repeat; }
+      .err { display: none; color: #F49D1A; background: url('@{iv-image-url}/ico-diagnosis-txt-err.png') left center no-repeat; }
+    }
+
+    .btn-stop {
+      position: absolute;
+      top: 110px;
+      right: 110px;
+      font-size: 24px;
+    }
+
+    .btn-back {
+      display: none;
+      position: absolute;
+      top: 300px;
+      left: 480px;
+      font-size: 24px;
+    }
+
+    /* 扫描光束 */
+    .scan-light {
+      position: absolute;
+      left: 0;
+      bottom: 58px;
+      width: 256px;
+      height: 390px;
+      background: url('@{iv-image-url}/vehicle-body-scan-light.png') 0 0 no-repeat;
+    }
+  }
+
+  /* 诊断结果区 */
+  .result-show {
+    @bg-color: #04070E;
+    height: @container-height-air;
+    background-color: @bg-color;
+
+    /* 扫描进度条 */
+    .scan-progress-bar {
+      position: relative;
+      height: 112px;
+      padding-top: 32px;
+
+      &::before, &::after {
+        position: absolute;
+        display: block;
+        width: 323px;
+        height: 32px;
+        content: '';
+        background: linear-gradient(-121deg, @bg-color 9px, transparent 11px, transparent), linear-gradient(-62deg, @bg-color 9px, transparent 11px ,transparent),
+        linear-gradient(to right, @bg-color, transparent), url('@{iv-image-url}/ico-diagnosis-progress-bar-arrow-to-right.png') repeat-x;
+        transform-origin: right;
+      }
+      &::before { left: 70px; transform: perspective(600px) rotateY(-13deg); }
+      &::after { right: 393px; transform: perspective(600px) rotateY(-167deg); }
+
+      .inner-text-scanning, .inner-text-over {
+        position: absolute;
+        width: 100%;
+        height: 32px;
+        color: #fff;
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 34px;
+        text-align: center;
+      }
+      .inner-text-over { display: none; }
+    }
+
+    /* 扫描部件 */
+    .component-container {
+      padding-left: 140px;
+
+      .component {
+        float: left;
+        width: 180px;
+        margin-right: 30px;
+        text-align: center;
+
+        .status-ico {
+          width: 56px;
+          height: 56px;
+          margin: 0 auto 35px auto;
+          background: url('@{iv-image-url}/ico-diagnosis-component-waiting.png') center no-repeat;
+        }
+
+        .component-name {
+          margin-bottom: 12px;
+          font-size: 18px;
+          color: #999;
+        }
+
+        .status-text {
+          &:before {
+            font-size: 24px;
+            color: #999;
+            content: '等待诊断...';
+          }
+        }
+
+        &.error {
+          .status-ico { background: url('@{iv-image-url}/ico-diagnosis-component-error.png') center no-repeat; }
+          .status-text:before { content: '有故障'; color: #fff; }
+          .component-name { color: #ABCDF0; }
+        }
+
+        &.ok {
+          .status-ico { background: url('@{iv-image-url}/ico-diagnosis-component-ok.png') center no-repeat; }
+          .status-text:before { content: '正常'; color: #fff; }
+          .component-name { color: #ABCDF0; }
+        }
+
+        &.scanning {
+          .status-ico { background: url('@{iv-image-url}/ico-diagnosis-component-scanning.png') center no-repeat; animation: iv-rotate 2s linear infinite; }
+          .status-text:before { content: '正在诊断...'; color: #fff; }
+          .component-name { color: #ABCDF0; }
+        }
+      }
+    }
+  }
+
+  /** 其它状态 **/
+  /* 扫描中状态 */
+  &.scanning {
+    .vehicle-body .scan-light { animation: iv-diagnosis-scan-light 8s linear infinite; }
+    .result-show .scan-progress-bar {
+      &::before, &::after { animation: iv-scan-progress-bar-running .3s linear infinite; }
+    }
+  }
+
+  /* 检测结束状态 */
+  &.over-ok, &.over-error {
+    .vehicle-body {
+      .scan-light { display: none; }
+      .txt-tip .tip-running { display: none; }
+      .txt-tip .tip-complete { display: block; }
+      .btn-back { display: block; }
+      .btn-stop { display: none; }
+    }
+    .result-show .scan-progress-bar {
+      .inner-text-scanning { display: none; }
+      .inner-text-over { display: block; }
+    }
+  }
+  /* 检测结束-无故障 */
+  &.over-ok .vehicle-body .txt-result .ok { display: inline; }
+  /* 检测结束-有故障 */
+  &.over-error .vehicle-body .txt-result .err { display: inline; }
+}
+
+/*** 远程升级 ***/
+.iv-upgrade {
+  display: none;
+  position: absolute;
+  top: 305px;
+  width: 100%;
+  z-index: 2;
+
+  /* 光圈部分 */
+  .circles-container {
+    position: relative;
+
+    .circles-bg {
+      position: relative;
+      height: 1114px;
+      margin-bottom: 30px;
+
+      /* 光圈 */
+      .base-bg, .core-bg, .inner-bg, .outer-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        will-change: transform;
+      }
+      /* 底圈 */
+      .base-bg {
+        background: url('@{iv-image-url}/upgrade-circle-base-bg.png') center no-repeat;
+        /* animation: iv-rotate 12s linear infinite; */
+      }
+      /* 最内黄圈 */
+      .core-bg {
+        background: url('@{iv-image-url}/upgrade-circle-core-bg.png') center no-repeat;
+        animation: iv-rotate 4s linear infinite;
+      }
+      /* 内圈 */
+      .inner-bg {
+        background: url('@{iv-image-url}/upgrade-circle-inner-bg.png') e("calc(50% - 7px) calc(50% + 7px)") no-repeat;
+        /* animation: iv-rotate 6s linear infinite; */
+        animation: iv-upgrade-light-circle-twist 2s ease alternate infinite;
+      }
+      /* 外圈 */
+      .outer-bg {
+        background: url('@{iv-image-url}/upgrade-circle-outer-bg.png') center no-repeat;
+        /*animation: iv-rotate-reverse 6s linear infinite;*/
+        animation: iv-upgrade-light-circle-twist-reverse 2s ease alternate infinite;
+      }
+    }
+
+    /* 光圈内进度信息 */
+    .progress-info {
+      position: absolute;
+      width: 300px;
+      top: 460px;
+      left: e("calc(50% - 150px)");
+      line-height: 1;
+      text-align: center;
+
+      /* 升级进度中*/
+      .running {
+        display: block;
+        /* 状态图标 */
+        .state-symbol {
+          display: none;
+          position: relative;
+          height: 80px;
+          margin-bottom: 16px;
+
+          &::before {
+            display: block;
+            position: absolute;
+            left: 50%;
+            width: 0;
+            height: 80px;
+            margin-left: -40px;
+            content: '';
+            background: url('@{iv-image-url}/ico-tip-success.png') 0 -10px no-repeat;
+            background-size: 100px 100px;
+            transition: width 1s;
+          }
+
+          &.writing::before { width: 100px; }
+        }
+        /* 百分比 */
+        .current-value {
+          margin: 0 0 2px 34px;
+          color: #3c69dc;
+          font-size: 140px;
+          font-weight: bold;
+
+          &::after {
+            content: '%';
+            /*color: #71aed4;*/
+            font-sizE: 40px;
+          }
+        }
+        /* 升级状态 */
+        .tip-txt {
+          padding: 0 15px;
+          color: #1b28ab;
+          font-size: 36px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        /* 返回按钮 */
+        .btn-back { display: none; }
+      }
+    }
+  }
+
+  /* 底部文本与按钮 */
+  .bottom-info {
+    .upgrading-component {
+      margin-bottom: 30px;
+      color: #71add4;
+      font-size: 48px;
+      line-height: 1;
+      text-align: center;
+    }
+    .btn-cancel { font-size: 24px; }
+  }
+
+  /* 升级成功与失败状态 */
+  &.success, &.fail {
+    .circles-container {
+      /* 光圈停转 */
+      .circles-bg { .core-bg, .inner-bg, .outer-bg { animation: none; } }
+      /* 显示返回按钮 */
+      .progress-info .running .btn-back { display: inline-block; }
+    }
+    /* 隐藏停止升级按钮 */
+    .bottom-info .btn-cancel { display: none; }
+  }
+  &.success {
+    .circles-container .progress-info .running {
+      margin-top: -25px;
+      .state-symbol { display: block; }
+      .current-value { display: none; }
+      .tip-txt {
+        margin-bottom: 20px;
+        color: #1b28ab;
+        font-size: 60px;
+        font-weight: bold;
+      }
+    }
+  }
+  &.fail {
+    .circles-container .progress-info .running {
+      margin-top: -35px;
+      .tip-txt { margin-bottom: 10px; }
+    }
+  }
+}
+
+/*** 弹出层 ***/
+.iv-dialog {
+  /*
+  position: fixed;
+  left: e("calc(50% - 510px)");
+  top: e("calc(50% - 310px)");
+  */
+  position: absolute;
+  left: 30px;
+  top: @container-height-header + @container-height-dashboard + (@container-height-vehicle - 620) / 2;
+  width: 1020px;
+  height: 620px;
+  background-color: rgba(27, 27, 27, .9);
+  z-index: 3;
+
+  /* 关闭按钮 */
+  .btn-dialog-close {
+    position: absolute;
+    top: 55px;
+    right: 60px;
+    width: 48px;
+    height: 48px;
+    background: url('@{iv-image-url}/dialog-close-btn-default.png') 0 0 no-repeat;
+    &:hover { background: url('@{iv-image-url}/dialog-close-btn-on.png') 0 0 no-repeat; }
+  }
+
+  .content {
+    padding-top: 190px;
+
+    /* 标题  */
+    .info-text {
+      margin-bottom: 60px;
+      line-height: 1;
+      text-align: center;
+      color: #fff;
+      font-size: 36px;
+      font-weight: bold;
+    }
+  }
+}
+
+/*** 停止充电弹层 ***/
+.iv-dialog-stop-charge {
+  display: none;
+}
+
+/*** 远程升级选择 ***/
+.iv-dialog-select-upgrade {
+  display: none;
+  padding-top: 55px;
+
+  /* 标题 */
+  .upgrade-title {
+    height: 40px;
+    margin: 0 0 14px 50px;
+    padding-left: 18px;
+    color: #fff;
+    font-size: 30px;
+    line-height: 40px;
+    border-left: 6px solid #fff;
+  }
+  .upgrade-sub-title {
+    margin: 0 0 45px 70px;
+    color: #ccc;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /* 升级卡 */
+  .upgrade-card-container {
+    .mix .clear-float;
+    margin: 0 0 50px 70px;
+
+    .upgrade-card {
+      float: left;
+      width: 200px;
+      height: 300px;
+      padding-top: 28px;
+      margin-right: 20px;
+      line-height: 1;
+      text-align: center;
+      border-radius: 10px;
+      background-color: #fff;
+
+      .uc-title {
+        margin: 0 0 26px;
+        color: #333;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .uc-tip {
+        margin: 0 0 14px;
+        color: #999;
+        font-size: 14px;
+      }
+
+      .uc-drop-down {
+        position: relative;
+        height: 46px;
+        margin: 0 0 32px;
+        color: #666;
+        font-size: 18px;
+        text-align: center;
+
+        /* 下拉按钮 */
+        .version-drop-down {
+          display: block;
+          position: relative;
+          width: 140px;
+          height: 46px;
+          margin: 0 auto;
+          padding: 0 18px 0 5px;
+          color: #666;
+          word-break: break-all;
+          line-height: 46px;
+          overflow: hidden;
+          background-color: #e4e4e4;
+
+          /* 小箭头 */
+          &::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 6px;
+            border-top: 8px solid;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+          }
+
+          .version {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+          }
+
+          /* 显示下拉列表 */
+          &:focus  + .version-list {
+            //top: -30px;
+            //left: 10px;
+            //right: 10px;
+            max-height: 300px;
+            opacity: 1;
+            z-index: 100;
+            transform: scale(1.25);
+          }
+        }
+
+        /* 下拉列表 */
+        .version-list {
+          position: absolute;
+          top: 0;
+          left: 30px;
+          right: 30px;
+          max-height: 46px;
+          overflow: hidden;
+          border-radius: 10px;
+          box-shadow: 3px 3px 3px rgba(51, 51, 51, .5);
+          opacity: .1;
+          z-index: -1;
+          transition: all .6s;
+
+          /* 列表项 */
+          li {
+            padding: 12px 10px;
+            line-height: 1;
+            word-wrap: break-word;
+            word-break: break-all;
+            border-bottom: 1px solid #fff;
+            background-color: #e4e4e4;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #ddd;
+            }
+
+            &.active {
+              color: #fff;
+              background-color: #3152f7;
+            }
+          }
+        }
+      }
+
+      /* 升级按钮 */
+      .uc-btn {
+        margin: 0 0 24px;
+        .btn-upgrade {
+          display: inline-block;
+          width: 120px;
+          height: 46px;
+          color: #fff;
+          font-size: 24px;
+          border-radius: 23px;
+          line-height: 46px;
+          background-color: #3152f7;
+
+          &:hover {
+            background-color: #1d3194;
+            box-shadow: 0 0 12px #1d3194;
+          }
+
+          &.disabled {
+            background-color: #3152f7;
+            box-shadow: none;
+            opacity: .3;
+            cursor: not-allowed;
+            pointer-events: none;
+          }
+        }
+      }
+
+      .uc-version {
+        margin: 0 12px;
+        color: #333;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  /* 返回按钮 */
+  .btn-back { width: 180px; }
+}
+
+/*** 停止升级弹层 ***/
+.iv-dialog-stop-upgrade {
+  display: none;
+}
+
+/*** 遮罩层 ***/
+.iv-overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: @color-overlay;
+  z-index: 1;
+}

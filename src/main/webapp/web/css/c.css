@@ -1,0 +1,58 @@
+.mx {
+  color: green;
+}
+.a {
+  color: green;
+  color: blue;
+  color: yellow;
+}
+#iv .mx {
+  color: #111;
+}
+.mx {
+  color: blue;
+}
+.b {
+  color: green;
+  color: blue;
+  color: yellow;
+}
+#iv .mx {
+  color: #222;
+}
+.mx {
+  color: yellow;
+}
+.c {
+  color: green;
+  color: blue;
+  color: yellow;
+}
+#iv .mx {
+  color: #333;
+}
+.d .x {
+  color: red;
+}
+.d .dd .x {
+  color: blue;
+}
+.d .dd .x {
+  color: black;
+}
+.d .dd .ddd1 .x {
+  color: purple;
+}
+.d .dd .ddd {
+  color: blue;
+  color: black;
+}
+.a .b .c .d {
+  color: black;
+}
+.ok.a .b .c .d {
+  color: blue;
+}
+.err.a .b .c .d {
+  color: red;
+}

@@ -89,7 +89,7 @@ li.list > a { color: red; }
 button.list-style {
   &:extend(li.list > a); // use the same list styles
 }
-.k:extend(.x2){ color: red; };
+.k:extend(.a){ color: red; };
 
 // 混合
 .mx(@p1: red) {
@@ -161,5 +161,195 @@ a {
   //@sw: x1;
   //.x(@sw, aaa);
   .c(){ p: cc; }
-  .xx(@a: b);
+  .xx(@a: c);
 }
+
+.xf(@a; @b) {
+  @p: 777;
+}
+.xf2() {
+  .on {
+    in: 111;
+  }
+}
+.xfc {
+  .a {
+    //@p: 66; // 不被override
+    .on() { my: 111; }
+    //.xf(2; 2);
+    .xf2();
+    .on;
+    //p: @p;
+  }
+  .on { out: 111 }
+  @p: 55; // 被override
+}
+
+@rules: { p1: 11; p2: 22; @p: ppp; p3: @p; };
+.r {
+  @rules();
+  .rx( {content: ' ';});
+  //p: @p; 不识别
+}
+.rx(@rules) {
+  *::before { @rules(); }
+}
+
+// 变量
+// 1. selector、property、value、url
+// 2. lazy load
+// 3. scope
+// 4. @@
+// 5. default value
+
+// 继承
+// 1. 多继承
+
+// 混合定义
+// 1. 无输出
+// 2. namespace
+// 3. 参数表(多态)：多参、默认值、变参
+// 4. inner selector
+// 5. match pattern 见下：
+/*
+.mixin() {}           -> 0
+.mixin(@a) {}         -> 1
+.mixin(@a:a) {}       -> 0~1
+.mixin(@a:a, ...) {}  -> 0~n
+.mixin(@a, ...) {}    -> 1~n
+.mixin(...) {}        -> 0~n
+*/
+
+
+
+// 混合调用
+// 1. 匹配规则
+// 2. !important
+// 3. arguments、 rest
+
+// 混合函数
+// 1. return“变量”与“混合”
+// 2. return的“变量”不覆盖本scope，但覆盖父scope
+
+// 条件混合（Guarded Mixin） && CSS Guarded
+// 语法： .mix when [not] (exp) [ [and | ,] (exp) ]... ， 运算符：>、 >=、 =、 =<、 <
+// 表达式exp类型：
+// 1. 参数与值比对、其它比对（非参数）
+// 2. 参数与参数比对
+// 3. 类型检查函数：iscolor, isnumber, isstring, iskeyword, isurl, ispixel, ispercentage, isem, isunit
+// 4. default()函数
+
+
+// 规则组定义
+// 1. “规则组引用”不会修改definition scope
+// 2. 可以return“混合”，不能return“变量”
+
+// 规则组调用
+// 1. 规则组可以当作参数传递
+// 2. 规则组中的“变量引用”与“混合调用”的查找顺序：definition scope > caller scope
+
+
+// @import (keywords, ...) "filename"
+// keywords: reference, optional, once/multiple, less/css/inline
+
+@import (reference) "ref.less";
+.a { p: @ref-var; }
+.b {
+  .ref();
+  .x-ref();
+}
+
+
+.gr(@a) when /* not */ (@a > 50) /* and (isnumber(@a)) */ , (iscolor(@a)), (isstring(@a)) {
+  exp: @a;
+}
+//.gr(...) {
+//  n-exp: @arguments;
+//}
+.gr(@a) when (@a) {
+  t-exp: @a;
+}
+.gr(@a) when (default()) {
+  d-exp: @a;
+}
+
+.grc {
+  .gr(60);
+  .gr(30);
+  .gr(30);
+  .gr("35");
+  .gr(55);
+  .gr(#fff);
+  .gr(true);
+}
+
+@var: 0;
+div when (@var > 0) {
+  color: red;
+}
+
+// loop 循环
+.loop(@n) when (@n > 0) {
+  .loop(@n - 1);
+  width: @n * 1px;
+  //.loop(@n - 1);
+}
+.lp {
+  .loop(10);
+}
+
+.col(@n, @i: 1) when (@i =< @n) {
+  .column-@{i} { width: @i * 100% / @n }
+  .col(@n, @i + 1);
+}
+.lp {
+  .col(12);
+}
+
+// Merge合并： "+"、 "+_"
+.mg {
+  box-shadow+: 0 0 10px red;
+  box-shadow+: 0 0 20px blue;
+  background-position+: 0 0;
+  background-position+: 2px 2px;
+  background-position+: 4px 4px;
+  transform+_: scale(1);
+  transform+_: skew(30deg);
+}
+
+.mode {
+  &-auto { p: 1 }
+  &-cool { p: 2 }
+  &-wind { p: 3 }
+}
+
+
+.ls {
+  //@modes: "auto", "cool", "hot", "wind";
+  @modes: auto, cool, hot, wind;
+  .loop(@i: length(@modes)) when (@i > 0) {
+    .loop(@i - 1);
+    @m: extract(@modes, @i);
+    &-@{m} {
+      p: @m;
+    }
+  };
+  .loop();
+}
+
+.fn {
+  p: ceil(1.5);
+  p: floor(1.5);
+  p: round(1.125, 2);
+  p: pi();
+  p: sin(pi() / 2);
+  p: sin(pi() / 6);
+  p: sin(31deg);
+  p: max(1, 5, 8, -9);
+}
+
+// 类型判断函数：
+// isnumber/isunit: ispixel, isem, ispercentage
+// isstring, iscolor, isurl, iskeyword
+// isruleset
+
