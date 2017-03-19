@@ -103,7 +103,7 @@ button.list-style {
 }
 
 @device: pc;
-@device: pad;
+//@device: pad;
 .effect(pc) {
   &:hover { .on; }
 }
@@ -121,6 +121,20 @@ a {
   //.mode !important;
 }
 
+.on(@style) when (@device=pc) {
+  &:hover { @style(); }
+}
+.on(@style) when (@device=pad) {
+  &:active { @style(); }
+}
+
+.btn {
+  color: red;
+  .on({
+    color: blue;
+    font-size: 14px;
+  });
+}
 
 
 .x() {
@@ -326,7 +340,8 @@ div when (@var > 0) {
 
 .ls {
   //@modes: "auto", "cool", "hot", "wind";
-  @modes: auto, cool, hot, wind;
+  @modes: auto, cool,
+  hot, wind;
   .loop(@i: length(@modes)) when (@i > 0) {
     .loop(@i - 1);
     @m: extract(@modes, @i);
@@ -352,4 +367,137 @@ div when (@var > 0) {
 // isnumber/isunit: ispixel, isem, ispercentage
 // isstring, iscolor, isurl, iskeyword
 // isruleset
+.type-fn {
+  @a: 3px;
+  @b: 5em;
+  @c: 50%;
+  @r: {color: red;};
+  p1: isunit(@a, px);
+  p2: isem(@b);
+  p3: ispercentage(@c);
+  p4: isruleset(@r);
+  p5: isnumber(8deg);
+  p6: isnumber(10vh);
+}
 
+// 字符串函数
+.str {
+  p1: escape("中国a=1&b=1");
+  p2: escape(111);
+  p3: escape(#fff);
+
+  @a: 1;
+  @b: name;
+  @c: "中国";
+
+  p4: %("%a-%d-%s", @a, @b, @c);
+  p5: %("%A-%D-%S", @a, @b, @c);
+  p6: %("%a-%a-%a", @a, @b, @c);
+
+  p7: replace("This is Good day!", "(good)\s*day", "a $1 boy", "i");
+
+  p8: color("#fff");
+
+  p9: convert(1in, cm);
+  p10: convert(1in, px);
+  p11: convert(1pt, px);
+  p12: convert(1mm, px);
+  p13: convert(1vh, px);
+  p14: convert(1em, px);
+
+  p15: image-size("../img/k.jpg");
+  p16: image-width("../img/vehicle.png");
+  p17: data-uri("../img/k.jpg");
+
+  div {
+    @list: red, green 30%, blue;
+    background-image: svg-gradient(to right, @list);
+  }
+
+}
+
+.color {
+  //@c1: hsla(80, 80%, 50%, .5);
+  //@c2: rgba(50, 60, 70, .8);
+  @1: hsla(287, 60%, 47%, .5);
+  @2: rgba(160, 48, 192, .8);
+  @3: #a030c0;
+
+  .loop(@i) when (@i > 0) {
+    .loop(@i - 1);
+    h@{i}: hue(@@i);
+    s@{i}: saturation(@@i);
+    l@{i}: lightness(@@i);
+    r@{i}: red(@@i);
+    g@{i}: green(@@i);
+    b@{i}: blue(@@i);
+    a@{i}: alpha(@@i);
+    luma@{i}: luma(@@i);
+    luminance@{i}: luminance(@@i);
+
+
+  }
+  .loop(3);
+
+  .cg(@c) {
+    spin30: spin(@c, 30);
+    saturate10: saturate(@c, 10%);
+    desaturate20: desaturate(@c, 20%);
+    lighten10: lighten(@c, 10%);
+    darken20: darken(@c, 20%);
+    fade50: fade(@c, 50%);
+    fadein10: fadein(@c, 10%);
+    fadeout20: fadeout(@c, 20%);
+    mix: mix(red, blue);
+    tint: tint(red);
+    shade: shade(blue);
+    greyscale: greyscale(red);
+    contrast: contrast(red);
+  }
+
+  .cg(@1);
+
+  .adv {
+    multiply: multiply(#ff6600, #333333);
+    screen: screen(#ff6600, #333333);
+    overlay: overlay(#ff6600, #333333);
+    softlight: softlight(#ff6600, #333333);
+    hardlight: hardlight(#ff6600, #333333);
+    difference: difference(#ff6600, #333333);
+    exclusion: exclusion(#ff6600, #333333);
+    average: average(#ff6600, #333333);
+    negation: negation(#ff6600, #333333);
+
+  }
+}
+
+.x {
+  .btn {
+    color: red;
+  }
+}
+
+.btn2:extend( .x .btn ) {
+  bgc: blue;
+}
+
+.lh(@line-height: 1) { line-height: @line-height; }
+.t {
+  .lh;
+  .lh(2);
+  .lh(3px);
+}
+.pd(@padding) { padding: @padding; }
+.pd {
+  .pd(0 12px);
+}
+
+@iv-image-url: "../imgages";
+
+.bg(@img) {
+  background: url('@{iv-image-url}/@{img}') 0 0 no-repeat;
+}
+
+.bgt {
+  .bg("dialog-close-btn-default.png");
+}

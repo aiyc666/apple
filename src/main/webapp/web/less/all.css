@@ -1,0 +1,2437 @@
+/* 液晶字体 */
+@font-face {
+  font-family: 'transponderaoe';
+  src: url('../../../font/transponderaoe.ttf') format('turetype'), url('../../../font/transponderaoe.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+/************ 页面内动画 ************/
+.iv-animations {
+  /* 360度旋转-顺时针 */
+  /* 360度旋转-逆时针 */
+  /* 灯光控制-双闪灯交替闪烁 */
+  /* 灯光控制按钮-打开中动画 */
+  /* 灯光控制按钮-关闭中动画 */
+  /* 空调顶盖-缩放效果 */
+  /* 空调风向箭头-向左 */
+  /* 空调风向箭头-向右 */
+  /* 空调开关按钮-打开中效果 */
+  /* 空调开关按钮-位移过程中的抖动 */
+  /* 空调设置-光圈旋转动画 */
+  /* 充电界面-虚线水帘 */
+  /* 充电界面-车辆边框上的小亮球 */
+  /* 诊断界面-扫描光束动画 */
+  /* 诊断界面-箭头进度条 */
+  /* 升级界面-光圈转动 */
+  /* 升级界面-光圏反向转动 */
+  /* 全局提示显示动画 */
+}
+@keyframes iv-rotate {
+  0% {
+    transform: translateZ(0) rotate(0deg);
+  }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+  }
+}
+@keyframes iv-rotate-reverse {
+  0% {
+    transform: translateZ(0) rotate(0deg);
+  }
+  100% {
+    transform: translateZ(0) rotate(-360deg);
+  }
+}
+@keyframes iv-vehicle-light-double-flash {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes iv-ctrl-btn-halo-opening {
+  from {
+    box-shadow: 0 0 0 0 rgba(161, 157, 184, 0.8);
+  }
+  to {
+    box-shadow: 0 0 25px 5px rgba(161, 157, 184, 0.8);
+  }
+}
+@keyframes iv-ctrl-btn-halo-closing {
+  from {
+    box-shadow: 0 0 25px 5px rgba(161, 157, 184, 0.8);
+  }
+  to {
+    box-shadow: 0 0 0 0 rgba(161, 157, 184, 0.8);
+  }
+}
+@keyframes iv-air-top-cap-scaling {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+@keyframes iv-air-wind-arrow-to-left {
+  0%,
+  85%,
+  100% {
+    transform: rotate(90deg) translate(0);
+    opacity: 1;
+  }
+  24.9999% {
+    transform: rotate(90deg) translate(120px, 0);
+    opacity: 1;
+  }
+  25% {
+    transform: rotate(180deg) translate(-20px, -140px);
+    opacity: 1;
+  }
+  70% {
+    transform: rotate(180deg) translate(160px, -140px);
+    opacity: 1;
+  }
+  84.9999% {
+    transform: rotate(180deg) translate(220px, -140px);
+    opacity: .4;
+  }
+}
+@keyframes iv-air-wind-arrow-to-right {
+  0%,
+  85%,
+  100% {
+    transform: rotate(90deg) translate(0);
+    opacity: 1;
+  }
+  24.9999% {
+    transform: rotate(90deg) translate(120px, 0);
+    opacity: 1;
+  }
+  25% {
+    transform: rotate(0deg) translate(-20px, 140px);
+    opacity: 1;
+  }
+  70% {
+    transform: rotate(0deg) translate(160px, 140px);
+    opacity: 1;
+  }
+  84.9999% {
+    transform: rotate(0deg) translate(220px, 140px);
+    opacity: .4;
+  }
+}
+@keyframes iv-air-switch-btn-opening {
+  0% {
+    background-color: #999;
+  }
+  100% {
+    background-color: #38019d;
+  }
+}
+@keyframes iv-air-switch-dot-shaking {
+  10% {
+    width: 40px;
+    transform: scale(1, 0.6);
+  }
+  40% {
+    width: 30px;
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(0.7, 1.3);
+  }
+  60% {
+    transform: scale(1.2, 0.8);
+  }
+  76% {
+    transform: scale(0.9, 1.1);
+  }
+  96% {
+    transform: scale(1);
+  }
+}
+@keyframes iv-air-temp-ring-turning {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(180deg) scale(1.08);
+  }
+  50% {
+    transform: rotate(360deg) scale(1);
+  }
+  75% {
+    transform: rotate(540deg) scale(0.96);
+  }
+  100% {
+    transform: rotate(720deg) scale(1);
+  }
+}
+@keyframes iv-dashed-line-flow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 -18px;
+  }
+}
+@keyframes iv-little-bright-ball {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33.3333% {
+    transform: translate(918px, 0);
+  }
+  50% {
+    transform: translate(918px, 458px);
+  }
+  83.3333% {
+    transform: translate(0, 458px);
+  }
+}
+@keyframes iv-diagnosis-scan-light {
+  0%,
+  100% {
+    left: -50px;
+    transform: scale(1);
+  }
+  49.9999% {
+    left: 638px;
+    transform: scale(1);
+  }
+  50% {
+    left: 894px;
+    transform: scaleX(-1);
+  }
+  99.9999% {
+    left: 206px;
+    transform: scaleX(-1);
+  }
+}
+@keyframes iv-scan-progress-bar-running {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 0, 0 0, 0 0, 19px 0;
+  }
+}
+@keyframes iv-upgrade-light-circle-twist {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(120deg);
+  }
+  100% {
+    transform: rotate(120deg);
+  }
+}
+@keyframes iv-upgrade-light-circle-twist-reverse {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+@keyframes iv-global-tip-active {
+  0%,
+  100% {
+    height: 80px;
+    opacity: 0;
+  }
+  10%,
+  80% {
+    opacity: 1;
+  }
+}
+/************ 通用部分 ************/
+/*** shortcuts ***/
+/*** shortcuts end ***/
+/* 清除浮动 */
+.clear-float::before,
+.clear-float::after {
+  display: table;
+  content: ' ';
+}
+.clear-float::after {
+  clear: both;
+}
+/* 按钮 */
+.iv-btn,
+.iv-btn-primary,
+.iv-btn-secondary,
+.iv-btn-opacity,
+.iv-btn-bordered {
+  display: inline-block;
+  font-size: 30px;
+  line-height: 1;
+  text-align: center;
+  padding: 0.83em 1.5em;
+  border-radius: 2em;
+}
+.iv-btn:focus {
+  outline: none;
+}
+/* 主按钮-蓝色 */
+.iv-btn-primary {
+  color: #fff;
+  background-color: #3152f7;
+}
+.iv-btn-primary:hover {
+  color: #fff;
+  background-color: #1d3194;
+}
+.iv-btn-primary:focus {
+  color: #fff;
+}
+/* 次按钮-白色 */
+.iv-btn-secondary {
+  color: #666;
+  background-color: #fff;
+}
+.iv-btn-secondary:hover {
+  color: #666;
+  background-color: #ccc;
+}
+.iv-btn-secondary:focus {
+  color: #666;
+}
+/* 半透明按钮-暗灰色 */
+.iv-btn-opacity {
+  font-size: 20px;
+  color: #ccc;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.iv-btn-opacity:hover {
+  color: #ccc;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px;
+}
+.iv-btn-opacity:focus {
+  color: #ccc;
+}
+/* 带边框按钮 */
+.iv-btn-bordered {
+  font-size: 24px;
+  color: #666;
+  background-color: rgba(102, 102, 102, 0.1);
+  border: 1px solid #666;
+}
+.iv-btn-bordered:hover {
+  color: #666;
+  background-color: rgba(102, 102, 102, 0.3);
+  box-shadow: 0 0 8px;
+}
+.iv-btn-bordered:focus {
+  color: #666;
+}
+/* 混合 */
+/************ 页面容器 ************/
+.icvt {
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  font-family: Arial, "微软雅黑", sans-serif;
+  overflow: auto;
+  background-color: #000;
+  /*** 页面内通用 ***/
+  /* 将“是”“否”按钮加宽 */
+  /* 按钮容器 */
+  /* 水球图片 */
+  /* 水球内的提示文字 */
+}
+.icvt a {
+  text-decoration: none;
+}
+.icvt .btn-yes,
+.icvt .btn-no {
+  padding: .83em 2em;
+}
+.icvt .btn-container {
+  text-align: center;
+}
+.icvt .btn-container .iv-btn-primary,
+.icvt .btn-container .iv-btn-secondary {
+  margin-right: 30px;
+}
+.icvt .btn-container :nth-last-child(1) {
+  margin-right: 0;
+}
+.icvt .water-bubble-image {
+  opacity: .5;
+}
+.icvt .water-bubble-text-container::before,
+.icvt .water-bubble-text-container::after {
+  position: absolute;
+  left: 0;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1;
+}
+.icvt .water-bubble-text-container::before {
+  content: '剩余电量';
+  top: 30px;
+}
+.icvt .water-bubble-text-container::after {
+  content: '';
+  bottom: 30px;
+}
+.icvt .charging .water-bubble-text-container::before {
+  content: '正在充电';
+}
+.icvt .low-power .water-bubble-text-container::after {
+  content: '电量低';
+}
+/****** 主页面 ******/
+/* 通用变量 */
+/* @container-height-header + ... */
+.iv-main {
+  position: relative;
+  width: 1080px;
+  margin: 0 auto;
+  /* 底纹 */
+  padding-bottom: calc(100vh - 1740px);
+  background: url('/main-bottom-bg.jpg') 0 1740px no-repeat;
+  /*** 离线时，界面禁用 ***/
+  /*** 诊断时其它界面禁止操作 ***/
+}
+.iv-main.disabled {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+.iv-main.disabled * {
+  pointer-events: none !important;
+}
+.iv-main.disabled .iv-header .right {
+  color: #666;
+}
+.iv-main.disabled .iv-header .offline-tip {
+  display: block;
+}
+.iv-main.diagnosis-running .iv-dashboard,
+.iv-main.diagnosis-running .iv-stats {
+  -webkit-filter: blur(1.5px) brightness(0.8);
+  filter: blur(1.5px) brightness(0.8);
+}
+.iv-main.diagnosis-running .iv-dashboard *,
+.iv-main.diagnosis-running .iv-stats * {
+  pointer-events: none !important;
+}
+/*** 全局提示 ***/
+.iv-tip-container {
+  position: fixed;
+  left: 0;
+  top: 27%;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  /* 提示 */
+}
+.iv-tip-container .iv-tip {
+  display: none;
+  height: 80px;
+  line-height: 80px;
+  font-size: 24px;
+  color: #333;
+  padding: 0 1.6em;
+  overflow: hidden;
+  border-radius: 80px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.iv-tip-container .iv-tip.active {
+  display: inline-block;
+  animation: iv-global-tip-active 2.5s;
+}
+/*** 页头部 ***/
+.iv-header {
+  position: relative;
+  height: 130px;
+  padding: 60px 30px 0;
+  font-weight: bold;
+  color: #330099;
+  background-color: #fff;
+  /* 离线提示 */
+}
+.iv-header .left {
+  float: left;
+  font-size: 28px;
+}
+.iv-header .left .logo {
+  float: left;
+  width: 62px;
+  height: 36px;
+  margin-right: 15px;
+  background: url('/logo.png') no-repeat;
+}
+.iv-header .right {
+  float: right;
+  font-size: 24px;
+  line-height: 50px;
+}
+.iv-header .right .vehicle-ico {
+  float: right;
+  width: 50px;
+  height: 50px;
+  margin-left: 15px;
+  background: url('/ico-vehicle.png') no-repeat;
+}
+.iv-header .offline-tip {
+  display: none;
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: 96px;
+  bottom: 10px;
+  font-size: 13px;
+  color: #666;
+}
+/*** 仪表盘区 ***/
+.iv-dashboard {
+  height: 430px;
+  padding: 95px 0 0 90px;
+  background: url('/main-dashboard-bg.jpg') 0 0 no-repeat;
+  /* 转速表 */
+  /* 速度表 */
+  /* 电量表 */
+}
+.iv-dashboard .dash-rpm-container {
+  float: left;
+  position: relative;
+  width: 230px;
+  height: 230px;
+}
+.iv-dashboard .dash-rpm-container .text-label {
+  position: absolute;
+  left: auto;
+  top: 50px;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+  color: #bbb;
+}
+.iv-dashboard .dash-rpm-container .text-label div:nth-child(1) {
+  height: 25px;
+  font-size: 18px;
+}
+.iv-dashboard .dash-rpm-container .text-label div:nth-child(2) {
+  height: 95px;
+  font-size: 84px;
+  color: #00BFFF;
+}
+.iv-dashboard .dash-rpm-container .text-label div:nth-child(3) {
+  font-size: 14px;
+}
+.iv-dashboard .dash-speed-container {
+  float: left;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: -12px 0 0 85px;
+}
+.iv-dashboard .dash-speed-container .text-label {
+  position: absolute;
+  left: auto;
+  top: 55px;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+  color: #bbb;
+}
+.iv-dashboard .dash-speed-container .text-label div:nth-child(1) {
+  height: 28px;
+  font-size: 18px;
+}
+.iv-dashboard .dash-speed-container .text-label div:nth-child(2) {
+  height: 100px;
+  font-size: 94px;
+  color: #00BFFF;
+}
+.iv-dashboard .dash-speed-container .text-label div:nth-child(3) {
+  font-size: 18px;
+}
+.iv-dashboard .dash-battery-container {
+  position: relative;
+  float: left;
+  margin: -12px 0 0 85px;
+  /* 电量球 */
+  /* 去充电按钮容器 */
+  /* 充电中 */
+  /* 低电量 */
+}
+.iv-dashboard .dash-battery-container .bat-outer-circle {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border: 12px solid rgba(200, 200, 255, 0.3);
+  border-radius: 50%;
+}
+.iv-dashboard .dash-battery-container .bat-outer-circle .water-bubble {
+  position: absolute;
+  left: 13px;
+  top: 13px;
+  right: auto;
+  bottom: auto;
+}
+.iv-dashboard .dash-battery-container .btn-container {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: auto;
+  bottom: -65px;
+  width: 100%;
+  /* 去充电按钮 */
+}
+.iv-dashboard .dash-battery-container .btn-container .btn-charge {
+  position: relative;
+  left: auto;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  overflow: hidden;
+}
+.iv-dashboard .dash-battery-container .btn-container .btn-charge .bg {
+  display: none;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  background-color: rgba(30, 237, 255, 0.8);
+}
+.iv-dashboard .dash-battery-container .btn-container .btn-charge .txt {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+}
+.iv-dashboard .dash-battery-container .btn-container .btn-charge .txt::after {
+  content: '去充电';
+}
+.iv-dashboard .dash-battery-container.charging .btn-container .btn-charge .bg {
+  display: block;
+}
+.iv-dashboard .dash-battery-container.charging .btn-container .btn-charge .txt::after {
+  content: '充电中';
+}
+.iv-dashboard .dash-battery-container.low-power .btn-container .btn-charge .bg {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+/*** 车身区 ***/
+.iv-vehicle {
+  position: relative;
+  height: 630px;
+  padding: 80px 100px 0;
+  background: url('/main-vehicle-bg.jpg') 0 0 no-repeat;
+  /* 车辆状态卡 */
+  /* 远程升级、故障诊断按钮*/
+  /* 车体 */
+  /* 控制按钮 */
+}
+.iv-vehicle .vehicle-status-card {
+  float: left;
+  width: 130px;
+  height: 186px;
+  padding-top: 16px;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1;
+  text-align: center;
+  background: url('/main-vehicle-status-card-bg.png') center no-repeat;
+}
+.iv-vehicle .vehicle-status-card .ico-engine-status {
+  height: 52px;
+  margin: 13px 0;
+  background: url('/main-vehicle-engine-ico-off.png') center no-repeat;
+}
+.iv-vehicle .vehicle-status-card .ico-engine-status.active {
+  background: url('/main-vehicle-engine-ico-on.png') center no-repeat;
+}
+.iv-vehicle .vehicle-status-card .total-mileage {
+  margin-top: 12px;
+  font-size: 24px;
+  color: #00adfe;
+}
+.iv-vehicle .btn-container {
+  float: right;
+}
+.iv-vehicle .btn-container > div {
+  margin-bottom: 20px;
+}
+.iv-vehicle .vehicle-body {
+  position: absolute;
+  left: 195px;
+  top: auto;
+  right: auto;
+  bottom: 150px;
+  width: 730px;
+  height: 206px;
+  background: url('/vehicle-body-normal-no-door.png') 0 0 no-repeat;
+  /* 车体内元素 */
+  /* 近光 */
+  /* 远光 */
+  /* 位置 */
+  /* 双闪 */
+  /* 前门 */
+  /* 后门 */
+  /* 前后门打开动画 */
+  /* 空调-制冷与制热 */
+}
+.iv-vehicle .vehicle-body > div {
+  position: absolute;
+}
+.iv-vehicle .vehicle-body .light-near {
+  display: none;
+  position: absolute;
+  left: 700px;
+  top: 80px;
+  right: auto;
+  bottom: auto;
+  width: 172px;
+  height: 155px;
+  background: url('/main-vehicle-part-light-near.png') 0 0 no-repeat;
+}
+.iv-vehicle .vehicle-body .light-far {
+  display: none;
+  position: absolute;
+  left: 690px;
+  top: 74px;
+  right: auto;
+  bottom: auto;
+  width: 195px;
+  height: 134px;
+  background: url('/main-vehicle-part-light-far.png') 0 0 no-repeat;
+}
+.iv-vehicle .vehicle-body .light-position {
+  display: none;
+}
+.iv-vehicle .vehicle-body .light-position .part-front {
+  width: 12px;
+  height: 14px;
+  position: absolute;
+  left: 669px;
+  top: 14px;
+  right: auto;
+  bottom: auto;
+  background: url('/main-vehicle-part-light-position-front.png') 0 0 no-repeat;
+}
+.iv-vehicle .vehicle-body .light-position .part-back {
+  width: 12px;
+  height: 14px;
+  position: absolute;
+  left: 35px;
+  top: 13px;
+  right: auto;
+  bottom: auto;
+  background: url('/main-vehicle-part-light-position-back.png') 0 0 no-repeat;
+}
+.iv-vehicle .vehicle-body .light-position .part-normal-top-left,
+.iv-vehicle .vehicle-body .light-position .part-normal-top-right,
+.iv-vehicle .vehicle-body .light-position .part-normal-bottom-right,
+.iv-vehicle .vehicle-body .light-position .part-normal-bottom-left {
+  width: 9px;
+  height: 16px;
+  background: url('/main-vehicle-part-light-position-normal.png') 0 0 no-repeat;
+}
+.iv-vehicle .vehicle-body .light-position .part-normal-top-left {
+  position: absolute;
+  left: -7px;
+  top: 50px;
+  right: auto;
+  bottom: auto;
+}
+.iv-vehicle .vehicle-body .light-position .part-normal-top-right {
+  position: absolute;
+  left: 700px;
+  top: 50px;
+  right: auto;
+  bottom: auto;
+}
+.iv-vehicle .vehicle-body .light-position .part-normal-bottom-right {
+  position: absolute;
+  left: 696px;
+  top: 170px;
+  right: auto;
+  bottom: auto;
+  transform: rotate(15deg);
+}
+.iv-vehicle .vehicle-body .light-position .part-normal-bottom-left {
+  position: absolute;
+  left: -2px;
+  top: 170px;
+  right: auto;
+  bottom: auto;
+  transform: rotate(-20deg);
+}
+.iv-vehicle .vehicle-body .light-double {
+  display: none;
+}
+.iv-vehicle .vehicle-body .light-double .part-front,
+.iv-vehicle .vehicle-body .light-double .part-back {
+  width: 38px;
+  height: 80px;
+  animation: iv-vehicle-light-double-flash 1s linear infinite;
+}
+.iv-vehicle .vehicle-body .light-double .part-front {
+  position: absolute;
+  left: 696px;
+  top: 111px;
+  right: auto;
+  bottom: auto;
+  background: url('/main-vehicle-part-light-double-front.png') 0 0 no-repeat;
+}
+.iv-vehicle .vehicle-body .light-double .part-back {
+  position: -25px;
+  left: 117px;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  background: url('/main-vehicle-part-light-double-back.png') 0 0 no-repeat;
+}
+.iv-vehicle .vehicle-body .light-near.active,
+.iv-vehicle .vehicle-body .light-far.active,
+.iv-vehicle .vehicle-body .light-position.active,
+.iv-vehicle .vehicle-body .light-double.active {
+  display: block;
+}
+.iv-vehicle .vehicle-body .front-door {
+  position: absolute;
+  left: 606px;
+  top: 78px;
+  right: auto;
+  bottom: auto;
+}
+.iv-vehicle .vehicle-body .front-door::before,
+.iv-vehicle .vehicle-body .front-door::after {
+  width: 40px;
+  height: 108px;
+  content: '';
+  transition: transform 3s;
+}
+.iv-vehicle .vehicle-body .front-door::before {
+  float: left;
+  background: url('/vehicle-body-normal-front-door-left.png') no-repeat;
+  transform-origin: left center;
+}
+.iv-vehicle .vehicle-body .front-door::after {
+  float: right;
+  background: url('/vehicle-body-normal-front-door-right.png') no-repeat;
+  transform-origin: right center;
+}
+.iv-vehicle .vehicle-body .back-door {
+  position: absolute;
+  left: 245px;
+  top: 77px;
+  right: auto;
+  bottom: auto;
+}
+.iv-vehicle .vehicle-body .back-door::before,
+.iv-vehicle .vehicle-body .back-door::after {
+  content: '';
+  transition: transform 3s;
+}
+.iv-vehicle .vehicle-body .back-door::before {
+  float: left;
+  width: 54px;
+  height: 111px;
+  background: url('/vehicle-body-normal-back-door-left.png') no-repeat;
+  transform-origin: left center;
+}
+.iv-vehicle .vehicle-body .back-door::after {
+  float: right;
+  width: 51px;
+  height: 111px;
+  background: url('/vehicle-body-normal-back-door-right.png') no-repeat;
+  transform-origin: right center;
+}
+.iv-vehicle .vehicle-body .front-door.active::before,
+.iv-vehicle .vehicle-body .back-door.active::before {
+  transform: perspective(80px) rotateY(90deg);
+}
+.iv-vehicle .vehicle-body .front-door.active::after,
+.iv-vehicle .vehicle-body .back-door.active::after {
+  transform: perspective(80px) rotateY(-90deg);
+}
+.iv-vehicle .vehicle-body .air-device {
+  width: 100%;
+  height: 100%;
+  /* 顶盖儿 */
+  /* 箭头运动范围 */
+  /* 显示制冷 */
+  /* 显示制热 */
+  /* 自动、通风暂无动画 */
+  /* 制冷制热动画 */
+}
+.iv-vehicle .vehicle-body .air-device .top-cap {
+  position: absolute;
+  left: 180px;
+  top: -30px;
+  right: auto;
+  bottom: auto;
+  width: 420px;
+  height: 100px;
+}
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range {
+  position: absolute;
+  left: 40px;
+  top: 40px;
+  right: 40px;
+  bottom: 40px;
+  overflow: hidden;
+  /* 箭头 */
+}
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group::before,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group::before,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group::after,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group::after {
+  position: absolute;
+  left: auto;
+  top: -100px;
+  right: auto;
+  bottom: auto;
+  width: 116px;
+  height: 78px;
+  content: '';
+}
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group::before,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group::before {
+  left: calc(50% - 58px - 39px);
+}
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group::after,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group::after {
+  left: calc(50% - 58px + 39px);
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .top-cap {
+  background: url('/air-top-cap-cool.png') center no-repeat;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .first-group::before,
+.iv-vehicle .vehicle-body .air-device.active-cool .second-group::before,
+.iv-vehicle .vehicle-body .air-device.active-cool .first-group::after,
+.iv-vehicle .vehicle-body .air-device.active-cool .second-group::after {
+  background: url('/air-cool-arrow-to-right.png') center no-repeat;
+}
+.iv-vehicle .vehicle-body .air-device.active-hot .top-cap {
+  background: url('/air-top-cap-hot.png') center no-repeat;
+}
+.iv-vehicle .vehicle-body .air-device.active-hot .first-group::before,
+.iv-vehicle .vehicle-body .air-device.active-hot .second-group::before,
+.iv-vehicle .vehicle-body .air-device.active-hot .first-group::after,
+.iv-vehicle .vehicle-body .air-device.active-hot .second-group::after {
+  background: url('/air-hot-arrow-to-right.png') center no-repeat;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool,
+.iv-vehicle .vehicle-body .air-device.active-hot {
+  /* 顶盖动画 */
+  /* 风向箭头动画 */
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .top-cap,
+.iv-vehicle .vehicle-body .air-device.active-hot .top-cap {
+  animation: iv-air-top-cap-scaling 5s cubic-bezier(0.3, 0, 0.7, 1) alternate infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .first-group::before,
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .first-group::before {
+  animation: iv-air-wind-arrow-to-left 6s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .first-group::after,
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .first-group::after {
+  animation: iv-air-wind-arrow-to-right 6s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .second-group::before,
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .second-group::before {
+  animation: iv-air-wind-arrow-to-left 6s 3s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .second-group::after,
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .second-group::after {
+  animation: iv-air-wind-arrow-to-right 6s 3s linear infinite;
+}
+.iv-vehicle .control-buttons {
+  position: absolute;
+  left: 270px;
+  top: auto;
+  right: auto;
+  bottom: 22px;
+  /* 按钮 */
+}
+.iv-vehicle .control-buttons .ctrl-btn {
+  float: left;
+  width: 88px;
+  margin-right: 10px;
+  font-size: 18px;
+  color: #c0c0c0;
+  text-align: center;
+  /* 图标 */
+  /* 点亮时图标 */
+  /* 打开中 */
+  /* 关闭中 */
+  /* 图标背景图片 */
+}
+.iv-vehicle .control-buttons .ctrl-btn:first-child,
+.iv-vehicle .control-buttons .ctrl-btn:last-child {
+  margin-top: -50px;
+}
+.iv-vehicle .control-buttons .ctrl-btn:nth-child(2),
+.iv-vehicle .control-buttons .ctrl-btn:nth-last-child(2) {
+  margin-top: -25px;
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico {
+  width: 48px;
+  height: 48px;
+  margin: 20px 20px 10px;
+  border-radius: 50%;
+  background: rgba(141, 137, 164, 0.7) center no-repeat;
+  cursor: pointer;
+  /* 鼠标悬停 */
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico:hover {
+  background-color: rgba(141, 137, 164, 0.9);
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico:hover + div {
+  color: #fff;
+}
+.iv-vehicle .control-buttons .ctrl-btn.active {
+  color: #fff;
+}
+.iv-vehicle .control-buttons .ctrl-btn.active .ico {
+  background-color: #38019d;
+  box-shadow: 0 0 25px 5px rgba(161, 157, 184, 0.8);
+}
+.iv-vehicle .control-buttons .ctrl-btn.opening {
+  color: #fff;
+}
+.iv-vehicle .control-buttons .ctrl-btn.opening .ico {
+  background-color: rgba(141, 137, 164, 0.9);
+  animation: iv-ctrl-btn-halo-opening 1.2s ease infinite;
+}
+.iv-vehicle .control-buttons .ctrl-btn.closing .ico {
+  animation: iv-ctrl-btn-halo-closing 1.2s ease infinite;
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico-light-near {
+  background-image: url('/ico-light-near-off.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-light-near {
+  background-image: url('/ico-light-near-on.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico-light-far {
+  background-image: url('/ico-light-far-off.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-light-far {
+  background-image: url('/ico-light-far-on.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico-light-position {
+  background-image: url('/ico-light-position-off.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-light-position {
+  background-image: url('/ico-light-position-on.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico-light-double {
+  background-image: url('/ico-light-double-off.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-light-double {
+  background-image: url('/ico-light-double-on.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico-door-front {
+  background-image: url('/ico-door-front-off.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-door-front {
+  background-image: url('/ico-door-front-on.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn .ico-door-back {
+  background-image: url('/ico-door-back-off.png');
+}
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-door-back {
+  background-image: url('/ico-door-back-on.png');
+}
+/*** 空调控制区 ***/
+.iv-air {
+  position: relative;
+  height: 330px;
+  padding: 20px 0 0 70px;
+  background: url('/main-air-bg.jpg') 0 0 no-repeat;
+  /* 标题 */
+  /* 控制区 */
+}
+.iv-air .top-title {
+  height: 46px;
+  padding-left: 52px;
+  font-size: 18px;
+  color: #fff;
+  background: url('/main-air-title.png') 0 -2px no-repeat;
+}
+/* 空调-开关键 */
+.iv-air-switch {
+  position: absolute;
+  left: auto;
+  top: 20px;
+  right: 70px;
+  bottom: auto;
+  font-size: 16px;
+  color: #fff;
+  vertical-align: middle;
+  /* 打开时控制面板中相关状态 */
+}
+.iv-air-switch:before,
+.iv-air-switch:after {
+  display: inline-block;
+  vertical-align: 15px;
+}
+.iv-air-switch:before {
+  margin-right: 10px;
+  color: #fff;
+  content: '关闭';
+}
+.active.iv-air-switch:before {
+  color: #999;
+}
+.iv-air-switch:after {
+  margin-left: 10px;
+  color: #999;
+  content: '开启';
+}
+.active.iv-air-switch:after {
+  color: #fff;
+}
+.iv-air-switch .switch-bg {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 18px;
+  color: #aaa;
+  line-height: 40px;
+  background-color: #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  /* 圆点 */
+}
+.iv-air-switch .switch-bg:before {
+  float: left;
+  content: 'on';
+}
+.active.iv-air-switch .switch-bg:before {
+  color: #38019d;
+}
+.iv-air-switch .switch-bg:after {
+  float: right;
+  content: 'off';
+}
+.iv-air-switch .switch-bg .switch-dot {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  right: auto;
+  bottom: auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #999;
+  transition: left 0.3s 0.1s /* ,background-color .2s .1s */;
+}
+.opening.iv-air-switch .switch-bg .switch-dot {
+  animation: iv-air-switch-btn-opening 0.85s linear infinite;
+}
+.closing.iv-air-switch .switch-bg .switch-dot {
+  animation: iv-air-switch-btn-opening 0.85s linear reverse infinite;
+}
+.active.iv-air-switch .switch-bg .switch-dot {
+  left: 45px;
+  background-color: #38019d;
+  animation: iv-air-switch-dot-shaking 1s linear;
+}
+.iv-air-switch.active + .control-panel .right .mode-btn-container .mode-btn:hover {
+  background-color: #4D4948;
+}
+/* 空调-右侧工作模式切换 */
+.iv-air-right {
+  float: right;
+  margin: 40px 70px 0 0;
+  /* 模式按钮 */
+}
+.iv-air-right .mode-title {
+  height: 24;
+  line-height: 24;
+  padding-left: 36px;
+  font-size: 18px;
+  color: #fff;
+  background: url('/main-air-mode.png') left center no-repeat;
+}
+.iv-air-right .mode-btn-container {
+  margin-top: 30px;
+}
+.iv-air-right .mode-btn {
+  float: left;
+  width: 80px;
+  height: 110px;
+  margin-right: 15px;
+  padding-top: 16px;
+  font-size: 20px;
+  color: #c0c0c0;
+  text-align: center;
+  border-radius: 8px;
+  background-color: #3d3938;
+  cursor: pointer;
+  /* 按钮图标 */
+  /* 打开中动画 */
+}
+.iv-air-right .mode-btn .ico {
+  width: 24px;
+  height: 24px;
+  margin: 0 auto 22px;
+}
+.iv-air-right .mode-btn.opening .ico {
+  animation: iv-rotate 1s linear infinite;
+}
+.iv-air-right .btn-auto .ico {
+  background: url('/ico-air-mode-auto-default.png') center no-repeat;
+}
+.active-auto.iv-air-right .btn-auto {
+  color: #27850A;
+  background-color: transparent;
+  border: 1px solid #27850A;
+  box-shadow: inset 0 0 18px #27850A;
+}
+.active-auto.iv-air-right .btn-auto .ico {
+  background: url('/ico-air-mode-auto-on.png') center no-repeat;
+}
+.active-auto.iv-air-right .btn-auto:hover {
+  background-color: transparent !important;
+}
+.iv-air-right.active-auto + .iv-air-left .air-temperature .temp-ring {
+  background: url('/air-temp-ring-auto.png') 0 0 no-repeat;
+  animation: iv-air-temp-ring-turning 15s linear infinite;
+}
+.iv-air-right .btn-cool .ico {
+  background: url('/ico-air-mode-cool-default.png') center no-repeat;
+}
+.active-cool.iv-air-right .btn-cool {
+  color: #01adfe;
+  background-color: transparent;
+  border: 1px solid #01adfe;
+  box-shadow: inset 0 0 18px #01adfe;
+}
+.active-cool.iv-air-right .btn-cool .ico {
+  background: url('/ico-air-mode-cool-on.png') center no-repeat;
+}
+.active-cool.iv-air-right .btn-cool:hover {
+  background-color: transparent !important;
+}
+.iv-air-right.active-cool + .iv-air-left .air-temperature .temp-ring {
+  background: url('/air-temp-ring-cool.png') 0 0 no-repeat;
+  animation: iv-air-temp-ring-turning 15s linear infinite;
+}
+.iv-air-right .btn-hot .ico {
+  background: url('/ico-air-mode-hot-default.png') center no-repeat;
+}
+.active-hot.iv-air-right .btn-hot {
+  color: #FEA62B;
+  background-color: transparent;
+  border: 1px solid #FEA62B;
+  box-shadow: inset 0 0 18px #FEA62B;
+}
+.active-hot.iv-air-right .btn-hot .ico {
+  background: url('/ico-air-mode-hot-on.png') center no-repeat;
+}
+.active-hot.iv-air-right .btn-hot:hover {
+  background-color: transparent !important;
+}
+.iv-air-right.active-hot + .iv-air-left .air-temperature .temp-ring {
+  background: url('/air-temp-ring-hot.png') 0 0 no-repeat;
+  animation: iv-air-temp-ring-turning 15s linear infinite;
+}
+.iv-air-right .btn-wind .ico {
+  background: url('/ico-air-mode-wind-default.png') center no-repeat;
+}
+.active-wind.iv-air-right .btn-wind {
+  color: #74128c;
+  background-color: transparent;
+  border: 1px solid #74128c;
+  box-shadow: inset 0 0 18px #74128c;
+}
+.active-wind.iv-air-right .btn-wind .ico {
+  background: url('/ico-air-mode-wind-on.png') center no-repeat;
+}
+.active-wind.iv-air-right .btn-wind:hover {
+  background-color: transparent !important;
+}
+.iv-air-right.active-wind + .iv-air-left .air-temperature .temp-ring {
+  background: url('/air-temp-ring-wind.png') 0 0 no-repeat;
+  animation: iv-air-temp-ring-turning 15s linear infinite;
+}
+/* 空调-左侧空调控制 */
+.iv-air-left {
+  float: left;
+  height: 220px;
+  line-height: 1;
+  margin: 14px 0 0 50px;
+  font-size: 18px;
+  color: #fff;
+  /* 车内外温度 */
+  /* 空调温度 */
+  /* 加、减按钮容器 */
+}
+.iv-air-left .vehicle-temperature {
+  float: left;
+  padding-top: 17px;
+}
+.iv-air-left .vehicle-temperature .temp-label {
+  margin-bottom: 12px;
+  color: #c0c0c0;
+}
+.iv-air-left .vehicle-temperature div:nth-child(2) {
+  height: 65px;
+}
+.iv-air-left .vehicle-temperature .temp-value > span {
+  float: left;
+  font-size: 36px;
+  font-family: transponderaoe, sans-serif;
+}
+.iv-air-left .vehicle-temperature .temp-value:after {
+  float: left;
+  margin: 2px 5px;
+  font-size: 14px;
+  font-family: '微软雅黑', sans-serif;
+  content: '℃';
+}
+.iv-air-left .air-temperature {
+  float: left;
+  position: relative;
+  width: 220px;
+  margin: -2px 0 0 48px;
+  text-align: center;
+  /* 光圈 */
+}
+.iv-air-left .air-temperature .temp-ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  width: 220px;
+  height: 220px;
+  background: url('/air-temp-ring-default.png') 0 0 no-repeat;
+}
+.iv-air-left .air-temperature .temp-value {
+  position: relative;
+  height: 84px;
+  margin-top: 64px;
+}
+.iv-air-left .air-temperature .temp-value .air-device-temperature {
+  font-size: 68px;
+  font-family: transponderaoe, sans-serif;
+}
+.iv-air-left .air-temperature .temp-value:after {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  margin: 10px 0 0 8px;
+  font-size: 24px;
+  color: #fff;
+  content: '℃';
+  font-family: '微软雅黑', sans-serif;
+}
+.iv-air-left .btn-container {
+  float: left;
+  margin: 40px 0 0 35px;
+  /* 禁用状态 */
+  /* 启用状态 */
+  /* active状态 */
+}
+.iv-air-left .btn-container .btn-plus,
+.iv-air-left .btn-container .btn-minus {
+  border-color: #5B6469;
+  display: block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 40px;
+  border-radius: 100%;
+  border: 3px solid;
+}
+.iv-air-left .btn-container .btn-plus::before,
+.iv-air-left .btn-container .btn-minus::before,
+.iv-air-left .btn-container .btn-plus::after,
+.iv-air-left .btn-container .btn-minus::after {
+  background-color: #5B6469;
+}
+.iv-air-left .btn-container .btn-plus::before,
+.iv-air-left .btn-container .btn-minus::before,
+.iv-air-left .btn-container .btn-plus::after,
+.iv-air-left .btn-container .btn-minus::after {
+  position: absolute;
+  left: 25%;
+  top: calc(50% - 1.5px);
+  right: auto;
+  bottom: auto;
+  width: 50%;
+  height: 3px;
+  content: '';
+}
+.iv-air-left .btn-container .btn-plus::after {
+  transform: rotate(90deg);
+}
+.iv-air-left .btn-container .btn-minus::after {
+  display: none;
+}
+.iv-air-left .btn-container .btn-disable {
+  border-color: #5B6469;
+}
+.iv-air-left .btn-container .btn-disable::before,
+.iv-air-left .btn-container .btn-disable::after {
+  background-color: #5B6469;
+}
+.iv-air-left .btn-container .btn-enable {
+  border-color: #ccc;
+}
+.iv-air-left .btn-container .btn-enable::before,
+.iv-air-left .btn-container .btn-enable::after {
+  background-color: #ccc;
+}
+.iv-air-left .btn-container .btn-active {
+  border-color: #ccc;
+  box-shadow: 0 0 12px #ccc;
+}
+.iv-air-left .btn-container .btn-active::before,
+.iv-air-left .btn-container .btn-active::after {
+  background-color: #ccc;
+}
+.iv-air-left .btn-container .btn-active::before,
+.iv-air-left .btn-container .btn-active::after {
+  background-color: #666;
+}
+/*** 能耗统计区 ***/
+.iv-stats {
+  height: 220px;
+  background: url('/main-stats-bg.jpg') 0 0 no-repeat;
+  /* 视频 */
+}
+.iv-stats .main-stats-chart {
+  float: left;
+  width: 750px;
+  padding: 20px 0 0 70px;
+  /* 标题 */
+  /* 柱状图 */
+}
+.iv-stats .main-stats-chart .stats-title {
+  height: 32px;
+  padding-left: 52px;
+  line-height: 32px;
+  color: #fff;
+  font-size: 18px;
+  background: url('/main-stats-title-ico.png') left center no-repeat;
+}
+.iv-stats .main-stats-chart .stats-chart-container {
+  margin: 5px 0 0 52px;
+}
+.iv-stats .main-stats-chart .stats-chart-container .energy-chart {
+  width: 620px;
+  height: 160px;
+}
+.iv-stats .video-container {
+  float: right;
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin-right: 30px;
+  /* 缩略图 */
+  /* 视频容器 */
+}
+.iv-stats .video-container .video-thumb {
+  height: 100%;
+  background: url('/video-thumb-play-btn-default.png') center center no-repeat, url('/video-thumb-bg.png') center center no-repeat;
+  opacity: .3;
+  cursor: pointer;
+}
+.iv-stats .video-container .video-thumb:hover {
+  background: url('/video-thumb-play-btn-on.png') center center no-repeat, url('/video-thumb-bg.png') center center no-repeat;
+  opacity: .9;
+}
+.iv-stats .video-container .video {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  width: 1000px;
+  margin-left: -500px;
+  border-radius: 5px;
+  box-shadow: 0 0 6px rgba(21, 95, 142, 0.5);
+  overflow: hidden;
+  opacity: 0;
+  z-index: -1;
+  transform: perspective(1000px) rotateX(30deg) translate3d(0, 0, 500px);
+  transition: transform .6s, opacity .6s;
+}
+.iv-stats .video-container .video.opening,
+.iv-stats .video-container .video.playing {
+  opacity: 1;
+  transform: perspective(1000px) rotateX(0deg) translate3d(0, -100px, 0);
+  z-index: 2;
+}
+.iv-stats .video-container .video.closing {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(0deg) translate3d(0, -50px, 0) scale(0.3);
+}
+.iv-stats .video-container .video .btn-dialog-close {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 48px;
+  height: 48px;
+  background: url('/dialog-close-btn-default.png') 0 0 no-repeat;
+  z-index: 1;
+}
+.iv-stats .video-container .video .btn-dialog-close:hover {
+  background: url('/dialog-close-btn-on.png') 0 0 no-repeat;
+}
+.iv-stats .video-container .video.playing .btn-dialog-close {
+  display: block;
+}
+.iv-stats .video-container .video video {
+  display: block;
+}
+/*** 车辆充电 ***/
+.iv-charge {
+  display: none;
+  position: absolute;
+  top: 130px;
+  width: 100%;
+  height: 1060px;
+  z-index: 2;
+  /* 上半区背景 */
+  /* 下半区车辆背景 */
+  /* 内部元素容器 */
+  /* 充电中时相应界面变化 */
+  /* 低电量界面变化 */
+}
+.iv-charge .top-bg {
+  height: 430px;
+  padding-top: 100px;
+  background: url('/main-dashboard-bg.jpg') 0 0 no-repeat;
+}
+.iv-charge .top-bg::before {
+  display: block;
+  width: 359px;
+  height: 57px;
+  margin: 0 auto;
+  content: '车辆充电';
+  color: #fff;
+  font-size: 36px;
+  line-height: 57px;
+  text-align: center;
+  letter-spacing: 16px;
+  background: url('/main-vehicle-title-bg.png') center center no-repeat;
+}
+.iv-charge .vehicle-bg {
+  height: 630px;
+  padding: 165px 90px 25px;
+  background: url('/vehicle-body-gray.png') content-box no-repeat 115px 108px, linear-gradient(0, transparent, transparent) content-box, linear-gradient(0, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)) padding-box, url('/main-vehicle-bg-gray.jpg') no-repeat padding-box;
+}
+.iv-charge .content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 铁爪手 */
+  /* 充电球 */
+  /* 车体容器 */
+}
+.iv-charge .content-container .iron-paw {
+  position: absolute;
+  top: 280px;
+  width: 100%;
+  padding: 0 79px;
+}
+.iv-charge .content-container .iron-paw::before,
+.iv-charge .content-container .iron-paw::after {
+  float: left;
+  width: 327px;
+  height: 100px;
+  content: '';
+  background: url('/charging-iron-paw-seat-left.png') 0 0 no-repeat, url('/charging-iron-paw-hook-left.png') 95px 20px no-repeat;
+  transition: all .6s;
+}
+.iv-charge .content-container .iron-paw::after {
+  float: right;
+  transform: scaleX(-1);
+}
+.iv-charge .content-container .ball-container {
+  position: absolute;
+  top: 188px;
+  left: 400px;
+  width: 280px;
+  /* 底托儿半圆 */
+  /* 低电量标示圆 */
+  /* 水球 */
+  /* 虚线水帘 */
+}
+.iv-charge .content-container .ball-container .outer-half-circle {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border: 3px solid #666;
+  border-radius: 140px;
+  clip: rect(112px, 300px, 300px, -20px);
+  transition: all .8s;
+}
+.iv-charge .content-container .ball-container .outer-half-circle.charging {
+  border: 3px solid #377fd0;
+  box-shadow: 0 0 18px #377fd0, inset 0 0 18px #377fd0;
+}
+.iv-charge .content-container .ball-container .low-power-circle {
+  position: absolute;
+  top: 15px;
+  left: 17px;
+  width: 246px;
+  height: 246px;
+  border: 10px solid rgba(30, 237, 255, 0.8);
+  border-radius: 200px;
+  transition: all 1s;
+  box-shadow: 0 0 4px rgba(30, 237, 255, 0.8), inset 0 0 4px rgba(30, 237, 255, 0.8);
+}
+.iv-charge .content-container .ball-container .low-power-circle.red {
+  border-color: rgba(255, 0, 0, 0.8);
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.8), inset 0 0 4px rgba(255, 0, 0, 0.8);
+}
+.iv-charge .content-container .ball-container .water-bubble-charge {
+  position: absolute;
+  top: 37px;
+  left: 40px;
+}
+.iv-charge .content-container .ball-container .dashed-line-container {
+  position: absolute;
+  left: 10px;
+  top: 210px;
+  transform: rotate(180deg);
+}
+.iv-charge .content-container .ball-container .dashed-line-container i {
+  float: left;
+  width: 2px;
+  margin: 0 9px;
+  background: #666;
+}
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-child(1),
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-last-child(1) {
+  height: 187px;
+}
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-child(2),
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-last-child(2) {
+  height: 160px;
+}
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-child(3),
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-last-child(3) {
+  height: 143px;
+}
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-child(4),
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-last-child(4) {
+  height: 131px;
+}
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-child(5),
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-last-child(5) {
+  height: 123px;
+}
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-child(6),
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-last-child(6) {
+  height: 119px;
+}
+.iv-charge .content-container .ball-container .dashed-line-container i:nth-child(7) {
+  height: 117px;
+}
+.iv-charge .content-container .ball-container .dashed-line-container.charging i {
+  background: linear-gradient(180deg, #377fd0 14px, transparent 14px, transparent 18px) 0 0 repeat-y;
+  background-size: 2px 18px;
+  animation: iv-dashed-line-flow 0.6s linear infinite;
+}
+.iv-charge .content-container .vehicle-container {
+  position: absolute;
+  left: 80px;
+  bottom: 15px;
+  width: 920px;
+  height: 460px;
+  border: 2px solid #666;
+  /* 不同状态下各自的界面容器 */
+  /* 未充电 */
+  /* 充电中 */
+  /* 充电完成 */
+}
+.iv-charge .content-container .vehicle-container > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.iv-charge .content-container .vehicle-container .status-label,
+.iv-charge .content-container .vehicle-container .info-text,
+.iv-charge .content-container .vehicle-container .btn-container {
+  position: absolute;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+}
+.iv-charge .content-container .vehicle-container .status-label {
+  top: 45px;
+  font-size: 36px;
+}
+.iv-charge .content-container .vehicle-container .info-text {
+  bottom: 60px;
+  font-size: 24px;
+}
+.iv-charge .content-container .vehicle-container .btn-container {
+  top: 145px;
+}
+.iv-charge .content-container .vehicle-container .not-charge .info-text {
+  display: none;
+}
+.iv-charge .content-container .vehicle-container .on-charging {
+  display: none;
+  /* 停止充电按钮 */
+  /* 收起窗口按钮 */
+}
+.iv-charge .content-container .vehicle-container .on-charging .btn-stop {
+  position: absolute;
+  top: -110px;
+  right: 0;
+  font-size: 24px;
+}
+.iv-charge .content-container .vehicle-container .on-charging .btn-collapse {
+  position: absolute;
+  left: 50%;
+  bottom: -100px;
+  margin-left: -90px;
+  font-size: 18px;
+}
+.iv-charge .content-container .vehicle-container .on-charging .btn-collapse .ico-collapse {
+  padding: 12px 18px;
+  background: url('/ico-charging-collapse-window.png') left center no-repeat;
+}
+.iv-charge .content-container .vehicle-container .charge-over {
+  display: none;
+}
+.iv-charge .content-container .vehicle-container .charge-over .status-label span {
+  margin-left: -70px;
+  padding-left: 70px;
+  background: url('/ico-tip-success.png') left center no-repeat;
+}
+.iv-charge.charging {
+  /* 下半区车辆背景 */
+  /* 内部元素容器 */
+}
+.iv-charge.charging .vehicle-bg {
+  background-image: url('/vehicle-body-bright.png'), linear-gradient(0, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.2)), linear-gradient(0, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/main-vehicle-bg-gray.jpg');
+}
+.iv-charge.charging .content-container {
+  /* 铁爪手 */
+  /* 充电球 */
+  /* 车体容器 */
+}
+.iv-charge.charging .content-container .iron-paw::before,
+.iv-charge.charging .content-container .iron-paw::after {
+  background-position: 0 0, 168px 20px;
+}
+.iv-charge.charging .content-container .ball-container {
+  /* 底托儿半圆 */
+  /* 虚线水帘 */
+}
+.iv-charge.charging .content-container .ball-container .outer-half-circle {
+  border: 3px solid #377fd0;
+  box-shadow: 0 0 18px #377fd0, inset 0 0 18px #377fd0;
+}
+.iv-charge.charging .content-container .ball-container .dashed-line-container i {
+  background: linear-gradient(180deg, #377fd0 14px, transparent 14px, transparent 18px) 0 0 repeat-y;
+  background-size: 2px 18px;
+  animation: iv-dashed-line-flow 0.6s linear infinite;
+}
+.iv-charge.charging .content-container .vehicle-container {
+  border: 2px dashed #377fd0;
+  /* 小亮球 */
+  /* 未充电界面 */
+  /* 充电中界面 */
+}
+.iv-charge.charging .content-container .vehicle-container::before {
+  display: block;
+  position: absolute;
+  top: -9px;
+  left: -9px;
+  width: 16px;
+  height: 16px;
+  content: '';
+  border-radius: 16px;
+  box-shadow: 0 0 18px 2px #7ecef4;
+  background-color: #7ecef4;
+  animation: iv-little-bright-ball 18s linear infinite;
+}
+.iv-charge.charging .content-container .vehicle-container .not-charge {
+  display: none;
+}
+.iv-charge.charging .content-container .vehicle-container .on-charging {
+  display: block;
+}
+.iv-charge.low-power .content-container .vehicle-container .not-charge .info-text {
+  display: block;
+}
+/*** 远程诊断 ***/
+.iv-diagnosis {
+  display: none;
+  position: absolute;
+  top: 560px;
+  left: 0;
+  width: 100%;
+  /* 车体扫描区 */
+  /* 诊断结果区 */
+  /** 其它状态 **/
+  /* 扫描中状态 */
+  /* 检测结束状态 */
+  /* 检测结束-无故障 */
+  /* 检测结束-有故障 */
+}
+.iv-diagnosis .vehicle-body {
+  position: relative;
+  height: 630px;
+  padding-top: 65px;
+  background: url('/vehicle-body-gray.png') 195px 274px no-repeat, url('/main-vehicle-bg-gray.jpg') 0 0 no-repeat;
+  overflow: hidden;
+  /* 扫描光束 */
+}
+.iv-diagnosis .vehicle-body .title {
+  width: 359px;
+  height: 57px;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 32px;
+  line-height: 57px;
+  text-align: center;
+  letter-spacing: 16px;
+  background: url('/main-vehicle-title-bg.png') center center no-repeat;
+}
+.iv-diagnosis .vehicle-body .txt-tip {
+  margin-top: 65px;
+  color: #fff;
+  font-size: 34px;
+  line-height: 1;
+  text-align: center;
+}
+.iv-diagnosis .vehicle-body .txt-tip .tip-complete {
+  display: none;
+}
+.iv-diagnosis .vehicle-body .txt-result {
+  margin-top: 330px;
+  font-size: 34px;
+  line-height: 1;
+  text-align: center;
+}
+.iv-diagnosis .vehicle-body .txt-result > span {
+  padding-left: 70px;
+}
+.iv-diagnosis .vehicle-body .txt-result .ok {
+  display: none;
+  color: #00B5FF;
+  background: url('/ico-tip-success.png') left center no-repeat;
+}
+.iv-diagnosis .vehicle-body .txt-result .err {
+  display: none;
+  color: #F49D1A;
+  background: url('/ico-diagnosis-txt-err.png') left center no-repeat;
+}
+.iv-diagnosis .vehicle-body .btn-stop {
+  position: absolute;
+  top: 110px;
+  right: 110px;
+  font-size: 24px;
+}
+.iv-diagnosis .vehicle-body .btn-back {
+  display: none;
+  position: absolute;
+  top: 300px;
+  left: 480px;
+  font-size: 24px;
+}
+.iv-diagnosis .vehicle-body .scan-light {
+  position: absolute;
+  left: 0;
+  bottom: 58px;
+  width: 256px;
+  height: 390px;
+  background: url('/vehicle-body-scan-light.png') 0 0 no-repeat;
+}
+.iv-diagnosis .result-show {
+  height: 330px;
+  background-color: #04070E;
+  /* 扫描进度条 */
+  /* 扫描部件 */
+}
+.iv-diagnosis .result-show .scan-progress-bar {
+  position: relative;
+  height: 112px;
+  padding-top: 32px;
+}
+.iv-diagnosis .result-show .scan-progress-bar::before,
+.iv-diagnosis .result-show .scan-progress-bar::after {
+  position: absolute;
+  display: block;
+  width: 323px;
+  height: 32px;
+  content: '';
+  background: linear-gradient(-121deg, #04070E 9px, transparent 11px, transparent), linear-gradient(-62deg, #04070E 9px, transparent 11px, transparent), linear-gradient(to right, #04070E, transparent), url('/ico-diagnosis-progress-bar-arrow-to-right.png') repeat-x;
+  transform-origin: right;
+}
+.iv-diagnosis .result-show .scan-progress-bar::before {
+  left: 70px;
+  transform: perspective(600px) rotateY(-13deg);
+}
+.iv-diagnosis .result-show .scan-progress-bar::after {
+  right: 393px;
+  transform: perspective(600px) rotateY(-167deg);
+}
+.iv-diagnosis .result-show .scan-progress-bar .inner-text-scanning,
+.iv-diagnosis .result-show .scan-progress-bar .inner-text-over {
+  position: absolute;
+  width: 100%;
+  height: 32px;
+  color: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 34px;
+  text-align: center;
+}
+.iv-diagnosis .result-show .scan-progress-bar .inner-text-over {
+  display: none;
+}
+.iv-diagnosis .result-show .component-container {
+  padding-left: 140px;
+}
+.iv-diagnosis .result-show .component-container .component {
+  float: left;
+  width: 180px;
+  margin-right: 30px;
+  text-align: center;
+}
+.iv-diagnosis .result-show .component-container .component .status-ico {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 35px auto;
+  background: url('/ico-diagnosis-component-waiting.png') center no-repeat;
+}
+.iv-diagnosis .result-show .component-container .component .component-name {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #999;
+}
+.iv-diagnosis .result-show .component-container .component .status-text:before {
+  font-size: 24px;
+  color: #999;
+  content: '等待诊断...';
+}
+.iv-diagnosis .result-show .component-container .component.error .status-ico {
+  background: url('/ico-diagnosis-component-error.png') center no-repeat;
+}
+.iv-diagnosis .result-show .component-container .component.error .status-text:before {
+  content: '有故障';
+  color: #fff;
+}
+.iv-diagnosis .result-show .component-container .component.error .component-name {
+  color: #ABCDF0;
+}
+.iv-diagnosis .result-show .component-container .component.ok .status-ico {
+  background: url('/ico-diagnosis-component-ok.png') center no-repeat;
+}
+.iv-diagnosis .result-show .component-container .component.ok .status-text:before {
+  content: '正常';
+  color: #fff;
+}
+.iv-diagnosis .result-show .component-container .component.ok .component-name {
+  color: #ABCDF0;
+}
+.iv-diagnosis .result-show .component-container .component.scanning .status-ico {
+  background: url('/ico-diagnosis-component-scanning.png') center no-repeat;
+  animation: iv-rotate 2s linear infinite;
+}
+.iv-diagnosis .result-show .component-container .component.scanning .status-text:before {
+  content: '正在诊断...';
+  color: #fff;
+}
+.iv-diagnosis .result-show .component-container .component.scanning .component-name {
+  color: #ABCDF0;
+}
+.iv-diagnosis.scanning .vehicle-body .scan-light {
+  animation: iv-diagnosis-scan-light 8s linear infinite;
+}
+.iv-diagnosis.scanning .result-show .scan-progress-bar::before,
+.iv-diagnosis.scanning .result-show .scan-progress-bar::after {
+  animation: iv-scan-progress-bar-running 0.3s linear infinite;
+}
+.iv-diagnosis.over-ok .vehicle-body .scan-light,
+.iv-diagnosis.over-error .vehicle-body .scan-light {
+  display: none;
+}
+.iv-diagnosis.over-ok .vehicle-body .txt-tip .tip-running,
+.iv-diagnosis.over-error .vehicle-body .txt-tip .tip-running {
+  display: none;
+}
+.iv-diagnosis.over-ok .vehicle-body .txt-tip .tip-complete,
+.iv-diagnosis.over-error .vehicle-body .txt-tip .tip-complete {
+  display: block;
+}
+.iv-diagnosis.over-ok .vehicle-body .btn-back,
+.iv-diagnosis.over-error .vehicle-body .btn-back {
+  display: block;
+}
+.iv-diagnosis.over-ok .vehicle-body .btn-stop,
+.iv-diagnosis.over-error .vehicle-body .btn-stop {
+  display: none;
+}
+.iv-diagnosis.over-ok .result-show .scan-progress-bar .inner-text-scanning,
+.iv-diagnosis.over-error .result-show .scan-progress-bar .inner-text-scanning {
+  display: none;
+}
+.iv-diagnosis.over-ok .result-show .scan-progress-bar .inner-text-over,
+.iv-diagnosis.over-error .result-show .scan-progress-bar .inner-text-over {
+  display: block;
+}
+.iv-diagnosis.over-ok .vehicle-body .txt-result .ok {
+  display: inline;
+}
+.iv-diagnosis.over-error .vehicle-body .txt-result .err {
+  display: inline;
+}
+/*** 远程升级 ***/
+.iv-upgrade {
+  display: none;
+  position: absolute;
+  top: 305px;
+  width: 100%;
+  z-index: 2;
+  /* 光圈部分 */
+  /* 底部文本与按钮 */
+  /* 升级成功与失败状态 */
+}
+.iv-upgrade .circles-container {
+  position: relative;
+  /* 光圈内进度信息 */
+}
+.iv-upgrade .circles-container .circles-bg {
+  position: relative;
+  height: 1114px;
+  margin-bottom: 30px;
+  /* 光圈 */
+  /* 底圈 */
+  /* 最内黄圈 */
+  /* 内圈 */
+  /* 外圈 */
+}
+.iv-upgrade .circles-container .circles-bg .base-bg,
+.iv-upgrade .circles-container .circles-bg .core-bg,
+.iv-upgrade .circles-container .circles-bg .inner-bg,
+.iv-upgrade .circles-container .circles-bg .outer-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  will-change: transform;
+}
+.iv-upgrade .circles-container .circles-bg .base-bg {
+  background: url('/upgrade-circle-base-bg.png') center no-repeat;
+  /* animation: iv-rotate 12s linear infinite; */
+}
+.iv-upgrade .circles-container .circles-bg .core-bg {
+  background: url('/upgrade-circle-core-bg.png') center no-repeat;
+  animation: iv-rotate 4s linear infinite;
+}
+.iv-upgrade .circles-container .circles-bg .inner-bg {
+  background: url('/upgrade-circle-inner-bg.png') calc(50% - 7px) calc(50% + 7px) no-repeat;
+  /* animation: iv-rotate 6s linear infinite; */
+  animation: iv-upgrade-light-circle-twist 2s ease alternate infinite;
+}
+.iv-upgrade .circles-container .circles-bg .outer-bg {
+  background: url('/upgrade-circle-outer-bg.png') center no-repeat;
+  /*animation: iv-rotate-reverse 6s linear infinite;*/
+  animation: iv-upgrade-light-circle-twist-reverse 2s ease alternate infinite;
+}
+.iv-upgrade .circles-container .progress-info {
+  position: absolute;
+  width: 300px;
+  top: 460px;
+  left: calc(50% - 150px);
+  line-height: 1;
+  text-align: center;
+  /* 升级进度中*/
+}
+.iv-upgrade .circles-container .progress-info .running {
+  display: block;
+  /* 状态图标 */
+  /* 百分比 */
+  /* 升级状态 */
+  /* 返回按钮 */
+}
+.iv-upgrade .circles-container .progress-info .running .state-symbol {
+  display: none;
+  position: relative;
+  height: 80px;
+  margin-bottom: 16px;
+}
+.iv-upgrade .circles-container .progress-info .running .state-symbol::before {
+  display: block;
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 80px;
+  margin-left: -40px;
+  content: '';
+  background: url('/ico-tip-success.png') 0 -10px no-repeat;
+  background-size: 100px 100px;
+  transition: width 1s;
+}
+.iv-upgrade .circles-container .progress-info .running .state-symbol.writing::before {
+  width: 100px;
+}
+.iv-upgrade .circles-container .progress-info .running .current-value {
+  margin: 0 0 2px 34px;
+  color: #3c69dc;
+  font-size: 140px;
+  font-weight: bold;
+}
+.iv-upgrade .circles-container .progress-info .running .current-value::after {
+  content: '%';
+  /*color: #71aed4;*/
+  font-sizE: 40px;
+}
+.iv-upgrade .circles-container .progress-info .running .tip-txt {
+  padding: 0 15px;
+  color: #1b28ab;
+  font-size: 36px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.iv-upgrade .circles-container .progress-info .running .btn-back {
+  display: none;
+}
+.iv-upgrade .bottom-info .upgrading-component {
+  margin-bottom: 30px;
+  color: #71add4;
+  font-size: 48px;
+  line-height: 1;
+  text-align: center;
+}
+.iv-upgrade .bottom-info .btn-cancel {
+  font-size: 24px;
+}
+.iv-upgrade.success,
+.iv-upgrade.fail {
+  /* 隐藏停止升级按钮 */
+}
+.iv-upgrade.success .circles-container,
+.iv-upgrade.fail .circles-container {
+  /* 光圈停转 */
+  /* 显示返回按钮 */
+}
+.iv-upgrade.success .circles-container .circles-bg .core-bg,
+.iv-upgrade.fail .circles-container .circles-bg .core-bg,
+.iv-upgrade.success .circles-container .circles-bg .inner-bg,
+.iv-upgrade.fail .circles-container .circles-bg .inner-bg,
+.iv-upgrade.success .circles-container .circles-bg .outer-bg,
+.iv-upgrade.fail .circles-container .circles-bg .outer-bg {
+  animation: none;
+}
+.iv-upgrade.success .circles-container .progress-info .running .btn-back,
+.iv-upgrade.fail .circles-container .progress-info .running .btn-back {
+  display: inline-block;
+}
+.iv-upgrade.success .bottom-info .btn-cancel,
+.iv-upgrade.fail .bottom-info .btn-cancel {
+  display: none;
+}
+.iv-upgrade.success .circles-container .progress-info .running {
+  margin-top: -25px;
+}
+.iv-upgrade.success .circles-container .progress-info .running .state-symbol {
+  display: block;
+}
+.iv-upgrade.success .circles-container .progress-info .running .current-value {
+  display: none;
+}
+.iv-upgrade.success .circles-container .progress-info .running .tip-txt {
+  margin-bottom: 20px;
+  color: #1b28ab;
+  font-size: 60px;
+  font-weight: bold;
+}
+.iv-upgrade.fail .circles-container .progress-info .running {
+  margin-top: -35px;
+}
+.iv-upgrade.fail .circles-container .progress-info .running .tip-txt {
+  margin-bottom: 10px;
+}
+/*** 弹出层 ***/
+.iv-dialog {
+  /*
+  position: fixed;
+  left: e("calc(50% - 510px)");
+  top: e("calc(50% - 310px)");
+  */
+  position: absolute;
+  left: 30px;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  top: 565px;
+  width: 1020px;
+  height: 620px;
+  background-color: rgba(27, 27, 27, 0.9);
+  z-index: 3;
+  /* 关闭按钮 */
+}
+.iv-dialog .btn-dialog-close {
+  position: absolute;
+  left: auto;
+  top: 55px;
+  right: 60px;
+  bottom: auto;
+  width: 48px;
+  height: 48px;
+  background: url('/dialog-close-btn-default.png') 0 0 no-repeat;
+}
+.iv-dialog .btn-dialog-close:hover {
+  background: url('/dialog-close-btn-on.png') 0 0 no-repeat;
+}
+.iv-dialog .content {
+  padding-top: 190px;
+  /* 标题  */
+}
+.iv-dialog .content .info-text {
+  margin-bottom: 60px;
+  line-height: 1;
+  text-align: center;
+  font-size: 36px;
+  color: #fff;
+  font-weight: bold;
+}
+/*** 停止充电弹层 ***/
+.iv-dialog-stop-charge {
+  display: none;
+}
+/*** 远程升级选择 ***/
+.iv-dialog-select-upgrade {
+  display: none;
+  padding-top: 55px;
+  /* 标题 */
+  /* 升级卡 */
+  /* 返回按钮 */
+}
+.iv-dialog-select-upgrade .upgrade-title {
+  height: 40px;
+  line-height: 40px;
+  margin: 0 0 14px 50px;
+  padding-left: 18px;
+  font-size: 30px;
+  color: #fff;
+  border-left: 6px solid #fff;
+}
+.iv-dialog-select-upgrade .upgrade-sub-title {
+  margin: 0 0 45px 70px;
+  font-size: 18px;
+  color: #ccc;
+  line-height: 1;
+}
+.iv-dialog-select-upgrade .upgrade-card-container {
+  margin: 0 0 50px 70px;
+}
+.iv-dialog-select-upgrade .upgrade-card-container::before,
+.iv-dialog-select-upgrade .upgrade-card-container::after {
+  display: table;
+  content: ' ';
+}
+.iv-dialog-select-upgrade .upgrade-card-container::after {
+  clear: both;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card {
+  float: left;
+  width: 200px;
+  height: 300px;
+  padding-top: 28px;
+  margin-right: 20px;
+  line-height: 1;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff;
+  /* 升级按钮 */
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-title {
+  margin: 0 0 26px;
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-tip {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #999;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down {
+  position: relative;
+  height: 46px;
+  margin: 0 0 32px;
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  /* 下拉按钮 */
+  /* 下拉列表 */
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down .version-drop-down {
+  display: block;
+  position: relative;
+  width: 140px;
+  height: 46px;
+  line-height: 46px;
+  margin: 0 auto;
+  padding: 0 18px 0 5px;
+  color: #666;
+  background-color: #e4e4e4;
+  word-break: break-all;
+  overflow: hidden;
+  /* 小箭头 */
+  /* 显示下拉列表 */
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down .version-drop-down::after {
+  content: '';
+  position: absolute;
+  left: auto;
+  top: 20px;
+  right: 6px;
+  bottom: auto;
+  border-top: 8px solid;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down .version-drop-down .version {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down .version-drop-down:focus + .version-list {
+  max-height: 300px;
+  opacity: 1;
+  z-index: 100;
+  transform: scale(1.25);
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down .version-list {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  right: 30px;
+  bottom: auto;
+  max-height: 46px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.5);
+  opacity: .1;
+  z-index: -1;
+  transition: all .6s;
+  /* 列表项 */
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down .version-list li {
+  padding: 12px 10px;
+  line-height: 1;
+  word-wrap: break-word;
+  word-break: break-all;
+  border-bottom: 1px solid #fff;
+  background-color: #e4e4e4;
+  cursor: pointer;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down .version-list li:hover {
+  background-color: #ddd;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-drop-down .version-list li.active {
+  color: #fff;
+  background-color: #3152f7;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-btn {
+  margin: 0 0 24px;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-btn .btn-upgrade {
+  display: inline-block;
+  width: 120px;
+  height: 46px;
+  line-height: 46px;
+  font-size: 24px;
+  color: #fff;
+  border-radius: 23px;
+  background-color: #3152f7;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-btn .btn-upgrade:hover {
+  background-color: #1d3194;
+  box-shadow: 0 0 12px #1d3194;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-btn .btn-upgrade.disabled {
+  background-color: #3152f7;
+  box-shadow: none;
+  opacity: .3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.iv-dialog-select-upgrade .upgrade-card-container .upgrade-card .uc-version {
+  margin: 0 12px;
+  color: #333;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.iv-dialog-select-upgrade .btn-back {
+  width: 180px;
+}
+/*** 停止升级弹层 ***/
+.iv-dialog-stop-upgrade {
+  display: none;
+}
+/*** 遮罩层 ***/
+.iv-overlay {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
