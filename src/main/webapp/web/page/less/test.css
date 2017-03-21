@@ -15,6 +15,12 @@
 *::after {
   box-sizing: border-box;
 }
+.arrow-group {
+  border: 1px solid blue;
+}
+.arrow-group .arrow {
+  margin-bottom: 3px;
+}
 .arrow-group .arrow {
   display: block;
   position: relative;

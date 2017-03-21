@@ -1345,6 +1345,7 @@
   width: 220px;
   height: 220px;
   background: url('/air-temp-ring-default.png') 0 0 no-repeat;
+  background: url('/@img') 0 0 no-repeat;
 }
 .iv-air-left .air-temperature .temp-value {
   position: relative;
@@ -1530,43 +1531,51 @@
 .iv-charge {
   display: none;
   position: absolute;
+  left: auto;
   top: 130px;
+  right: auto;
+  bottom: auto;
   width: 100%;
   height: 1060px;
   z-index: 2;
   /* 上半区背景 */
   /* 下半区车辆背景 */
   /* 内部元素容器 */
-  /* 充电中时相应界面变化 */
-  /* 低电量界面变化 */
 }
 .iv-charge .top-bg {
   height: 430px;
   padding-top: 100px;
   background: url('/main-dashboard-bg.jpg') 0 0 no-repeat;
+  background: url('/@img') 0 0 no-repeat;
 }
 .iv-charge .top-bg::before {
   display: block;
   width: 359px;
   height: 57px;
   margin: 0 auto;
-  content: '车辆充电';
-  color: #fff;
   font-size: 36px;
+  color: #fff;
   line-height: 57px;
   text-align: center;
+  background: url('/main-vehicle-title-bg.png') 0 0 no-repeat;
+  background: url('/@img') 0 0 no-repeat;
   letter-spacing: 16px;
-  background: url('/main-vehicle-title-bg.png') center center no-repeat;
+  content: '车辆充电';
 }
 .iv-charge .vehicle-bg {
   height: 630px;
   padding: 165px 90px 25px;
   background: url('/vehicle-body-gray.png') content-box no-repeat 115px 108px, linear-gradient(0, transparent, transparent) content-box, linear-gradient(0, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)) padding-box, url('/main-vehicle-bg-gray.jpg') no-repeat padding-box;
 }
+.charging.iv-charge .vehicle-bg {
+  background-image: url('/vehicle-body-bright.png'), linear-gradient(0, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.2)), linear-gradient(0, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/main-vehicle-bg-gray.jpg');
+}
 .iv-charge .content-container {
   position: absolute;
-  top: 0;
   left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
   width: 100%;
   height: 100%;
   /* 铁爪手 */
@@ -1575,7 +1584,10 @@
 }
 .iv-charge .content-container .iron-paw {
   position: absolute;
+  left: auto;
   top: 280px;
+  right: auto;
+  bottom: auto;
   width: 100%;
   padding: 0 79px;
 }
@@ -1586,16 +1598,22 @@
   height: 100px;
   content: '';
   background: url('/charging-iron-paw-seat-left.png') 0 0 no-repeat, url('/charging-iron-paw-hook-left.png') 95px 20px no-repeat;
-  transition: all .6s;
+  transition: background-position 0.6s;
 }
 .iv-charge .content-container .iron-paw::after {
   float: right;
   transform: scaleX(-1);
 }
+.charging.iv-charge .content-container .iron-paw::before,
+.charging.iv-charge .content-container .iron-paw::after {
+  background-position: 0 0, 168px 20px;
+}
 .iv-charge .content-container .ball-container {
   position: absolute;
-  top: 188px;
   left: 400px;
+  top: 188px;
+  right: auto;
+  bottom: auto;
   width: 280px;
   /* 底托儿半圆 */
   /* 低电量标示圆 */
@@ -1604,41 +1622,51 @@
 }
 .iv-charge .content-container .ball-container .outer-half-circle {
   position: absolute;
+  left: auto;
+  top: auto;
+  right: auto;
+  bottom: auto;
   width: 280px;
   height: 280px;
+  border-radius: 100%;
   border: 3px solid #666;
-  border-radius: 140px;
   clip: rect(112px, 300px, 300px, -20px);
-  transition: all .8s;
+  transition: border 0.8s, box-shadow 0.8s;
 }
-.iv-charge .content-container .ball-container .outer-half-circle.charging {
+.charging.iv-charge .content-container .ball-container .outer-half-circle {
   border: 3px solid #377fd0;
   box-shadow: 0 0 18px #377fd0, inset 0 0 18px #377fd0;
 }
 .iv-charge .content-container .ball-container .low-power-circle {
   position: absolute;
-  top: 15px;
   left: 17px;
+  top: 15px;
+  right: auto;
+  bottom: auto;
   width: 246px;
   height: 246px;
+  border-radius: 100%;
   border: 10px solid rgba(30, 237, 255, 0.8);
-  border-radius: 200px;
-  transition: all 1s;
   box-shadow: 0 0 4px rgba(30, 237, 255, 0.8), inset 0 0 4px rgba(30, 237, 255, 0.8);
+  transition: border 1s, box-shadow 1s;
 }
-.iv-charge .content-container .ball-container .low-power-circle.red {
+.low-power.iv-charge .content-container .ball-container .low-power-circle {
   border-color: rgba(255, 0, 0, 0.8);
   box-shadow: 0 0 4px rgba(255, 0, 0, 0.8), inset 0 0 4px rgba(255, 0, 0, 0.8);
 }
 .iv-charge .content-container .ball-container .water-bubble-charge {
   position: absolute;
-  top: 37px;
   left: 40px;
+  top: 37px;
+  right: auto;
+  bottom: auto;
 }
 .iv-charge .content-container .ball-container .dashed-line-container {
   position: absolute;
   left: 10px;
   top: 210px;
+  right: auto;
+  bottom: auto;
   transform: rotate(180deg);
 }
 .iv-charge .content-container .ball-container .dashed-line-container i {
@@ -1674,7 +1702,7 @@
 .iv-charge .content-container .ball-container .dashed-line-container i:nth-child(7) {
   height: 117px;
 }
-.iv-charge .content-container .ball-container .dashed-line-container.charging i {
+.charging.iv-charge .content-container .ball-container .dashed-line-container i {
   background: linear-gradient(180deg, #377fd0 14px, transparent 14px, transparent 18px) 0 0 repeat-y;
   background-size: 2px 18px;
   animation: iv-dashed-line-flow 0.6s linear infinite;
@@ -1682,6 +1710,8 @@
 .iv-charge .content-container .vehicle-container {
   position: absolute;
   left: 80px;
+  top: auto;
+  right: auto;
   bottom: 15px;
   width: 920px;
   height: 460px;
@@ -1691,10 +1721,30 @@
   /* 充电中 */
   /* 充电完成 */
 }
+.charging.iv-charge .content-container .vehicle-container {
+  border: 2px dashed #377fd0;
+}
+.charging.iv-charge .content-container .vehicle-container::before {
+  display: block;
+  position: absolute;
+  left: -9px;
+  top: -9px;
+  right: auto;
+  bottom: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background-color: #7ecef4;
+  content: '';
+  box-shadow: 0 0 18px 2px #7ecef4;
+  animation: iv-little-bright-ball 18s linear infinite;
+}
 .iv-charge .content-container .vehicle-container > div {
   position: absolute;
-  top: 0;
   left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
   width: 100%;
   height: 100%;
 }
@@ -1720,10 +1770,17 @@
 .iv-charge .content-container .vehicle-container .not-charge .info-text {
   display: none;
 }
+.low-power.iv-charge .content-container .vehicle-container .not-charge .info-text {
+  display: block;
+}
+.charging.iv-charge .content-container .vehicle-container .not-charge {
+  display: none;
+}
 .iv-charge .content-container .vehicle-container .on-charging {
   display: none;
-  /* 停止充电按钮 */
-  /* 收起窗口按钮 */
+}
+.charging.iv-charge .content-container .vehicle-container .on-charging {
+  display: block;
 }
 .iv-charge .content-container .vehicle-container .on-charging .btn-stop {
   position: absolute;
@@ -1749,63 +1806,6 @@
   margin-left: -70px;
   padding-left: 70px;
   background: url('/ico-tip-success.png') left center no-repeat;
-}
-.iv-charge.charging {
-  /* 下半区车辆背景 */
-  /* 内部元素容器 */
-}
-.iv-charge.charging .vehicle-bg {
-  background-image: url('/vehicle-body-bright.png'), linear-gradient(0, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.2)), linear-gradient(0, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/main-vehicle-bg-gray.jpg');
-}
-.iv-charge.charging .content-container {
-  /* 铁爪手 */
-  /* 充电球 */
-  /* 车体容器 */
-}
-.iv-charge.charging .content-container .iron-paw::before,
-.iv-charge.charging .content-container .iron-paw::after {
-  background-position: 0 0, 168px 20px;
-}
-.iv-charge.charging .content-container .ball-container {
-  /* 底托儿半圆 */
-  /* 虚线水帘 */
-}
-.iv-charge.charging .content-container .ball-container .outer-half-circle {
-  border: 3px solid #377fd0;
-  box-shadow: 0 0 18px #377fd0, inset 0 0 18px #377fd0;
-}
-.iv-charge.charging .content-container .ball-container .dashed-line-container i {
-  background: linear-gradient(180deg, #377fd0 14px, transparent 14px, transparent 18px) 0 0 repeat-y;
-  background-size: 2px 18px;
-  animation: iv-dashed-line-flow 0.6s linear infinite;
-}
-.iv-charge.charging .content-container .vehicle-container {
-  border: 2px dashed #377fd0;
-  /* 小亮球 */
-  /* 未充电界面 */
-  /* 充电中界面 */
-}
-.iv-charge.charging .content-container .vehicle-container::before {
-  display: block;
-  position: absolute;
-  top: -9px;
-  left: -9px;
-  width: 16px;
-  height: 16px;
-  content: '';
-  border-radius: 16px;
-  box-shadow: 0 0 18px 2px #7ecef4;
-  background-color: #7ecef4;
-  animation: iv-little-bright-ball 18s linear infinite;
-}
-.iv-charge.charging .content-container .vehicle-container .not-charge {
-  display: none;
-}
-.iv-charge.charging .content-container .vehicle-container .on-charging {
-  display: block;
-}
-.iv-charge.low-power .content-container .vehicle-container .not-charge .info-text {
-  display: block;
 }
 /*** 远程诊断 ***/
 .iv-diagnosis {
@@ -2227,9 +2227,11 @@
   width: 48px;
   height: 48px;
   background: url('/dialog-close-btn-default.png') 0 0 no-repeat;
+  background: url('/@img') 0 0 no-repeat;
 }
 .iv-dialog .btn-dialog-close:hover {
   background: url('/dialog-close-btn-on.png') 0 0 no-repeat;
+  background: url('/@img') 0 0 no-repeat;
 }
 .iv-dialog .content {
   padding-top: 190px;

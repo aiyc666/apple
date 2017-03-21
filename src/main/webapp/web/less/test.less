@@ -497,7 +497,13 @@ div when (@var > 0) {
 .bg(@img) {
   background: url('@{iv-image-url}/@{img}') 0 0 no-repeat;
 }
+.bg-(@img) {
+  background+: url(@img) 0 0 no-repeat;
+}
+
 
 .bgt {
   .bg("dialog-close-btn-default.png");
+  .bg-('a.jpg');
+  .bg-('b.jpg');
 }

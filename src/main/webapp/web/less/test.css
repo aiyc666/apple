@@ -332,4 +332,5 @@ button.list-style {
 }
 .bgt {
   background: url('../imgages/dialog-close-btn-default.png') 0 0 no-repeat;
+  background: url('a.jpg') 0 0 no-repeat, url('b.jpg') 0 0 no-repeat;
 }
