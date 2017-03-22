@@ -84,19 +84,20 @@
     opacity: 1;
   }
   24.9999% {
-    transform: rotate(90deg) translate(120px, 0);
+    transform: rotate(90deg) translate(115px, 0);
     opacity: 1;
   }
-  25% {
-    transform: rotate(180deg) translate(-20px, -140px);
+  25%,
+  26% {
+    transform: rotate(180deg) translate(12px, -140px);
     opacity: 1;
   }
   70% {
-    transform: rotate(180deg) translate(160px, -140px);
-    opacity: 1;
+    transform: rotate(180deg) translate(210px, -140px);
+    opacity: .8;
   }
   84.9999% {
-    transform: rotate(180deg) translate(220px, -140px);
+    transform: rotate(180deg) translate(260px, -140px);
     opacity: .4;
   }
 }
@@ -108,19 +109,20 @@
     opacity: 1;
   }
   24.9999% {
-    transform: rotate(90deg) translate(120px, 0);
+    transform: rotate(90deg) translate(115px, 0);
     opacity: 1;
   }
-  25% {
-    transform: rotate(0deg) translate(-20px, 140px);
+  25%,
+  26% {
+    transform: rotate(0deg) translate(12px, 140px);
     opacity: 1;
   }
   70% {
-    transform: rotate(0deg) translate(160px, 140px);
-    opacity: 1;
+    transform: rotate(0deg) translate(140px, 140px);
+    opacity: .8;
   }
   84.9999% {
-    transform: rotate(0deg) translate(220px, 140px);
+    transform: rotate(0deg) translate(180px, 140px);
     opacity: .4;
   }
 }
@@ -456,9 +458,9 @@
   font-size: 24px;
   color: #333;
   padding: 0 1.6em;
-  overflow: hidden;
   border-radius: 80px;
   background-color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
 }
 .iv-tip-container .iv-tip.active {
   display: inline-block;
@@ -483,7 +485,7 @@
   width: 62px;
   height: 36px;
   margin-right: 15px;
-  background: url('/logo.png') no-repeat;
+  background: url('/logo.png') 0 0 no-repeat;
 }
 .iv-header .right {
   float: right;
@@ -495,7 +497,7 @@
   width: 50px;
   height: 50px;
   margin-left: 15px;
-  background: url('/ico-vehicle.png') no-repeat;
+  background: url('/ico-vehicle.png') 0 0 no-repeat;
 }
 .iv-header .offline-tip {
   display: none;
@@ -588,8 +590,8 @@
   position: relative;
   width: 250px;
   height: 250px;
-  border: 12px solid rgba(200, 200, 255, 0.3);
   border-radius: 50%;
+  border: 12px solid rgba(200, 200, 255, 0.3);
 }
 .iv-dashboard .dash-battery-container .bat-outer-circle .water-bubble {
   position: absolute;
@@ -846,12 +848,12 @@
 }
 .iv-vehicle .vehicle-body .front-door::before {
   float: left;
-  background: url('/vehicle-body-normal-front-door-left.png') no-repeat;
+  background: url('/vehicle-body-normal-front-door-left.png') 0 0 no-repeat;
   transform-origin: left center;
 }
 .iv-vehicle .vehicle-body .front-door::after {
   float: right;
-  background: url('/vehicle-body-normal-front-door-right.png') no-repeat;
+  background: url('/vehicle-body-normal-front-door-right.png') 0 0 no-repeat;
   transform-origin: right center;
 }
 .iv-vehicle .vehicle-body .back-door {
@@ -870,14 +872,14 @@
   float: left;
   width: 54px;
   height: 111px;
-  background: url('/vehicle-body-normal-back-door-left.png') no-repeat;
+  background: url('/vehicle-body-normal-back-door-left.png') 0 0 no-repeat;
   transform-origin: left center;
 }
 .iv-vehicle .vehicle-body .back-door::after {
   float: right;
   width: 51px;
   height: 111px;
-  background: url('/vehicle-body-normal-back-door-right.png') no-repeat;
+  background: url('/vehicle-body-normal-back-door-right.png') 0 0 no-repeat;
   transform-origin: right center;
 }
 .iv-vehicle .vehicle-body .front-door.active::before,
@@ -893,19 +895,16 @@
   height: 100%;
   /* 顶盖儿 */
   /* 箭头运动范围 */
-  /* 显示制冷 */
-  /* 显示制热 */
-  /* 自动、通风暂无动画 */
-  /* 制冷制热动画 */
 }
 .iv-vehicle .vehicle-body .air-device .top-cap {
   position: absolute;
-  left: 180px;
-  top: -30px;
+  left: 265px;
+  top: 0;
   right: auto;
   bottom: auto;
-  width: 420px;
-  height: 100px;
+  width: 285px;
+  height: 35px;
+  border-radius: 70px 100px 0 0 / 40px 40px 0 0;
 }
 .iv-vehicle .vehicle-body .air-device .arrow-motion-range {
   position: absolute;
@@ -914,12 +913,11 @@
   right: 40px;
   bottom: 40px;
   overflow: hidden;
-  /* 箭头 */
 }
-.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group::before,
-.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group::before,
-.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group::after,
-.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group::after {
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group .to-left,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group .to-left,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group .to-right,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group .to-right {
   position: absolute;
   left: auto;
   top: -100px;
@@ -929,56 +927,127 @@
   height: 78px;
   content: '';
 }
-.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group::before,
-.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group::before {
-  left: calc(50% - 58px - 39px);
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group .to-left :first-child,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group .to-left :first-child,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group .to-right :first-child,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group .to-right :first-child {
+  margin-bottom: 18px;
 }
-.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group::after,
-.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group::after {
-  left: calc(50% - 58px + 39px);
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group .to-left,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group .to-left {
+  left: calc(50% - 70px);
 }
-.iv-vehicle .vehicle-body .air-device.active-cool .top-cap {
-  background: url('/air-top-cap-cool.png') center no-repeat;
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .first-group .to-right,
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .second-group .to-right {
+  left: calc(50% + 20px);
 }
-.iv-vehicle .vehicle-body .air-device.active-cool .first-group::before,
-.iv-vehicle .vehicle-body .air-device.active-cool .second-group::before,
-.iv-vehicle .vehicle-body .air-device.active-cool .first-group::after,
-.iv-vehicle .vehicle-body .air-device.active-cool .second-group::after {
-  background: url('/air-cool-arrow-to-right.png') center no-repeat;
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .arrow {
+  display: block;
+  position: relative;
+  width: 116px;
+  height: 30px;
+  color: transparent;
+  transition: color 3s;
 }
-.iv-vehicle .vehicle-body .air-device.active-hot .top-cap {
-  background: url('/air-top-cap-hot.png') center no-repeat;
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .arrow::before {
+  position: absolute;
+  left: 0;
+  top: 25%;
+  right: auto;
+  bottom: auto;
+  width: 96.1px;
+  height: 0;
+  border-top: 15px solid;
+  content: '';
 }
-.iv-vehicle .vehicle-body .air-device.active-hot .first-group::before,
-.iv-vehicle .vehicle-body .air-device.active-hot .second-group::before,
-.iv-vehicle .vehicle-body .air-device.active-hot .first-group::after,
-.iv-vehicle .vehicle-body .air-device.active-hot .second-group::after {
-  background: url('/air-hot-arrow-to-right.png') center no-repeat;
+.iv-vehicle .vehicle-body .air-device .arrow-motion-range .arrow::after {
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  width: 0;
+  height: 0;
+  border-left: 20px solid;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  content: '';
 }
-.iv-vehicle .vehicle-body .air-device.active-cool,
-.iv-vehicle .vehicle-body .air-device.active-hot {
-  /* 顶盖动画 */
-  /* 风向箭头动画 */
+.iv-vehicle .vehicle-body .air-device.active-auto .top-cap {
+  background-color: rgba(94, 198, 230, 0.6);
+  box-shadow: 0 0 25px #5ec6e6;
+  transition: background-color 3s, box-shadow 3s;
+  animation: iv-air-top-cap-scaling 3s cubic-bezier(0.3, 0, 0.7, 1) alternate infinite;
 }
-.iv-vehicle .vehicle-body .air-device.active-cool .top-cap,
-.iv-vehicle .vehicle-body .air-device.active-hot .top-cap {
-  animation: iv-air-top-cap-scaling 5s cubic-bezier(0.3, 0, 0.7, 1) alternate infinite;
+.iv-vehicle .vehicle-body .air-device.active-auto .arrow-motion-range .arrow {
+  color: rgba(94, 198, 230, 0.6);
 }
-.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .first-group::before,
-.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .first-group::before {
+.iv-vehicle .vehicle-body .air-device.active-auto .arrow-motion-range .to-left {
   animation: iv-air-wind-arrow-to-left 6s linear infinite;
 }
-.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .first-group::after,
-.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .first-group::after {
+.iv-vehicle .vehicle-body .air-device.active-auto .arrow-motion-range .to-right {
   animation: iv-air-wind-arrow-to-right 6s linear infinite;
 }
-.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .second-group::before,
-.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .second-group::before {
-  animation: iv-air-wind-arrow-to-left 6s 3s linear infinite;
+.iv-vehicle .vehicle-body .air-device.active-auto .arrow-motion-range .second-group .to-left,
+.iv-vehicle .vehicle-body .air-device.active-auto .arrow-motion-range .second-group .to-right {
+  animation-delay: 3s;
 }
-.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .second-group::after,
-.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .second-group::after {
-  animation: iv-air-wind-arrow-to-right 6s 3s linear infinite;
+.iv-vehicle .vehicle-body .air-device.active-cool .top-cap {
+  background-color: rgba(56, 125, 211, 0.6);
+  box-shadow: 0 0 25px #387dd3;
+  transition: background-color 3s, box-shadow 3s;
+  animation: iv-air-top-cap-scaling 3s cubic-bezier(0.3, 0, 0.7, 1) alternate infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .arrow {
+  color: rgba(56, 125, 211, 0.6);
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .to-left {
+  animation: iv-air-wind-arrow-to-left 6s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .to-right {
+  animation: iv-air-wind-arrow-to-right 6s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .second-group .to-left,
+.iv-vehicle .vehicle-body .air-device.active-cool .arrow-motion-range .second-group .to-right {
+  animation-delay: 3s;
+}
+.iv-vehicle .vehicle-body .air-device.active-hot .top-cap {
+  background-color: rgba(216, 96, 64, 0.6);
+  box-shadow: 0 0 25px #d86040;
+  transition: background-color 3s, box-shadow 3s;
+  animation: iv-air-top-cap-scaling 3s cubic-bezier(0.3, 0, 0.7, 1) alternate infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .arrow {
+  color: rgba(216, 96, 64, 0.6);
+}
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .to-left {
+  animation: iv-air-wind-arrow-to-left 6s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .to-right {
+  animation: iv-air-wind-arrow-to-right 6s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .second-group .to-left,
+.iv-vehicle .vehicle-body .air-device.active-hot .arrow-motion-range .second-group .to-right {
+  animation-delay: 3s;
+}
+.iv-vehicle .vehicle-body .air-device.active-wind .top-cap {
+  background-color: rgba(67, 153, 224, 0.6);
+  box-shadow: 0 0 25px #4399e0;
+  transition: background-color 3s, box-shadow 3s;
+  animation: iv-air-top-cap-scaling 3s cubic-bezier(0.3, 0, 0.7, 1) alternate infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-wind .arrow-motion-range .arrow {
+  color: rgba(67, 153, 224, 0.6);
+}
+.iv-vehicle .vehicle-body .air-device.active-wind .arrow-motion-range .to-left {
+  animation: iv-air-wind-arrow-to-left 6s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-wind .arrow-motion-range .to-right {
+  animation: iv-air-wind-arrow-to-right 6s linear infinite;
+}
+.iv-vehicle .vehicle-body .air-device.active-wind .arrow-motion-range .second-group .to-left,
+.iv-vehicle .vehicle-body .air-device.active-wind .arrow-motion-range .second-group .to-right {
+  animation-delay: 3s;
 }
 .iv-vehicle .control-buttons {
   position: absolute;
@@ -1041,17 +1110,17 @@
 .iv-vehicle .control-buttons .ctrl-btn.closing .ico {
   animation: iv-ctrl-btn-halo-closing 1.2s ease infinite;
 }
-.iv-vehicle .control-buttons .ctrl-btn .ico-light-near {
-  background-image: url('/ico-light-near-off.png');
+.iv-vehicle .control-buttons .ctrl-btn .ico-door-back {
+  background-image: url('/ico-door-back-off.png');
 }
-.iv-vehicle .control-buttons .ctrl-btn.active .ico-light-near {
-  background-image: url('/ico-light-near-on.png');
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-door-back {
+  background-image: url('/ico-door-back-on.png');
 }
-.iv-vehicle .control-buttons .ctrl-btn .ico-light-far {
-  background-image: url('/ico-light-far-off.png');
+.iv-vehicle .control-buttons .ctrl-btn .ico-door-front {
+  background-image: url('/ico-door-front-off.png');
 }
-.iv-vehicle .control-buttons .ctrl-btn.active .ico-light-far {
-  background-image: url('/ico-light-far-on.png');
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-door-front {
+  background-image: url('/ico-door-front-on.png');
 }
 .iv-vehicle .control-buttons .ctrl-btn .ico-light-position {
   background-image: url('/ico-light-position-off.png');
@@ -1065,17 +1134,17 @@
 .iv-vehicle .control-buttons .ctrl-btn.active .ico-light-double {
   background-image: url('/ico-light-double-on.png');
 }
-.iv-vehicle .control-buttons .ctrl-btn .ico-door-front {
-  background-image: url('/ico-door-front-off.png');
+.iv-vehicle .control-buttons .ctrl-btn .ico-light-far {
+  background-image: url('/ico-light-far-off.png');
 }
-.iv-vehicle .control-buttons .ctrl-btn.active .ico-door-front {
-  background-image: url('/ico-door-front-on.png');
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-light-far {
+  background-image: url('/ico-light-far-on.png');
 }
-.iv-vehicle .control-buttons .ctrl-btn .ico-door-back {
-  background-image: url('/ico-door-back-off.png');
+.iv-vehicle .control-buttons .ctrl-btn .ico-light-near {
+  background-image: url('/ico-light-near-off.png');
 }
-.iv-vehicle .control-buttons .ctrl-btn.active .ico-door-back {
-  background-image: url('/ico-door-back-on.png');
+.iv-vehicle .control-buttons .ctrl-btn.active .ico-light-near {
+  background-image: url('/ico-light-near-on.png');
 }
 /*** 空调控制区 ***/
 .iv-air {
@@ -1093,7 +1162,7 @@
   color: #fff;
   background: url('/main-air-title.png') 0 -2px no-repeat;
 }
-/* 空调-开关键 */
+/* 空调：开关键 */
 .iv-air-switch {
   position: absolute;
   left: auto;
@@ -1103,7 +1172,7 @@
   font-size: 16px;
   color: #fff;
   vertical-align: middle;
-  /* 打开时控制面板中相关状态 */
+  /* 开关打开时，控制面板中相关状态 */
 }
 .iv-air-switch:before,
 .iv-air-switch:after {
@@ -1166,30 +1235,107 @@
 .opening.iv-air-switch .switch-bg .switch-dot {
   animation: iv-air-switch-btn-opening 0.85s linear infinite;
 }
-.closing.iv-air-switch .switch-bg .switch-dot {
-  animation: iv-air-switch-btn-opening 0.85s linear reverse infinite;
-}
 .active.iv-air-switch .switch-bg .switch-dot {
   left: 45px;
   background-color: #38019d;
   animation: iv-air-switch-dot-shaking 1s linear;
 }
-.iv-air-switch.active + .control-panel .right .mode-btn-container .mode-btn:hover {
+.closing.iv-air-switch .switch-bg .switch-dot {
+  animation: iv-air-switch-btn-opening 0.85s linear reverse infinite;
+}
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-plus,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-plus,
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-minus,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-minus {
+  border-color: #ccc;
+}
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-plus::before,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-plus::before,
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-minus::before,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-minus::before,
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-plus::after,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-plus::after,
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-minus::after,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-minus::after {
+  background-color: #ccc;
+}
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-plus:hover,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-plus:hover,
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-minus:hover,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-minus:hover {
+  background-color: #ccc;
+  box-shadow: 0 0 12px #ccc;
+}
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-plus:hover::before,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-plus:hover::before,
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-minus:hover::before,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-minus:hover::before,
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-plus:hover::after,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-plus:hover::after,
+.iv-air-switch.active + .control-panel .iv-air-right.active-cool + .iv-air-left .btn-container .btn-minus:hover::after,
+.iv-air-switch.active + .control-panel .iv-air-right.active-hot + .iv-air-left .btn-container .btn-minus:hover::after {
+  background-color: #666666;
+}
+.iv-air-switch.active + .control-panel .iv-air-right .mode-btn-container .mode-btn:hover {
   background-color: #4D4948;
 }
-/* 空调-右侧工作模式切换 */
+/* 空调：右侧工作模式切换 */
 .iv-air-right {
   float: right;
   margin: 40px 70px 0 0;
   /* 模式按钮 */
+  /*
+    .btn-@{mode} {
+      .ico { .bg('ico-air-mode-@{mode}-default.png', center); }
+      .active-@{mode}& {
+        .cc(@color, transparent);
+        border: 1px solid @color;
+        box-shadow: inset 0 0 18px @color;
+        .ico { .bg('ico-air-mode-@{mode}-on.png', center); }
+        .on({ .bgc(transparent) !important; });
+      }
+    } */
+  /*
+    .btn-@{mode} {
+      .ico { .bg('ico-air-mode-@{mode}-default.png', center); }
+      .active-@{mode}& {
+        .cc(@color, transparent);
+        border: 1px solid @color;
+        box-shadow: inset 0 0 18px @color;
+        .ico { .bg('ico-air-mode-@{mode}-on.png', center); }
+        .on({ .bgc(transparent) !important; });
+      }
+    } */
+  /*
+    .btn-@{mode} {
+      .ico { .bg('ico-air-mode-@{mode}-default.png', center); }
+      .active-@{mode}& {
+        .cc(@color, transparent);
+        border: 1px solid @color;
+        box-shadow: inset 0 0 18px @color;
+        .ico { .bg('ico-air-mode-@{mode}-on.png', center); }
+        .on({ .bgc(transparent) !important; });
+      }
+    } */
+  /*
+    .btn-@{mode} {
+      .ico { .bg('ico-air-mode-@{mode}-default.png', center); }
+      .active-@{mode}& {
+        .cc(@color, transparent);
+        border: 1px solid @color;
+        box-shadow: inset 0 0 18px @color;
+        .ico { .bg('ico-air-mode-@{mode}-on.png', center); }
+        .on({ .bgc(transparent) !important; });
+      }
+    } */
 }
 .iv-air-right .mode-title {
-  height: 24;
-  line-height: 24;
+  height: 24px;
+  line-height: 24px;
   padding-left: 36px;
   font-size: 18px;
   color: #fff;
-  background: url('/main-air-mode.png') left center no-repeat;
+  background: url('/main-air-mode.png') left no-repeat;
 }
 .iv-air-right .mode-btn-container {
   margin-top: 30px;
@@ -1221,16 +1367,15 @@
   background: url('/ico-air-mode-auto-default.png') center no-repeat;
 }
 .active-auto.iv-air-right .btn-auto {
-  color: #27850A;
-  background-color: transparent;
-  border: 1px solid #27850A;
-  box-shadow: inset 0 0 18px #27850A;
+  color: #fff;
+  background-color: #0e162c;
+  border: 1px solid #172447;
 }
 .active-auto.iv-air-right .btn-auto .ico {
   background: url('/ico-air-mode-auto-on.png') center no-repeat;
 }
 .active-auto.iv-air-right .btn-auto:hover {
-  background-color: transparent !important;
+  background-color: #0e162c !important;
 }
 .iv-air-right.active-auto + .iv-air-left .air-temperature .temp-ring {
   background: url('/air-temp-ring-auto.png') 0 0 no-repeat;
@@ -1240,16 +1385,15 @@
   background: url('/ico-air-mode-cool-default.png') center no-repeat;
 }
 .active-cool.iv-air-right .btn-cool {
-  color: #01adfe;
-  background-color: transparent;
-  border: 1px solid #01adfe;
-  box-shadow: inset 0 0 18px #01adfe;
+  color: #fff;
+  background-color: #0e162c;
+  border: 1px solid #172447;
 }
 .active-cool.iv-air-right .btn-cool .ico {
   background: url('/ico-air-mode-cool-on.png') center no-repeat;
 }
 .active-cool.iv-air-right .btn-cool:hover {
-  background-color: transparent !important;
+  background-color: #0e162c !important;
 }
 .iv-air-right.active-cool + .iv-air-left .air-temperature .temp-ring {
   background: url('/air-temp-ring-cool.png') 0 0 no-repeat;
@@ -1259,16 +1403,15 @@
   background: url('/ico-air-mode-hot-default.png') center no-repeat;
 }
 .active-hot.iv-air-right .btn-hot {
-  color: #FEA62B;
-  background-color: transparent;
-  border: 1px solid #FEA62B;
-  box-shadow: inset 0 0 18px #FEA62B;
+  color: #fff;
+  background-color: #0e162c;
+  border: 1px solid #172447;
 }
 .active-hot.iv-air-right .btn-hot .ico {
   background: url('/ico-air-mode-hot-on.png') center no-repeat;
 }
 .active-hot.iv-air-right .btn-hot:hover {
-  background-color: transparent !important;
+  background-color: #0e162c !important;
 }
 .iv-air-right.active-hot + .iv-air-left .air-temperature .temp-ring {
   background: url('/air-temp-ring-hot.png') 0 0 no-repeat;
@@ -1278,22 +1421,21 @@
   background: url('/ico-air-mode-wind-default.png') center no-repeat;
 }
 .active-wind.iv-air-right .btn-wind {
-  color: #74128c;
-  background-color: transparent;
-  border: 1px solid #74128c;
-  box-shadow: inset 0 0 18px #74128c;
+  color: #fff;
+  background-color: #0e162c;
+  border: 1px solid #172447;
 }
 .active-wind.iv-air-right .btn-wind .ico {
   background: url('/ico-air-mode-wind-on.png') center no-repeat;
 }
 .active-wind.iv-air-right .btn-wind:hover {
-  background-color: transparent !important;
+  background-color: #0e162c !important;
 }
 .iv-air-right.active-wind + .iv-air-left .air-temperature .temp-ring {
   background: url('/air-temp-ring-wind.png') 0 0 no-repeat;
   animation: iv-air-temp-ring-turning 15s linear infinite;
 }
-/* 空调-左侧空调控制 */
+/* 空调：左侧空调控制 */
 .iv-air-left {
   float: left;
   height: 220px;
@@ -1345,7 +1487,6 @@
   width: 220px;
   height: 220px;
   background: url('/air-temp-ring-default.png') 0 0 no-repeat;
-  background: url('/@img') 0 0 no-repeat;
 }
 .iv-air-left .air-temperature .temp-value {
   position: relative;
@@ -1373,11 +1514,9 @@
   margin: 40px 0 0 35px;
   /* 禁用状态 */
   /* 启用状态 */
-  /* active状态 */
 }
 .iv-air-left .btn-container .btn-plus,
 .iv-air-left .btn-container .btn-minus {
-  border-color: #5B6469;
   display: block;
   position: relative;
   width: 50px;
@@ -1385,12 +1524,7 @@
   margin-bottom: 40px;
   border-radius: 100%;
   border: 3px solid;
-}
-.iv-air-left .btn-container .btn-plus::before,
-.iv-air-left .btn-container .btn-minus::before,
-.iv-air-left .btn-container .btn-plus::after,
-.iv-air-left .btn-container .btn-minus::after {
-  background-color: #5B6469;
+  border-color: #5B6469;
 }
 .iv-air-left .btn-container .btn-plus::before,
 .iv-air-left .btn-container .btn-minus::before,
@@ -1405,37 +1539,17 @@
   height: 3px;
   content: '';
 }
+.iv-air-left .btn-container .btn-plus::before,
+.iv-air-left .btn-container .btn-minus::before,
+.iv-air-left .btn-container .btn-plus::after,
+.iv-air-left .btn-container .btn-minus::after {
+  background-color: #5B6469;
+}
 .iv-air-left .btn-container .btn-plus::after {
   transform: rotate(90deg);
 }
 .iv-air-left .btn-container .btn-minus::after {
   display: none;
-}
-.iv-air-left .btn-container .btn-disable {
-  border-color: #5B6469;
-}
-.iv-air-left .btn-container .btn-disable::before,
-.iv-air-left .btn-container .btn-disable::after {
-  background-color: #5B6469;
-}
-.iv-air-left .btn-container .btn-enable {
-  border-color: #ccc;
-}
-.iv-air-left .btn-container .btn-enable::before,
-.iv-air-left .btn-container .btn-enable::after {
-  background-color: #ccc;
-}
-.iv-air-left .btn-container .btn-active {
-  border-color: #ccc;
-  box-shadow: 0 0 12px #ccc;
-}
-.iv-air-left .btn-container .btn-active::before,
-.iv-air-left .btn-container .btn-active::after {
-  background-color: #ccc;
-}
-.iv-air-left .btn-container .btn-active::before,
-.iv-air-left .btn-container .btn-active::after {
-  background-color: #666;
 }
 /*** 能耗统计区 ***/
 .iv-stats {
@@ -1546,7 +1660,6 @@
   height: 430px;
   padding-top: 100px;
   background: url('/main-dashboard-bg.jpg') 0 0 no-repeat;
-  background: url('/@img') 0 0 no-repeat;
 }
 .iv-charge .top-bg::before {
   display: block;
@@ -1558,7 +1671,6 @@
   line-height: 57px;
   text-align: center;
   background: url('/main-vehicle-title-bg.png') 0 0 no-repeat;
-  background: url('/@img') 0 0 no-repeat;
   letter-spacing: 16px;
   content: '车辆充电';
 }
@@ -1717,9 +1829,9 @@
   height: 460px;
   border: 2px solid #666;
   /* 不同状态下各自的界面容器 */
-  /* 未充电 */
-  /* 充电中 */
-  /* 充电完成 */
+  /* 车体界面-未充电 */
+  /* 车体界面-充电中 */
+  /* 车体界面-充电完成 */
 }
 .charging.iv-charge .content-container .vehicle-container {
   border: 2px dashed #377fd0;
@@ -1811,14 +1923,13 @@
 .iv-diagnosis {
   display: none;
   position: absolute;
-  top: 560px;
   left: 0;
+  top: 560px;
+  right: auto;
+  bottom: auto;
   width: 100%;
   /* 车体扫描区 */
   /* 诊断结果区 */
-  /** 其它状态 **/
-  /* 扫描中状态 */
-  /* 检测结束状态 */
   /* 检测结束-无故障 */
   /* 检测结束-有故障 */
 }
@@ -1828,68 +1939,95 @@
   padding-top: 65px;
   background: url('/vehicle-body-gray.png') 195px 274px no-repeat, url('/main-vehicle-bg-gray.jpg') 0 0 no-repeat;
   overflow: hidden;
-  /* 扫描光束 */
 }
 .iv-diagnosis .vehicle-body .title {
   width: 359px;
   height: 57px;
   margin: 0 auto;
-  color: #fff;
   font-size: 32px;
+  color: #fff;
   line-height: 57px;
   text-align: center;
+  background: url('/main-vehicle-title-bg.png') center no-repeat;
   letter-spacing: 16px;
-  background: url('/main-vehicle-title-bg.png') center center no-repeat;
 }
 .iv-diagnosis .vehicle-body .txt-tip {
   margin-top: 65px;
-  color: #fff;
   font-size: 34px;
+  color: #fff;
   line-height: 1;
   text-align: center;
+}
+.over-ok.iv-diagnosis .vehicle-body .txt-tip .tip-running,
+.over-error.iv-diagnosis .vehicle-body .txt-tip .tip-running {
+  display: none;
 }
 .iv-diagnosis .vehicle-body .txt-tip .tip-complete {
   display: none;
 }
+.over-ok.iv-diagnosis .vehicle-body .txt-tip .tip-complete,
+.over-error.iv-diagnosis .vehicle-body .txt-tip .tip-complete {
+  display: block;
+}
 .iv-diagnosis .vehicle-body .txt-result {
-  margin-top: 330px;
-  font-size: 34px;
-  line-height: 1;
+  margin-top: 400px;
+  font-size: 30px;
   text-align: center;
 }
 .iv-diagnosis .vehicle-body .txt-result > span {
-  padding-left: 70px;
+  padding: 10px 0 10px 70px;
 }
 .iv-diagnosis .vehicle-body .txt-result .ok {
   display: none;
   color: #00B5FF;
-  background: url('/ico-tip-success.png') left center no-repeat;
+  background: url('/ico-tip-success.png') left no-repeat;
 }
 .iv-diagnosis .vehicle-body .txt-result .err {
   display: none;
   color: #F49D1A;
-  background: url('/ico-diagnosis-txt-err.png') left center no-repeat;
+  background: url('/ico-diagnosis-txt-err.png') left no-repeat;
 }
 .iv-diagnosis .vehicle-body .btn-stop {
   position: absolute;
+  left: auto;
   top: 110px;
   right: 110px;
+  bottom: auto;
   font-size: 24px;
+}
+.over-ok.iv-diagnosis .vehicle-body .btn-stop,
+.over-error.iv-diagnosis .vehicle-body .btn-stop {
+  display: none;
 }
 .iv-diagnosis .vehicle-body .btn-back {
   display: none;
   position: absolute;
-  top: 300px;
   left: 480px;
+  top: 300px;
+  right: auto;
+  bottom: auto;
   font-size: 24px;
+}
+.over-ok.iv-diagnosis .vehicle-body .btn-back,
+.over-error.iv-diagnosis .vehicle-body .btn-back {
+  display: block;
 }
 .iv-diagnosis .vehicle-body .scan-light {
   position: absolute;
   left: 0;
+  top: auto;
+  right: auto;
   bottom: 58px;
   width: 256px;
   height: 390px;
   background: url('/vehicle-body-scan-light.png') 0 0 no-repeat;
+}
+.scanning.iv-diagnosis .vehicle-body .scan-light {
+  animation: iv-diagnosis-scan-light 8s linear infinite;
+}
+.over-ok.iv-diagnosis .vehicle-body .scan-light,
+.over-error.iv-diagnosis .vehicle-body .scan-light {
+  display: none;
 }
 .iv-diagnosis .result-show {
   height: 330px;
@@ -1904,8 +2042,8 @@
 }
 .iv-diagnosis .result-show .scan-progress-bar::before,
 .iv-diagnosis .result-show .scan-progress-bar::after {
-  position: absolute;
   display: block;
+  position: absolute;
   width: 323px;
   height: 32px;
   content: '';
@@ -1923,16 +2061,34 @@
 .iv-diagnosis .result-show .scan-progress-bar .inner-text-scanning,
 .iv-diagnosis .result-show .scan-progress-bar .inner-text-over {
   position: absolute;
+  left: auto;
+  top: auto;
+  right: auto;
+  bottom: auto;
   width: 100%;
   height: 32px;
-  color: #fff;
   font-size: 28px;
+  color: #fff;
   font-weight: bold;
   line-height: 34px;
   text-align: center;
 }
+.over-ok.iv-diagnosis .result-show .scan-progress-bar .inner-text-scanning,
+.over-ok.iv-diagnosis .result-show .scan-progress-bar .inner-text-over,
+.over-error.iv-diagnosis .result-show .scan-progress-bar .inner-text-scanning,
+.over-error.iv-diagnosis .result-show .scan-progress-bar .inner-text-over {
+  display: none;
+}
 .iv-diagnosis .result-show .scan-progress-bar .inner-text-over {
   display: none;
+}
+.over-ok.iv-diagnosis .result-show .scan-progress-bar .inner-text-over,
+.over-error.iv-diagnosis .result-show .scan-progress-bar .inner-text-over {
+  display: block;
+}
+.scanning.iv-diagnosis .result-show .scan-progress-bar::before,
+.scanning.iv-diagnosis .result-show .scan-progress-bar::after {
+  animation: iv-scan-progress-bar-running 0.3s linear infinite;
 }
 .iv-diagnosis .result-show .component-container {
   padding-left: 140px;
@@ -1949,81 +2105,42 @@
   margin: 0 auto 35px auto;
   background: url('/ico-diagnosis-component-waiting.png') center no-repeat;
 }
-.iv-diagnosis .result-show .component-container .component .component-name {
-  margin-bottom: 12px;
-  font-size: 18px;
-  color: #999;
-}
-.iv-diagnosis .result-show .component-container .component .status-text:before {
-  font-size: 24px;
-  color: #999;
-  content: '等待诊断...';
-}
-.iv-diagnosis .result-show .component-container .component.error .status-ico {
-  background: url('/ico-diagnosis-component-error.png') center no-repeat;
-}
-.iv-diagnosis .result-show .component-container .component.error .status-text:before {
-  content: '有故障';
-  color: #fff;
-}
-.iv-diagnosis .result-show .component-container .component.error .component-name {
-  color: #ABCDF0;
-}
 .iv-diagnosis .result-show .component-container .component.ok .status-ico {
   background: url('/ico-diagnosis-component-ok.png') center no-repeat;
 }
-.iv-diagnosis .result-show .component-container .component.ok .status-text:before {
-  content: '正常';
-  color: #fff;
-}
-.iv-diagnosis .result-show .component-container .component.ok .component-name {
-  color: #ABCDF0;
+.iv-diagnosis .result-show .component-container .component.error .status-ico {
+  background: url('/ico-diagnosis-component-error.png') center no-repeat;
 }
 .iv-diagnosis .result-show .component-container .component.scanning .status-ico {
   background: url('/ico-diagnosis-component-scanning.png') center no-repeat;
   animation: iv-rotate 2s linear infinite;
 }
-.iv-diagnosis .result-show .component-container .component.scanning .status-text:before {
-  content: '正在诊断...';
-  color: #fff;
+.iv-diagnosis .result-show .component-container .component .component-name {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #999;
 }
-.iv-diagnosis .result-show .component-container .component.scanning .component-name {
+.iv-diagnosis .result-show .component-container .component.scanning .component-name,
+.iv-diagnosis .result-show .component-container .component.ok .component-name,
+.iv-diagnosis .result-show .component-container .component.error .component-name {
   color: #ABCDF0;
 }
-.iv-diagnosis.scanning .vehicle-body .scan-light {
-  animation: iv-diagnosis-scan-light 8s linear infinite;
+.iv-diagnosis .result-show .component-container .component .status-text::before {
+  font-size: 24px;
+  color: #999;
+  content: '等待诊断...';
 }
-.iv-diagnosis.scanning .result-show .scan-progress-bar::before,
-.iv-diagnosis.scanning .result-show .scan-progress-bar::after {
-  animation: iv-scan-progress-bar-running 0.3s linear infinite;
+.iv-diagnosis .result-show .component-container .component.ok .status-text::before {
+  color: #fff;
+  content: '正常';
 }
-.iv-diagnosis.over-ok .vehicle-body .scan-light,
-.iv-diagnosis.over-error .vehicle-body .scan-light {
-  display: none;
+.iv-diagnosis .result-show .component-container .component.error .status-text::before {
+  color: #fff;
+  content: '有故障';
 }
-.iv-diagnosis.over-ok .vehicle-body .txt-tip .tip-running,
-.iv-diagnosis.over-error .vehicle-body .txt-tip .tip-running {
-  display: none;
-}
-.iv-diagnosis.over-ok .vehicle-body .txt-tip .tip-complete,
-.iv-diagnosis.over-error .vehicle-body .txt-tip .tip-complete {
-  display: block;
-}
-.iv-diagnosis.over-ok .vehicle-body .btn-back,
-.iv-diagnosis.over-error .vehicle-body .btn-back {
-  display: block;
-}
-.iv-diagnosis.over-ok .vehicle-body .btn-stop,
-.iv-diagnosis.over-error .vehicle-body .btn-stop {
-  display: none;
-}
-.iv-diagnosis.over-ok .result-show .scan-progress-bar .inner-text-scanning,
-.iv-diagnosis.over-error .result-show .scan-progress-bar .inner-text-scanning {
-  display: none;
-}
-.iv-diagnosis.over-ok .result-show .scan-progress-bar .inner-text-over,
-.iv-diagnosis.over-error .result-show .scan-progress-bar .inner-text-over {
-  display: block;
+.iv-diagnosis .result-show .component-container .component.scanning .status-text::before {
+  color: #fff;
+  content: '正在诊断...';
 }
 .iv-diagnosis.over-ok .vehicle-body .txt-result .ok {
   display: inline;
@@ -2227,11 +2344,9 @@
   width: 48px;
   height: 48px;
   background: url('/dialog-close-btn-default.png') 0 0 no-repeat;
-  background: url('/@img') 0 0 no-repeat;
 }
 .iv-dialog .btn-dialog-close:hover {
   background: url('/dialog-close-btn-on.png') 0 0 no-repeat;
-  background: url('/@img') 0 0 no-repeat;
 }
 .iv-dialog .content {
   padding-top: 190px;

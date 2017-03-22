@@ -334,3 +334,6 @@ button.list-style {
   background: url('../imgages/dialog-close-btn-default.png') 0 0 no-repeat;
   background: url('a.jpg') 0 0 no-repeat, url('b.jpg') 0 0 no-repeat;
 }
+.fd {
+  color: rgba(136, 136, 136, 0.5);
+}
