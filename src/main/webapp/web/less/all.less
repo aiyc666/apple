@@ -1,7 +1,7 @@
-//!@import "../../../../../resource/skin/default/less/variables";
-//!@import "../../../../../resource/skin/default/less/mixins";
+@import "../../../../../resource/skin/default/less/variables";
+@import "../../../../../resource/skin/default/less/mixins";
 // -- 删除 --
-@iv-image-url: "";
+//@iv-image-url: "";
 // -- 删除 --
 
 // 设备类型：pc、pad
@@ -70,19 +70,19 @@
   /* 空调风向箭头-向左 */
   @keyframes iv-air-wind-arrow-to-left {
     0%, 85%, 100% { transform: rotate(90deg) translate(0); opacity: 1; }
-    24.9999% { transform: rotate(90deg) translate(120px, 0); opacity: 1; }
-    25% { transform: rotate(180deg) translate(-20px, -140px); opacity: 1; }
-    70% { transform: rotate(180deg) translate(160px, -140px); opacity: 1; }
-    84.9999% { transform: rotate(180deg) translate(220px, -140px); opacity: .4; }
+    24.9999% { transform: rotate(90deg) translate(115px, 0); opacity: 1; }
+    25%, 26% { transform: rotate(180deg) translate(12px, -140px); opacity: 1; }
+    70% { transform: rotate(180deg) translate(210px, -140px); opacity: .8; }
+    84.9999% { transform: rotate(180deg) translate(260px, -140px); opacity: .4; }
   }
 
   /* 空调风向箭头-向右 */
   @keyframes iv-air-wind-arrow-to-right {
     0%, 85%, 100% { transform: rotate(90deg) translate(0); opacity: 1; }
-    24.9999% { transform: rotate(90deg) translate(120px, 0); opacity: 1; }
-    25% { transform: rotate(0deg) translate(-20px, 140px); opacity: 1; }
-    70% { transform: rotate(0deg) translate(160px, 140px); opacity: 1; }
-    84.9999% { transform: rotate(0deg) translate(220px, 140px); opacity: .4; }
+    24.9999% { transform: rotate(90deg) translate(115px, 0); opacity: 1; }
+    25%, 26% { transform: rotate(0deg) translate(12px, 140px); opacity: 1; }
+    70% { transform: rotate(0deg) translate(140px, 140px); opacity: .8; }
+    84.9999% { transform: rotate(0deg) translate(180px, 140px); opacity: .4; }
   }
 
   /* 空调开关按钮-打开中效果 */
@@ -207,6 +207,8 @@
 .c(@color) { color: @color; }
 // 背景图
 .bg(@img) { background: url('@{iv-image-url}/@{img}') 0 0 no-repeat; }
+// 背景图
+.bg(@img, @position) { background: url('@{iv-image-url}/@{img}') @position no-repeat; }
 // 背景色
 .bgc(@color) { background-color: @color; }
 // 颜色与背景色
@@ -221,8 +223,6 @@
 .tc() { text-align: center; }
 // 边框圆角
 .br(@radius) { border-radius: @radius; }
-.bg(@img) { background: url('@{iv-image-url}/@img') 0 0 no-repeat; }
-.bg(@img, @position) { background: url('@{iv-image-url}/@img') @position no-repeat; }
 /*** shortcuts end ***/
 
 /* 清除浮动 */
@@ -283,11 +283,6 @@
 /* 混合 */
 .x() {
 
-  .style(@color) {
-    @_color: @color;
-    border-color: @color;
-    &::before, &::after { background-color: @color; }
-  }
 }
 
 
@@ -308,12 +303,8 @@
   /* 按钮容器 */
   .btn-container {
     .tc;
-    .iv-btn-primary, .iv-btn-secondary  {
-      .mgr(30px);
-    }
-    :nth-last-child(1) {
-      .mgr(0);
-    }
+    .iv-btn-primary, .iv-btn-secondary  { .mgr(30px); }
+    :nth-last-child(1) { .mgr(0); }
   }
 
   /* 水球图片 */
@@ -332,9 +323,7 @@
   }
   .charging .water-bubble-text-container::before { content: '正在充电'; }
   .low-power .water-bubble-text-container::after { content: '电量低'; }
-
 }
-
 
 /****** 主页面 ******/
 
@@ -346,6 +335,10 @@
 @container-height-stats: 220px;
 @total-height: 1740px; /* @container-height-header + ... */
 @color-overlay: rgba(0, 0, 0, .8);
+// 空调的四种工作模式，以及对应的主题颜色
+// 自动 制冷 制热 通风
+@air-mode: auto, cool, hot, wind;
+@air-mode-color: #5ec6e6, #387dd3, #d86040, #4399e0;
 
 .iv-main {
   .pr;
@@ -389,10 +382,10 @@
     .hide;
     .hh(80px);
     .fsc(24px, #333);
-    padding: 0 1.6em;
+    .pd(0 1.6em);
+    .br(80px);
+    .bgc(hsla(0, 100%, 100%, .5));
     overflow: hidden;
-    border-radius: 80px;
-    .bgc( hsla(0, 100%, 100%, .5) );
     &.active {
       .sib;
       animation: iv-global-tip-active 2.5s;
@@ -403,8 +396,8 @@
 /*** 页头部 ***/
 .iv-header {
   .pr;
-  height: @container-height-header;
-  padding: 60px 30px 0;
+  .h(@container-height-header);
+  .pd(60px 30px 0);
   .fw(bold);
   .cc(#330099, #fff);
 
@@ -415,7 +408,7 @@
       .fl;
       .s(62px, 36px);
       .mgr(15px);
-      background: url('@{iv-image-url}/logo.png') no-repeat;
+      .bg('logo.png');
     }
   }
   .right {
@@ -426,7 +419,7 @@
       .fr;
       .s(50px);
       .mgl(15px);
-      background: url('@{iv-image-url}/ico-vehicle.png') no-repeat;
+      .bg('ico-vehicle.png');
     }
   }
   /* 离线提示 */
@@ -441,7 +434,7 @@
 .iv-dashboard {
   height: @container-height-dashboard;
   padding: 95px 0 0 90px;
-  background: url('@{iv-image-url}/main-dashboard-bg.jpg') 0 0 no-repeat;
+  .bg('main-dashboard-bg.jpg');
 
   /* 转速表 */
   .dash-rpm-container {
@@ -492,12 +485,10 @@
     .bat-outer-circle {
       .pr;
       .s(250px);
+      .br(50%);
       border: 12px solid rgba(200, 200, 255, 0.3);
-      border-radius: 50%;
 
-      .water-bubble {
-        .p(absolute, 13px, 13px);
-      }
+      .water-bubble { .p(absolute, 13px, 13px); }
     }
 
     /* 去充电按钮容器 */
@@ -552,8 +543,8 @@
 .iv-vehicle {
   .pr;
   .h(@container-height-vehicle);
-  padding: 80px 100px 0;
-  background: url('@{iv-image-url}/main-vehicle-bg.jpg') 0 0 no-repeat;
+  .pd(80px 100px 0);
+  .bg("main-vehicle-bg.jpg");
 
   /* 车辆状态卡 */
   .vehicle-status-card {
@@ -563,13 +554,13 @@
     .fsc(18px, #fff);
     .lh;
     .tc;
-    background: url('@{iv-image-url}/main-vehicle-status-card-bg.png') center no-repeat;
+    .bg('main-vehicle-status-card-bg.png', center);
 
     .ico-engine-status {
       height: 52px;
       margin: 13px 0;
-      background: url('@{iv-image-url}/main-vehicle-engine-ico-off.png') center no-repeat;
-      &.active {background: url('@{iv-image-url}/main-vehicle-engine-ico-on.png') center no-repeat;}
+      .bg('main-vehicle-engine-ico-off.png', center);
+      &.active { .bg('main-vehicle-engine-ico-on.png', center); }
     }
     .total-mileage {
       .mgt(12px);
@@ -587,7 +578,7 @@
   .vehicle-body {
     .p(absolute, @l: 195px, @b: 150px);
     .s(730px, 206px);
-    background: url('@{iv-image-url}/vehicle-body-normal-no-door.png') 0 0 no-repeat;
+    .bg('vehicle-body-normal-no-door.png');
 
     /* 车体内元素 */
     > div { position: absolute; }
@@ -597,7 +588,7 @@
       .hide;
       .p(absolute, 700px, 80px);
       .s(172px, 155px);
-      background: url('@{iv-image-url}/main-vehicle-part-light-near.png') 0 0 no-repeat;
+      .bg('main-vehicle-part-light-near.png');
     }
 
     /* 远光 */
@@ -605,7 +596,7 @@
       .hide;
       .p(absolute, 690px, 74px);
       .s(195px, 134px);
-      background: url('@{iv-image-url}/main-vehicle-part-light-far.png') 0 0 no-repeat;
+      .bg('main-vehicle-part-light-far.png');
     }
 
     /* 位置 */
@@ -614,17 +605,17 @@
       .part-front {
         .s(12px, 14px);
         .p(absolute, 669px, 14px);
-        background: url('@{iv-image-url}/main-vehicle-part-light-position-front.png') 0 0 no-repeat;
+        .bg('main-vehicle-part-light-position-front.png');
       }
       .part-back {
         .s(12px, 14px);
         .p(absolute, 35px, 13px);
-        background: url('@{iv-image-url}/main-vehicle-part-light-position-back.png') 0 0 no-repeat;
+        .bg('main-vehicle-part-light-position-back.png');
       }
       .part-normal {
         &-top-left, &-top-right, &-bottom-right, &-bottom-left {
           .s(9px, 16px);
-          background: url('@{iv-image-url}/main-vehicle-part-light-position-normal.png') 0 0 no-repeat;
+          .bg('main-vehicle-part-light-position-normal.png');
         }
         &-top-left {
           .p(absolute, -7px, 50px);
@@ -652,11 +643,11 @@
       }
       .part-front {
         .p(absolute, 696px, 111px);
-        background: url('@{iv-image-url}/main-vehicle-part-light-double-front.png') 0 0 no-repeat;
+        .bg('main-vehicle-part-light-double-front.png');
       }
       .part-back {
         .p(-25px, 117px);
-        background: url('@{iv-image-url}/main-vehicle-part-light-double-back.png') 0 0 no-repeat;
+        .bg('main-vehicle-part-light-double-back.png');
       }
     }
 
@@ -668,12 +659,12 @@
       &::before, &::after { .s(40px, 108px); content: ''; transition: transform 3s; }
       &::before {
         .fl;
-        background: url('@{iv-image-url}/vehicle-body-normal-front-door-left.png') no-repeat;
+        .bg('vehicle-body-normal-front-door-left.png');
         transform-origin: left center;
       }
       &::after {
         .fr;
-        background: url('@{iv-image-url}/vehicle-body-normal-front-door-right.png') no-repeat;
+        .bg('vehicle-body-normal-front-door-right.png');
         transform-origin: right center;
       }
     }
@@ -685,13 +676,13 @@
       &::before {
         .fl;
         .s(54px, 111px);
-        background: url('@{iv-image-url}/vehicle-body-normal-back-door-left.png') no-repeat;
+        .bg('vehicle-body-normal-back-door-left.png');
         transform-origin: left center;
       }
       &::after {
         .fr;
         .s(51px, 111px);
-        background: url('@{iv-image-url}/vehicle-body-normal-back-door-right.png') no-repeat;
+        .bg('vehicle-body-normal-back-door-right.png');
         transform-origin: right center;
       }
     }
@@ -708,8 +699,9 @@
 
       /* 顶盖儿 */
       .top-cap {
-        .p(absolute, 180px, -30px);
-        .s(420px, 100px);
+        .p(absolute, 265px, 0);
+        .s(285px, 35px);
+        .br(~"70px 100px 0 0 / 40px 40px 0 0");
       }
 
       /* 箭头运动范围 */
@@ -717,45 +709,71 @@
         .p(absolute, 40px, 40px, 40px, 40px);
         overflow: hidden;
 
-        /* 箭头 */
+        // 分两组
         .first-group, .second-group {
-          &::before, &::after {
+          .to-left, .to-right {
             .p(absolute, @t: -100px);
             .s(116px, 78px);
             content: '';
+            :first-child { .mgb(18px); }
           }
         }
         .first-group, .second-group {
-          &::before { left: e("calc(50% - 58px - 39px)"); }
-          &::after { left: e("calc(50% - 58px + 39px)"); }
+          .to-left { left: ~"calc(50% - 70px)"; }
+          .to-right { left: ~"calc(50% + 20px)"; }
+        }
+
+        // 单个箭头
+        .arrow {
+          @width: 116px;
+          @height: 15px;
+          @color: transparent;
+          .sb;
+          .pr;
+          .s(@width, @height * 2);
+          .c(@color);
+          transition: color 3s;
+          &::before {
+            .p(absolute, 0, 25%);
+            .s(@width - @height * 4 / 3 + .1, 0);
+            border-top: @height solid;
+            content: '';
+          }
+          &::after {
+            .p(absolute, auto, 0, 0);
+            .s(0);
+            border-left: @height * 4 / 3 solid;
+            border-top: @height solid transparent;
+            border-bottom: @height solid transparent;
+            content: '';
+          }
         }
       }
 
-      /* 显示制冷 */
-      &.active-cool {
-        .top-cap { background: url('@{iv-image-url}/air-top-cap-cool.png') center no-repeat; }
-        .first-group, .second-group { &::before, &::after { background: url('@{iv-image-url}/air-cool-arrow-to-right.png') center no-repeat; } }
-      }
+      .loop(@i: length(@air-mode)) when (@i > 0) {
+        .loop(@i - 1);
+        @mode: extract(@air-mode, @i);
+        @color: extract(@air-mode-color, @i);
 
-      /* 显示制热 */
-      &.active-hot {
-        .top-cap { background: url('@{iv-image-url}/air-top-cap-hot.png') center no-repeat; }
-        .first-group, .second-group { &::before, &::after { background: url('@{iv-image-url}/air-hot-arrow-to-right.png') center no-repeat; } }
+        &.active {
+          // 不同模式显示不同颜色
+          &-@{mode} {
+            .top-cap {
+              background-color: fade(@color, 60);
+              box-shadow: 0 0 25px @color;
+              transition: background-color 3s, box-shadow 3s;
+              animation: iv-air-top-cap-scaling 3s cubic-bezier(.3, 0, .7, 1) alternate infinite;
+            }
+            .arrow-motion-range {
+              .arrow { color: fade(@color, 60); }
+              .to-left { animation: iv-air-wind-arrow-to-left 6s linear infinite; }
+              .to-right { animation: iv-air-wind-arrow-to-right 6s linear infinite; }
+              .second-group { .to-left, .to-right { animation-delay: 3s; } }
+            }
+          }
+        }
       }
-
-      /* 自动、通风暂无动画 */
-      &.active-auto, &.active-wind {}
-
-      /* 制冷制热动画 */
-      &.active-cool, &.active-hot {
-        /* 顶盖动画 */
-        .top-cap { animation: iv-air-top-cap-scaling 5s cubic-bezier(.3, 0, .7, 1) alternate infinite; }
-        /* 风向箭头动画 */
-        .arrow-motion-range .first-group::before { animation: iv-air-wind-arrow-to-left 6s linear infinite; }
-        .arrow-motion-range .first-group::after { animation: iv-air-wind-arrow-to-right 6s linear infinite; }
-        .arrow-motion-range .second-group::before { animation: iv-air-wind-arrow-to-left 6s 3s linear infinite; }
-        .arrow-motion-range .second-group::after { animation: iv-air-wind-arrow-to-right 6s 3s linear infinite; }
-      }
+      .loop();
     }
   }
 
@@ -776,8 +794,8 @@
       /* 图标 */
       .ico {
         .s(48px);
-        margin: 20px 20px 10px;
-        border-radius: 50%;
+        .mg(20px 20px 10px);
+        .br(50%);
         background: rgba(141, 137, 164, .7) center no-repeat;
         cursor: pointer;
 
@@ -814,7 +832,8 @@
       }
 
       /* 图标背景图片 */
-      @ico: ico-light-near, ico-light-far, ico-light-position, ico-light-double, ico-door-front, ico-door-back;
+      // 后门、 前门、 位置、 双闪、 远光、 近光
+      @ico: ico-door-back, ico-door-front, ico-light-position, ico-light-double, ico-light-far, ico-light-near;
       .loop(@i: length(@ico)) when (@i > 0) {
         .loop(@i - 1);
         @name: extract(@ico, @i);
@@ -833,21 +852,21 @@
   .pr;
   height: @container-height-air;
   padding: 20px 0 0 70px;
-  background: url('@{iv-image-url}/main-air-bg.jpg') 0 0 no-repeat;
+  .bg('main-air-bg.jpg');
 
   /* 标题 */
   .top-title {
     .h(46px);
     .pdl(52px);
     .fsc(18px, #fff);
-    background: url('@{iv-image-url}/main-air-title.png') 0 -2px no-repeat;
+    .bg('main-air-title.png', 0 -2px);
   }
 
   /* 控制区 */
   .control-panel { }
 }
 
-/* 空调-开关键 */
+/* 空调：开关键 */
 .iv-air-switch {
   // 三种状态：打开中、关闭中、已打开
   @opening: .opening;
@@ -895,33 +914,39 @@
       transition: left .3s .1s /* ,background-color .2s .1s */;
       // 打开中闪烁
       @{opening}& { animation: iv-air-switch-btn-opening .85s linear infinite; }
-      // 关闭中闪烁
-      @{closing}& { animation: iv-air-switch-btn-opening .85s linear reverse infinite; }
       // 已打开
       @{active}& {
         left: 45px;
         background-color: #38019d;
         animation: iv-air-switch-dot-shaking 1s linear;
       }
+      // 关闭中闪烁
+      @{closing}& { animation: iv-air-switch-btn-opening .85s linear reverse infinite; }
     }
   }
 
-  /* 打开时控制面板中相关状态 */
-  &.active + .control-panel {
-    .left .btn-container {
-      .btn-minus, .btn-plus {
-
+  /* 开关打开时，控制面板中相关状态 */
+  &@{active} + .control-panel {
+    // 左侧“+ -”按钮，只有在“制冷”与“制热”模式时才可用
+    .iv-air-right {
+      &.active-cool, &.active-hot {
+        + .iv-air-left .btn-container {
+          .btn-plus, .btn-minus {
+            .iv-air-left .btn-container .btn-enable;
+          }
+        }
       }
     }
-    .right .mode-btn-container .mode-btn:hover { background-color: #4D4948; }
+
+    // 右侧模式按钮可用
+    .iv-air-right .mode-btn-container .mode-btn {
+      .on({ .bgc(#4D4948); });
+    }
   }
 }
 
-/* 空调-右侧工作模式切换 */
+/* 空调：右侧工作模式切换 */
 .iv-air-right {
-  // 四种模式及对应的主题颜色：自动 制冷 制热 通风
-  @modes: auto, cool, hot, wind;
-  @colors: #27850A, #01adfe, #FEA62B, #74128c;
   // 左侧空调圈: class path
   @left-temp-ring: ~"+ .iv-air-left .air-temperature .temp-ring";
 
@@ -929,10 +954,10 @@
   .mg(40px 70px 0 0);
 
   .mode-title {
-    .hh(24);
+    .hh(24px);
     .pdl(36px);
     .fsc(18px, #fff);
-    background: url('@{iv-image-url}/main-air-mode.png') left center no-repeat;
+    .bg('main-air-mode.png', left);
   }
   .mode-btn-container { .mgt(30px); }
 
@@ -955,27 +980,39 @@
     &.opening .ico { animation: iv-rotate 1s linear infinite ; }
   }
 
-  .loop(@i: length(@modes)) when (@i > 0) {
+  .loop(@i: length(@air-mode)) when (@i > 0) {
     .loop(@i - 1);
-    @mode: extract(@modes, @i);
-    @color: extract(@colors, @i);
+    @mode: extract(@air-mode, @i);
+    @color: extract(@air-mode-color, @i);
 
+    // 选中状态按钮的样式重新调整，使用统一背景色与边框色
     // .btn-auto  .btn-cool  .btn-hot  .btn-wind
+    /*
     .btn-@{mode} {
-      .ico { background: url('@{iv-image-url}/ico-air-mode-@{mode}-default.png') center no-repeat; }
+      .ico { .bg('ico-air-mode-@{mode}-default.png', center); }
       .active-@{mode}& {
         .cc(@color, transparent);
         border: 1px solid @color;
         box-shadow: inset 0 0 18px @color;
-        .ico { background: url('@{iv-image-url}/ico-air-mode-@{mode}-on.png') center no-repeat; }
+        .ico { .bg('ico-air-mode-@{mode}-on.png', center); }
         .on({ .bgc(transparent) !important; });
+      }
+    } */
+
+    .btn-@{mode} {
+      .ico { .bg('ico-air-mode-@{mode}-default.png', center); }
+      .active-@{mode}& {
+        .cc(#fff, #0e162c);
+        border: 1px solid #172447;
+        .ico { .bg('ico-air-mode-@{mode}-on.png', center); }
+        .on({ .bgc(#0e162c) !important; });
       }
     }
 
     // 左侧空调圆圈
     &.active-@{mode} {
       @{left-temp-ring} {
-        background: url('@{iv-image-url}/air-temp-ring-@{mode}.png') 0 0 no-repeat;
+        .bg('air-temp-ring-@{mode}.png');
         animation: iv-air-temp-ring-turning 15s linear infinite;
       }
     }
@@ -983,7 +1020,7 @@
   .loop();
 }
 
-/* 空调-左侧空调控制 */
+/* 空调：左侧空调控制 */
 .iv-air-left {
   .fl;
   .hh(220px, 1);
@@ -1057,7 +1094,6 @@
 
     // + -
     .btn-plus, .btn-minus {
-      .btn-disable;
       .sb;
       .pr;
       .s(50px);
@@ -1070,29 +1106,31 @@
         .s(50%, 3px);
         content: '';
       }
+
+      .btn-disable;
     }
     .btn-plus::after { transform: rotate(90deg); }
     .btn-minus::after { .hide; }
 
-    .style(@color) {
+    /* 禁用状态 */
+    .btn-disable(@color: #5B6469) {
       border-color: @color;
       &::before, &::after { .bgc(@color); }
     }
 
-    /* 禁用状态 */
-    .btn-disable { .style(#5B6469); }
     /* 启用状态 */
-    .btn-enable { .style(#ccc); }
-    /* active状态 */
-    .btn-active {
-      .style(#ccc);
-      box-shadow: 0 0 12px #ccc;
-      &::before, &::after { background-color: #666; }
+    .btn-enable(@color: #ccc) {
+      border-color: @color;
+      &::before, &::after { .bgc(@color); }
+
+      .on({
+        .bgc(@color);
+        box-shadow: 0 0 12px @color;
+        &::before, &::after { .bgc(darken(@color, 40%)); }
+      });
     }
   }
-
 }
-
 
 /*** 能耗统计区 ***/
 .iv-stats {
@@ -1273,6 +1311,7 @@
         clip: rect(112px, 300px, 300px, -20px);
         transition: border .8s, box-shadow .8s;
 
+        // 充电时亮起
         @{charging}& {
           border: 3px solid #377fd0;
           box-shadow: 0 0 18px #377fd0, inset 0 0 18px #377fd0;
@@ -1290,6 +1329,7 @@
         box-shadow: 0 0 4px @normal-color, inset 0 0 4px @normal-color;
         transition: border 1s, box-shadow 1s;
 
+        // 低电量时显示为红色
         @{low-power}& {
           border-color: @red-color;
           box-shadow: 0 0 4px @red-color, inset 0 0 4px @red-color;
@@ -1318,6 +1358,7 @@
           &:nth-child(6), &:nth-last-child(6) { height: 119px; }
           &:nth-child(7) { height: 117px; };
 
+          // 充电时流动起来
           @{charging}& {
             background: linear-gradient(180deg, #377fd0 14px, transparent 14px, transparent 18px) 0 0 repeat-y;
             background-size: 2px 18px;
@@ -1333,7 +1374,7 @@
       .s(920px, 460px);
       border: 2px solid #666;
 
-      // 充电时车体容器变化
+      // 充电时小亮球绕圈转
       @{charging}& {
         border: 2px dashed #377fd0;
         // 小亮球
@@ -1366,13 +1407,13 @@
       .info-text { bottom: 60px; font-size: 24px; }
       .btn-container { top: 145px; }
 
-      /* 未充电 */
+      /* 车体界面-未充电 */
       .not-charge {
         .info-text { .hide; @{low-power}& {.sb;} }
         @{charging}& { .hide; }
       }
 
-      /* 充电中 */
+      /* 车体界面-充电中 */
       .on-charging {
         .hide;
         @{charging}& { .sb; }
@@ -1400,7 +1441,7 @@
         }
       }
 
-      /* 充电完成 */
+      /* 车体界面-充电完成 */
       .charge-over {
         .hide;
         .status-label span {
@@ -1453,11 +1494,10 @@
     }
 
     .txt-result {
-      margin-top: 330px;
-      font-size: 34px;
-      line-height: 1;
+      margin-top: 400px;
+      font-size: 30px;
       .tc;
-      > span { padding-left: 70px; }
+      > span { padding: 10px 0 10px 70px; }
 
       .ok { .hide; color: #00B5FF; background: url('@{iv-image-url}/ico-tip-success.png') left center no-repeat; }
       .err { .hide; color: #F49D1A; background: url('@{iv-image-url}/ico-diagnosis-txt-err.png') left center no-repeat; }
