@@ -25,8 +25,8 @@
   display: block;
   position: relative;
   width: 140px;
-  height: 30px;
-  color: red;
+  height: 32px;
+  color: rgba(255, 0, 0, 0.5);
 }
 .arrow-group .arrow::before {
   position: absolute;
@@ -34,9 +34,9 @@
   top: 25%;
   right: auto;
   bottom: auto;
-  width: 125px;
+  width: 118.76666667px;
   height: 0;
-  border-top: 15px solid;
+  border-top: 16px solid;
   content: '';
 }
 .arrow-group .arrow::after {
@@ -47,8 +47,8 @@
   bottom: auto;
   width: 0;
   height: 0;
-  border-left: 20px solid;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
+  border-left: 21.33333333px solid;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
   content: '';
 }

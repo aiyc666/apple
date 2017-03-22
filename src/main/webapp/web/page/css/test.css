@@ -1,3 +1,5 @@
+/*** shortcuts ***/
+/*** shortcuts end ***/
 .mix .btn {
   color: red;
 }
@@ -7,4 +9,46 @@
 }
 .box div {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.arrow-group {
+  border: 1px solid blue;
+}
+.arrow-group .arrow {
+  margin-bottom: 3px;
+}
+.arrow-group .arrow {
+  display: block;
+  position: relative;
+  width: 140px;
+  height: 32px;
+  color: rgba(255, 0, 0, 0.5);
+}
+.arrow-group .arrow::before {
+  position: absolute;
+  left: 0;
+  top: 25%;
+  right: auto;
+  bottom: auto;
+  width: 118.76666667px;
+  height: 0;
+  border-top: 16px solid;
+  content: '';
+}
+.arrow-group .arrow::after {
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  width: 0;
+  height: 0;
+  border-left: 21.33333333px solid;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  content: '';
 }
