@@ -519,3 +519,14 @@ div when (@var > 0) {
 .it {
   .inner;
 }
+
+.bg-variant(@color) {
+  background-color: @color;
+  a&:hover {
+    background-color: darken(@color, 10%);
+  }
+}
+
+.boots {
+  .bg-variant(red);
+}

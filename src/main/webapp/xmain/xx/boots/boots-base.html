@@ -19,6 +19,12 @@
         /*@media (orientation: portrait), (min-width: 600px) {
             body { background-color: red; }
         }*/
+        body {
+            -webkit-overflow-scrolling: touch;
+        }
+        @media print {
+            * { color: red !important; }
+        }
 
         @keyframes k-rotating {
             0% {transform: rotate(0deg); color: red;}
@@ -88,6 +94,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
+            <a href="http://www.bootcss.com">打印时的尾部链接==></a>
             <div class="text-lowercase">AdcdEF ghiJ JKlmn</div>
             <div class="text-uppercase">AdcdEF ghiJ JKlmn</div>
             <div class="text-capitalize">AdcdEF ghiJ JKlmn</div>

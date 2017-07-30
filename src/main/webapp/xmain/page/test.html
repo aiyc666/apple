@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta http-equiv="Access-Control-Allow-Origin" content="*">-->
+    <title>Title</title>
+    <script src="../lib/jquery/jquery-3.1.1.js"></script>
+    <script>
+        //        let url = 'http://mob.epicc.com.cn:7008/nr/insure?9087f68e746b485aabdb822e4f32a7eb=&from=singlemessage';
+        //        let url = 'http://127.0.0.1:8081/apple/';
+        //        $.get(url).then(function(txt) {
+        //            console.log(txt);
+        //        });
+
+        //        jQuery之jsonp
+        /*
+         $.ajax({
+         url: url + '?callback=?',
+         type: 'get',
+         dataType: 'jsonp',
+         success: txt => { debugger; console.log(txt); }
+         });
+
+         $.getJSON(url + '?callback=?', txt => console.log(txt));
+         */
+
+        //        setTimeout(() => {
+        //            debugger;
+        //            console.log($('#picc')[0].contentWindow.document.documentElement.innerHTML);
+        //        }, 5000)
+    </script>
+</head>
+<body>
+<form action="http://127.0.0.1:8081/apple/" method="post" target="picc">
+    <input name="user">
+    <input type="submit" value="submit">
+</form>
+<iframe id="picc" name="picc" src="about:blank"></iframe>
+
+<!--[if IE 11]> ie11 <![endif]-->
+<!--[if ie 10]> ie10 <![endif]-->
+<!--[if ie 9]> ie9 <![endif]-->
+<!--[if ie 8]> ie8 <![endif]-->
+<!--[if ie 7]> ie7 <![endif]-->
+<!--[if ie 6]> ie6 <![endif]-->
+
+<!--[if !IE]><!--> !IE <!--<![endif]-->
+<!--[if IE]> IE <![endif]-->
+<!--[if lte IE 6]> <=IE6 <![endif]-->
+<!--[if gte IE 6]> >=IE6 <![endif]-->
+<!--[if lt IE 7]> < IE7 <![endif]-->
+<!--[if gt IE 7]> >IE7 <![endif]-->
+
+
+</body>
+</html>

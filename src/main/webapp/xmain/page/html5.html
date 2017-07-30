@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>H5 Test</title>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.7/dist/css/normalize.css"/>
+    <style>
+        * { font-size: 14px !important; }
+        ul, ol, li, h2, h3 { line-height: 1 !important; margin:0; padding:0; list-style: none; }
+    </style>
+    <style>
+        .bef1::before { content: '中\A9\4E00'; }
+        .bef2::before { content: attr(data-title); }
+        .bef3::before { content: url(../img/icon-danger.png); }
+        .bef33::before { content: url(../res/1.wav); }
+        .bef4::before { content: open-quote; }
+        .bef4::after { content: close-quote; }
+        .valign { display:table-cell; width:100px; height: 200px; vertical-align:middle; text-align: center; border: 1px solid; }
+    </style>
+</head>
+<body>
+<a class="bef1" href="#">链接</a>　　
+<a class="bef2" href="#" data-title="title_中国">链接</a>　　
+<a class="bef3" href="#">链接</a>　　
+<a class="bef33" href="#">链接</a>　　
+<a class="bef4" href="#">链接</a>　　
+<div class="valign">
+    <h3>&#169;&#xa9;h33333</h3>
+    <p>par par par par</p>
+</div>
+<div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <ol>
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+    </ol>
+    <h2>h22222</h2>
+    <h3>h33333</h3>
+</div>
+</body>
+</html>

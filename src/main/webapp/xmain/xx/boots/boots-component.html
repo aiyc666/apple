@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- 引入bootstrap -->
+    <link href="../../lib/bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../lib/bootstrap-3.3.7/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../../lib/jquery/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="../../lib/bootstrap-3.3.7/dist/js/bootstrap.js"></script>
+    <style>
+        @keyframes pr {
+            0%   { background-position: 0 0; }
+            100% { background-position: 40px 0; }
+        }
+        .my-progress { height: 20px; background: #eee; border-radius: 4px; }
+        .my-progress-bar { height: 100%; line-height: 20px; color: #fff; text-align: center;
+            background: blue linear-gradient(45deg, transparent 25%, hsla(0, 100%, 100%, .3) 25%, hsla(0, 100%, 100%, .3) 50%, transparent 50%, transparent 75%, hsla(0, 100%, 100%, .3) 75%, hsla(0, 100%, 100%, .3)) repeat-x 0 0/40px 40px;
+            animation: pr 1s linear infinite;
+        }
+
+        .row { margin-bottom: 40px; border: 1px solid #ccc; }
+        div[class*=col] { border: 1px solid #eee; }
+        #testScrollSpy { border: 2px solid; background: #fff; z-index: 999; }
+        .affix-top {}
+        .affix { top: 0; right: 0; }
+        .affix-bottom { position: relative; }
+    </style>
+</head>
+<body data-spy="scroll" data-target="#testScrollSpy" data-offset="20">
+<header>
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <span class="navbar-brand">Brand</span>
+            <button class="navbar-toggle glyphicon glyphicon-menu-hamburger"></button>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Nav1</a></li>
+                <li class="active"><a href="#">Nav2</a></li>
+                <li><a href="#">Nav3</a></li>
+            </ul>
+            <span class="navbar-text">NavText</span>
+            <a class="navbar-link" href="#">NavLink</a>
+            <button class="btn btn-success navbar-btn">Button</button>
+            <form class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input class="form-control">
+                    <span class="input-group-btn"><button class="btn btn-default">搜索</button></span>
+                </div>
+            </form>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid">
+    <div id="row1" class="row">
+        <h4>row1</h4>
+        <div class="col-xs-6">
+            <div class="my-progress">
+                <div class="my-progress-bar" style="width: 60%">60%</div>
+            </div>
+        </div>
+    </div>
+    <div id="row2" class="row" style="position: relative;">
+        <h4>row2</h4>
+
+        <!--  滚动监听  -->
+        <div style="position: absolute; right: 0; z-index: 999;">
+            <div id="testScrollSpy" data-spy="affix" data-offset-top="170" data-offset-bottom="1100">
+                <ul class="nav nav-pills nav-stacked" style="width: 150px;">
+                    <li class="active"><a href="#row1">row1</a></li>
+                    <li><a href="#row2">row2</a></li>
+                    <li><a href="#row3">row3</a></li>
+                    <li><a href="#row4">row4</a></li>
+                    <li><a href="#row5">row5</a></li>
+                    <li><a href="#row6">row6</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-3">
+            <!--  1. 下拉菜单  -->
+            <div class="dropdown">
+            <!--上拉-->
+            <!--<div class="dropup">-->
+                <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">下拉菜单 <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">分组111</li>
+                    <li><a href="#">子菜单一一一</a></li>
+                    <li class="disabled"><a href="#">子菜单二二二</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">分组222</li>
+                    <li><a href="#">子菜单三三三</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <!--  2. 按钮组  -->
+            <div class="btn-group btn-group-lg">
+                <button class="btn btn-default">11</button>
+                <button class="btn btn-warning">22</button>
+                <button class="btn btn-primary">33</button>
+            </div>
+            <div class="btn-group btn-group-xs btn-group-vertical">
+                <button class="btn btn-default">11</button>
+                <button class="btn btn-warning">22</button>
+                <button class="btn btn-primary">33</button>
+            </div>
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group"><button class="btn btn-default">11</button></div>
+                <div class="btn-group"><button class="btn btn-warning">22</button></div>
+                <div class="btn-group"><button class="btn btn-primary">33</button></div>
+            </div>
+            <div class="btn-group ">
+                <a class="btn btn-default">11</a>
+                <a class="btn btn-warning">22</a>
+                <div class="btn-group dropdown">
+                    <button class="btn btn-primary dropdown-toggle"><span class="caret"></span></button>
+                    <ul class="dropdown-menu" style="display: block;">
+                        <li><a>1111111</a></li>
+                        <li><a>2222222</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <!--  3. 输入框组  -->
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon">@</span>
+                <input class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default ">中国</button>
+                </span>
+            </div>
+            <br>
+            <!--  4. 导航路径  -->
+            <ul class="breadcrumb">
+                <li><a>Home</a></li>
+                <li><a>News</a></li>
+                <li class="active">bj</li>
+            </ul>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <!-- 5. 导航  -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Mail</a></li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked">
+                <li class=""><a href="#">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Mail</a></li>
+            </ul>
+
+            <ul class="nav nav-pills nav-justified">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Mail <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jon Zondge</a></li>
+                        <li><a href="#">Tom Mary</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-xs-6 col-sm-3">
+
+        </div>
+    </div>
+
+    <div id="row3" class="row">
+        <h4>row3</h4>
+        <div class="col-xs-6 col-sm-3">
+            <!--  进度条  -->
+            <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-danger  " style="width: 60%;">60%</div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: 40%;"></div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: 80%;"></div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <!--  列表组  -->
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-danger">li item 11 <span class="badge">20</span></li>
+                <li class="list-group-item list-group-item-info"><a href="#">li > a item 33</a></li>
+                <a href="#" class="list-group-item list-group-item-success">a item 44</a>
+                <button class="list-group-item">Button</button>
+                <div class="list-group-item">
+                    <h2>h2 title</h2>
+                    <p>bla bla bla...</p>
+                </div>
+            </ul>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <ul class="pagination pagination-lg">
+                <li><a href="#"><<</a></li>
+                <li><a href="#">1</a></li>
+                <li class="active"><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li class="disabled"><a href="#">4</a></li>
+                <li><a href="#">>></a></li>
+            </ul>
+            <ul class="pager">
+                <li class="previous">
+                    <a href="#"><span class="glyphicon glyphicon-arrow-left"></span> Previous</a>
+                </li>
+                <li class="next">
+                    <a href="#">Next <span class="glyphicon glyphicon-arrow-right"></span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <div class="alert">This is a beautiful test for bootstrap in my day !</div>
+            <div class="alert alert-success">This is a beautiful test for bootstrap in my day !</div>
+            <div class="alert alert-danger alert-dismissible">
+                <strong>Danger</strong> <u>This</u> is a <s>beautiful</s> test for <a class="alert-link" href="#">link</a> !
+                <button class="close"><span>&times;</span></button>
+            </div>
+        </div>
+    </div>
+    <div id="row4" class="row">
+        <h4>row4</h4>
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-default panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        This is panel title
+                        <button class="close"><span>&times;</span></button>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>bla bla bla bla bla bla bla bla blab la b la bla bla bla bla .....</p>
+                </div>
+                <div class="panel-footer">
+                    <span class="text-muted">footer copyright ...</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h3><span class="label label-success">new</span></h3>
+            <h2 class="text-success"><span class="badge">10</span></h2>
+            <h3 class="text-danger"><span class="badge badge-danger">20</span></h3>
+            <span class="well well-sm">Well</span>
+        </div>
+    </div>
+    <div id="row5" class="row">
+        <h4>row5</h4>
+        <div class="col-xs-6 col-sm-3">
+            <!--  缩略图  -->
+            <div class="thumbnail">
+                <img src="../../img/3.jpg" width="100">
+                <div>
+                    <h3>iPhone7</h3>
+                    <p>iphone7 is a new product in this year, it ...</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <!--  媒体对象  -->
+            <div class="media">
+                <div class="media-left media-middle">
+                    <img class="media-object" src="../../img/6.jpg" width="50">
+                </div>
+                <div class="media-body">
+                    <h3 class="media-heading">author</h3>
+                    <p>I'm thinking about this, when I was yong...</p>
+                </div>
+                <div class="media-right">
+                    <span>2017-06-10</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <!-- 内嵌  -->
+            <div class="embed-responsive embed-responsive-4by3">
+                <div class="embed-responsive-item" style="background: #EEF"></div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <!-- 巨幕、页头、标签、徽章、Well  -->
+            <div class="jumbotron">
+                <h1>h1111</h1>
+                <p>ppppppppp</p>
+            </div>
+            <div class="page-header">
+                <h1>this is page-header <small>small text</small></h1>
+            </div>
+        </div>
+    </div>
+
+    <div id="row6" class="row">
+        <h4>row6</h4>
+        <div class="col-xs-6 col-sm-3">
+            <button class="btn btn-default" data-toggle="modal" data-target="#testModal">打开</button>
+            <!--  模态框  -->
+            <div class="modal fade" id="testModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">模态框标题</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Overflowing text to show scroll behavior</h3>
+                            <p class="text-success">Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                            <p class="text-warning">Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                            <p class="text-danger">Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" onclick="$('#testModal').modal('hide')">关闭</button>
+                            <button class="btn btn-primary" onclick="$('#testModal').modal('hide')">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $("#testModal").on("show.bs.modal", function() {
+                    console.log('show.bs.modal');
+                });
+                $("#testModal").on("hide.bs.modal", function() {
+                    console.log('hide.bs.modal');
+                });
+                $("#testModal").on("shown.bs.modal", function() {
+                    console.log('shown.bs.modal');
+                });
+                $("#testModal").on("hidden.bs.modal", function() {
+                    console.log('hidden.bs.modal');
+                });
+            </script>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+                <li class="active"><a href="#first" data-toggle="tab">first</a></li>
+                <li><a href="#second" data-toggle="tab">second</a></li>
+                <li><a href="#third" data-toggle="tab">third</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="first" class="tab-pane active fade in">
+                    <p>first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first </p>
+                </div>
+                <div id="second" class="tab-pane fade">
+                    <p>second second second second second second second second second second second second second second second second second second second second second second second second second second second second second second </p>
+                </div>
+                <div id="third" class="tab-pane fade">
+                    <p>third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third third </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <!-- tooltip -->
+            <button href="#" class="tt btn btn-default" data-toggle="tooltip" data-placement="top" title="This is a tip show!">
+                tip
+            </button>
+            <!--  popover  -->
+            <a href="javascript:;" class="pp btn btn-default" data-toggle="popover" data-placement="right" title="Pop Title" data-content="This is a test for popover tip!">
+                popover
+            </a>
+            <script>
+                $(".tt").tooltip();
+                $(".pp").popover({trigger: 'hover focus'});
+            </script>
+            <!--  alert -->
+            <div class="alert alert-danger">
+                <button class="close" data-dismiss="alert">&times;</button>
+                Vehicle-0076 is alarming, please check it out!
+            </div>
+            <!-- button -->
+            <button class="btn btn-primary" data-toggle="button">Toggle</button>
+            <div class="btn-group btn-group-sm" data-toggle="buttons">
+                <label class="btn btn-success"><input type="radio" name="bgr">Radio1</label>
+                <label class="btn btn-success"><input type="radio" name="bgr">Radio2</label>
+                <label class="btn btn-success"><input type="radio" name="bgr">Radio3</label>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <div id="accs" class="panel-group">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a href="javascript:" data-toggle="collapse" data-target="#acc1" data-parent="#accs">Acc1</a>
+                        </h3>
+                    </div>
+                    <div id="acc1" class="panel-body collapse fade">
+                        <p>acc1 acc1 acc1 acc1 acc1</p>
+                        <p>acc1 acc1 acc1 acc1 acc1</p>
+                        <p>acc1 acc1 acc1 acc1 acc1</p>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a href="javascript:" data-toggle="collapse" data-target="#acc2" data-parent="#accs">Acc1</a>
+                        </h3>
+                    </div>
+                    <div id="acc2" class="panel-body collapse fade">
+                        <p>acc2 acc2 acc2 acc2 acc2</p>
+                        <p>acc2 acc2 acc2 acc2 acc2</p>
+                        <p>acc2 acc2 acc2 acc2 acc2</p>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a href="javascript:" data-toggle="collapse" data-target="#acc3" data-parent="#accs">Acc1</a>
+                        </h3>
+                    </div>
+                    <div id="acc3" class="panel-body collapse fade">
+                        <p>acc23 acc23 acc23 acc23 acc23</p>
+                        <p>acc23 acc23 acc23 acc23 acc23</p>
+                        <p>acc23 acc23 acc23 acc23 acc23</p>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a href="javascript:" data-toggle="collapse" data-target="#acc4" data-parent="#accs">Acc1</a>
+                        </h3>
+                    </div>
+                    <div id="acc4" class="panel-body collapse fade">
+                        <p>acc4 acc4 acc4 acc4 acc4</p>
+                        <p>acc4 acc4 acc4 acc4 acc4</p>
+                        <p>acc4 acc4 acc4 acc4 acc4</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <div id="car" class="carousel slide">
+                <ol class="carousel-indicators">
+                    <li data-target="#car" data-slide-to="0" class="active"></li>
+                    <li data-target="#car" data-slide-to="1"></li>
+                    <li data-target="#car" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="../../img/1.jpg">
+                        <div class="carousel-caption">
+                            <h3>picture1</h3>
+                            <p>this is a beautiful pic</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="../../img/2.jpg">
+                        <div class="carousel-caption">
+                            <h3>picture2</h3>
+                            <p>this is a beautiful pic</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="../../img/3.jpg">
+                        <div class="carousel-caption">
+                            <h3>picture3</h3>
+                            <p>this is a beautiful pic</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control left"  data-target="#car" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="carousel-control right" data-target="#car" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <p>A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A </p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <p>B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B </p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <p>C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C </p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <p>D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D </p>
+        </div>
+    </div>
+</div>
+
+<div style="background:#eee;">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+</body>
+</html>

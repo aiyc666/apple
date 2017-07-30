@@ -343,3 +343,9 @@ button.list-style {
 .it {
   color: blue;
 }
+.boots {
+  background-color: red;
+}
+a.boots:hover {
+  background-color: #cc0000;
+}

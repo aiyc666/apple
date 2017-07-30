@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>unicode-table</title>
+    <style>
+        table  { border-collapse: collapse; table-layout: fixed; font-size: 12px; }
+        tr     { height: 25px; }
+        th, td { border: 1px solid darkgreen; text-align: center; overflow: hidden; }
+        th     { background-color: lightgreen; }
+    </style>
+    <script>
+        window.onload = function () {
+            let arr = [], i = 0, j, codePoint;
+            for (; i < 256 * 16; i++) {
+                // 每16行为一个表格
+                if (i % 16 == 0) {
+                    // 表头
+                    arr.push('<table><tr><th width="50"></th>',
+                        [...'0123456789ABCDEF'].map(x => '<th width="30">' + x + '</th>').join(''),
+                        '</tr>');
+                }
+                arr.push('<tr>');
+                // 每行第一列的U码
+                arr.push('<th>', i.toString(16).toUpperCase().padStart(3, '0'), 'x</th>');
+                for (j = 0; j < 16; j++) {
+                    codePoint = i * 16 + j;
+                    // 每个单元格的符号
+                    arr.push('<td>&#', codePoint, ';</td>');
+                }
+                arr.push('</tr>');
+                // 16行后结束该表格
+                if ((i + 1) % 16 == 0) {
+                    arr.push('</table>');
+                }
+            }
+            document.querySelector('.tables').innerHTML = arr.join('');
+        };
+    </script>
+</head>
+<body>
+    <div class="tables">
+        <!--
+        <table>
+            <tr><th></th><th>0</th><th>1</th> ... <th>F</th></tr>
+            <tr><th>U+000x</th><td>&#0;</td> ... <td>&#15;</td></tr>
+            ...
+        </table>
+        <table>
+            ...
+
+        -->
+    </div>
+</body>
+</html>

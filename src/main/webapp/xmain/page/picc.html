@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>picc</title>
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+        // 从身份证号中(第7位~第15位)提取生日，转换成"yyyy-MM-dd"格式
+        function getBirthday(idNo) {
+            return idNo.substring(6, 14).replace(/(\d{4})(\d{2})/, '$1-$2-');
+        }
+
+        // 提交表单
+        function submit() {
+            // TODO : 表单字段验证
+            // ...
+            var valid = true;
+            // 非空校验
+            $('input:text').not($('#beneficiarieCheckbox:checked').parent().next('#bf').find('input:text')).each(function () {
+                if (this.value == '')
+                    return valid = false;
+            });
+            if (!valid) {
+                alert('请完整填写表单内容！');
+                return;
+            }
+
+            // TODO : 数据提交至服务端
+            // ...
+            alert('保存数据成功');
+
+            // 将数据提交至人保财险系统，并进行支付。
+            var weixin = 'http://mob.epicc.com.cn:7008/nr/mobPay';         // 微信支付接口
+            var bill = 'http://mob.epicc.com.cn:7008/nr/submitNewPolicy';  // 快钱支付接口
+            var action = $('#payType').prop('checked') ? bill : weixin;
+            $('#form').attr('action', action).submit();
+        }
+    </script>
+</head>
+<body>
+<form id="form" method="post" action="">
+    <input type="hidden" name="newPolicy" value="1">
+
+    <fieldset>
+        <legend>被保险人信息</legend>
+        　　姓名：<input type="text" id="insuredName" name="insuredName" value="张小三">
+        <br>
+        　　性别：<label><input type="radio" name="sex" id="man" value="1" checked="checked">男</label>
+                  <label><input type="radio" name="sex" id="woman" value="0">女</label>
+        <br>
+        证件类型：<select id="insuredCertificateType" name="insuredCertificateType" onchange="$('#insuredCertificateName').val($('option:selected', this).text())">
+            <option value="0">身份证</option>
+            <option value="1">军官证</option>
+            <option value="2">护照</option>
+            <option value="3">户口薄</option>
+        </select>
+        <!--<input type="hidden" id="insuredCertificateType" name="insuredCertificateType" value="0">-->
+        <input type="hidden" id="insuredCertificateName" name="insuredCertificateName" value="身份证">
+        <br>
+        证件号码：<input type="text" id="insuredCertificateId" name="insuredCertificateId" onchange="$('#insuredBirth').val(getBirthday(this.value))" value="410101200706017715">
+        <br>
+        出生日期：<input value="2007-06-01" readonly="readonly" id="insuredBirth" name="insuredBirth" type="text">
+    </fieldset>
+    <br>
+
+    <fieldset>
+        <legend>投保人信息</legend>
+        　　姓名：<input type="text" id="policyholderName" name="policyholderName" value="张三">
+        <br>
+        　手机号：<input type="text" id="policyholderPhoneNo" name="policyholderPhoneNo" value="13066666666">
+        <br>
+        证件类型：<select id="policyholderCertificateType" name="policyholderCertificateType" onchange="$('#policyholderCertificateName').val($('option:selected', this).text())">
+            <option value="0">身份证</option>
+            <option value="1">军官证</option>
+            <option value="2">护照</option>
+            <option value="3">户口薄</option>
+        </select>
+        <!--<input type="hidden" id="policyholderCertificateType" name="policyholderCertificateType" value="0">-->
+        <input type="hidden" id="policyholderCertificateName" name="policyholderCertificateName" value="身份证" readonly="">
+        <br>
+        证件号码：<input type="text" id="policyholderCertificateId" name="policyholderCertificateId" onchange="$('#insuredBirthday').val(getBirthday(this.value))" value="410101198006018151">
+        <br>
+        出生日期：<input type="text" readonly="readonly" id="insuredBirthday" name="insuredBirthday" value="1980-06-01">
+    </fieldset>
+    <br>
+
+    <fieldset>
+        <legend>受益人信息</legend>
+        <label><input type="checkbox" id="beneficiarieCheckbox" name="beneficiarieCheckbox" checked
+                      onclick="$('#bf').toggle()">受益人指定为法定</label>
+        <div id="bf" style="display: none">
+            　　姓名：<input type="text" id="beneficiarieName" name="beneficiarieName">
+            <br>
+            证件类型：<select id="beneficiarieCertificateType" name="beneficiarieCertificateType" onchange="$('#beneficiarieCertificateName').val($('option:selected', this).text())">
+                <option value="0">身份证</option>
+                <option value="1">军官证</option>
+                <option value="2">护照</option>
+                <option value="3">户口薄</option>
+            </select>
+            <!--<input type="hidden" id="beneficiarieCertificateType" name="beneficiarieCertificateType" value="0">-->
+            <input type="hidden" id="beneficiarieCertificateName" name="beneficiarieCertificateName" value="身份证" readonly="">
+            <br>
+            证件号码：<input type="text" id="beneficiarieCertificateId" name="beneficiarieCertificateId">
+        </div>
+    </fieldset>
+    <br>
+
+    <fieldset>
+        <legend>保险期间</legend>
+        起保日期：<input value="2017-06-25" name="startDate" id="startDate" type="text">
+                  <input value="00:00" name="startTime" id="startTime" type="text">
+        <br>
+        终保日期：<input value="2018-06-24" name="endDate" id="endDate" type="text">
+                  <input value="24:00" name="endTime" id="endTime" type="text">
+    </fieldset>
+    <br>
+
+    投保份数：
+    <select id="copyNum" name="copyNum" onchange="$('#total').text(this.value * 100); $('#sumPremium2').val(this.value * 100 + '.00 元')">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    <!--<input type="number" id="copyNum" name="copyNum" value="1" min="1" max="3">-->
+    <br>
+    总保费：<span id="total">100</span>.00 元
+    <br>
+
+    <!-- 隐藏域 -->
+    <input type="hidden" id="planId" name="planId" value="8a05543e5963092b015995b1b158059c">
+    <input type="hidden" id="innerVersionNo" name="innerVersionNo" value="87">
+    <input type="hidden" id="userId" name="userId" value="4100211002800023">
+    <input type="hidden" id="riskCode" name="riskCode" value="ECD">
+    <input type="hidden" id="config" value="0010000000000000">
+    <input type="hidden" id="experienceNumMax" value="">
+    <input type="hidden" id="countNum" value="">
+    <input type="hidden" id="copyMin" value="1">
+    <input type="hidden" id="sumPremium2" name="sumPremium" value="100.00 元">
+
+    <input type="hidden" id="school" name="school">
+    <input type="hidden" id="klass" name="klass">
+</form>
+支付方式：<label><input id="payType" type="radio" name="payType" checked>快钱</label>
+          <label><input type="radio" name="payType">微信</label>
+<br>
+<br>
+<button type="button" onclick="submit()">快速投保</button>
+<!-- just get JSESSIONID -->
+<iframe src="http://mob.epicc.com.cn:7008/nr/insure?9087f68e746b485aabdb822e4f32a7eb=&from=singlemessage"
+        style="position: relative; left: -99999px; width: 1px; height: 1px;"></iframe>
+
+</body>
+</html>
